@@ -1,7 +1,7 @@
-const http = require("http");
+/* const http = require("http");
 const { set } = require("lodash");
 const fs = require("fs");
-/* const _ = require("lodash"); */
+const _ = require("lodash");
 
 const server = http.createServer((req, res) => {
   console.log(req.url, req.method);
@@ -20,3 +20,4 @@ const server = http.createServer((req, res) => {
 server.listen(3005, "localhost", () => {
   console.log("listening to port 3005 😎");
 });
+ */
