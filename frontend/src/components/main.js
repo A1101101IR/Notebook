@@ -10,7 +10,7 @@ const Main = () => {
   }, []);
   return (
     <div>
-      <h1 className="hello">{!data ? "loading..." : data.title}</h1>
+      <h1 className="hello">{!data ? "loading..." : data[0].title}</h1>
     </div>
   );
 };

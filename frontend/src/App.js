@@ -14,19 +14,17 @@ function App() {
       .then((data) => setData(data.message));
   }, []); */
   return (
-    <div>
-      <div>
-        <Navbar />
-        <main>
-          <Routes>
-            <Route path="/" element={<Main />}></Route>
-            <Route path="/posts" element={<Posts />}></Route>
-            <Route path="/create" element={<Create />}></Route>
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </div>
+    <section>
+      <Navbar />
+      <main>
+        <Routes>
+          <Route path="/" element={<Main />}></Route>
+          <Route path="/posts" element={<Posts />}></Route>
+          <Route path="/create" element={<Create />}></Route>
+        </Routes>
+      </main>
+      <Footer />
+    </section>
   );
 }
 

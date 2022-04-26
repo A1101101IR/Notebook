@@ -3,9 +3,9 @@ const Create = () => {
     <div>
       <h1>Create someting new!</h1>
       <form action="/create-new" method="POST">
-        <label for="title"></label>
+        <label htmlFor="title"></label>
         <input type="text" name="title" placeholder="Title" />
-        <label for="body"></label>
+        <label htmlFor="body"></label>
         <input type="text" name="body" placeholder="Body" />
         <button>Submit</button>
       </form>
