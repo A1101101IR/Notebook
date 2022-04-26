@@ -1,13 +1,33 @@
-import { useState, useEffect } from "react";
+/* import { useState, useEffect } from "react"; */
+import { Routes, Route } from "react-router-dom";
+import Create from "./components/create";
+import Footer from "./components/footer";
+import Main from "./components/main";
+import Navbar from "./components/navbar";
+import Posts from "./components/posts";
 
 function App() {
-  const [data, setData] = useState();
+  /* const [data, setData] = useState();
   useEffect(() => {
-    fetch("/api")
+    fetch("/")
       .then((res) => res.json())
       .then((data) => setData(data.message));
-  }, []);
-  return <h1 className="hello">{!data ? "loading..." : data}</h1>;
+  }, []); */
+  return (
+    <div>
+      <div>
+        <Navbar />
+        <main>
+          <Routes>
+            <Route path="/" element={<Main />}></Route>
+            <Route path="/posts" element={<Posts />}></Route>
+            <Route path="/create" element={<Create />}></Route>
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </div>
+  );
 }
 
 export default App;
