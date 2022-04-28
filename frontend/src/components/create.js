@@ -1,6 +1,6 @@
 const Create = () => {
   return (
-    <div>
+    <div className="form-container">
       <h1>Create someting new!</h1>
       <form action="/create-new" method="POST">
         <label htmlFor="title"></label>

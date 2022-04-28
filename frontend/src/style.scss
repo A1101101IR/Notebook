@@ -1,7 +1,62 @@
 // classes 
 // mixin
 
+@mixin FlexAllCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin FlexCenterSpaceBetween {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 * {
   margin: 0;
   padding: 0;
 }
+body {
+  @include FlexAllCenter()
+}
+section {
+  width: 820px;
+  min-width: 100%;
+}
+header {
+  height: 60px;
+  @include FlexCenterSpaceBetween();
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  nav {
+    a {
+      padding: 10px;
+      text-decoration: none;
+      color: black;
+    }
+    a:hover {
+      border-bottom: 1px solid black;
+    }
+  }
+}
+main {
+  min-height: calc(100vh - 100px);
+}
+.form-container {
+  @include FlexAllCenter();
+  flex-direction: column;
+  form {
+    @include FlexAllCenter();
+    flex-direction: column;
+    input {
+      width: 400px;
+      height: 40px;
+    }
+  }
+}
+footer {
+  height: 40px;
+}
+

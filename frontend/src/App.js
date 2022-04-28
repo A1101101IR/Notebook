@@ -1,18 +1,12 @@
-/* import { useState, useEffect } from "react"; */
 import { Routes, Route } from "react-router-dom";
+import Post from "./components/post/post";
 import Create from "./components/create";
 import Footer from "./components/footer";
 import Main from "./components/main";
 import Navbar from "./components/navbar";
-import Posts from "./components/posts";
+import Posts from "./components/post/posts";
 
 function App() {
-  /* const [data, setData] = useState();
-  useEffect(() => {
-    fetch("/")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []); */
   return (
     <section>
       <Navbar />
@@ -20,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />}></Route>
           <Route path="/posts" element={<Posts />}></Route>
+          <Route path="/posts/:id" element={<Post />}></Route>
           <Route path="/create" element={<Create />}></Route>
         </Routes>
       </main>
