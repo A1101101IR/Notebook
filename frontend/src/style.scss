@@ -159,12 +159,15 @@ header {
     height: 36px;
   }
 }
-main {
+.site {
   display: flex;
   flex-wrap: wrap;
   min-height: calc(100vh - 100px);
   width: 1280px;
   gap: 10px
+}
+aside {
+  background-color: gray;
 }
 .form-container {
   @include FlexAllCenter();

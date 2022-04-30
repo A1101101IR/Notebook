@@ -1,9 +1,17 @@
 const Create = () => {
+  const addPost = () => {};
   return (
-    <form action="/create-new" method="POST" className="post-form">
-      <input type="text" name="author" className="auto-input" />
-      <textarea name="body" id=""></textarea>
-      <button>Publisera</button>
+    <form className="post-form">
+      <input type="text" name="authorId" className="aauto-input" />
+      <textarea type="text" name="body" id="body"></textarea>
+      <button
+        type="submit"
+        onClick={() => {
+          addPost();
+        }}
+      >
+        Publisera
+      </button>
     </form>
   );
 };

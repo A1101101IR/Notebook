@@ -4,15 +4,17 @@ const UserSmByline = (id) => {
   /* const { id } = useParams(); */
 
   const { data: user, error, isLoading } = useFatch(`/users/${id.id}`);
-  console.log(user);
+  /* console.log(user); */
   return (
     <>
       <div className="user-sm-byline-preview">
         {error && <p>{error}</p>}
         {isLoading && <p>{isLoading}</p>}
-        <Link to={`/users/${user._id}`}>
-          {user && user.firstname + " " + user.lastname}
-        </Link>
+        {user && (
+          <Link to={`/users/${user._id}`}>
+            <h4>{user.firstname + " " + user.lastname}</h4>
+          </Link>
+        )}
       </div>
     </>
   );

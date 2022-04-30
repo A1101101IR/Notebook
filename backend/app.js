@@ -114,10 +114,10 @@ app.post("/adduser", (req, res) => {
   user
     .save()
     .then((result) => {
-      res.send(result);
+      res.status(201).json(result);
     })
     .catch((err) => {
-      console.log(err);
+      res.status(500).json(err);
     });
 });
 
@@ -127,9 +127,9 @@ app.post("/newpost", (req, res) => {
   post
     .save()
     .then((result) => {
-      res.send(result);
+      res.status(201).json(result);
     })
     .catch((err) => {
-      console.log(err);
+      res.status(500).json(err);
     });
 });

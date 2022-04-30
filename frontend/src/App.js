@@ -6,12 +6,14 @@ import Main from "./components/main";
 import Navbar from "./components/navbar";
 import Posts from "./components/post/posts";
 import User from "./components/user/user";
+import Aside from "./aside";
 
 function App() {
   return (
     <section>
       <Navbar />
-      <main>
+      <div className="site">
+        <Aside />
         <Routes>
           <Route path="/" element={<Main />}></Route>
           <Route path="/posts" element={<Posts />}></Route>
@@ -19,7 +21,7 @@ function App() {
           <Route path="/users/:id" element={<User />}></Route>
           <Route path="/create" element={<Create />}></Route>
         </Routes>
-      </main>
+      </div>
       <Footer />
     </section>
   );
