@@ -1,15 +1,10 @@
 const Create = () => {
   return (
-    <div className="form-container">
-      <h1>Create someting new!</h1>
-      <form action="/create-new" method="POST">
-        <label htmlFor="title"></label>
-        <input type="text" name="title" placeholder="Title" />
-        <label htmlFor="body"></label>
-        <input type="text" name="body" placeholder="Body" />
-        <button>Submit</button>
-      </form>
-    </div>
+    <form action="/create-new" method="POST" className="post-form">
+      <input type="text" name="author" className="auto-input" />
+      <textarea name="body" id=""></textarea>
+      <button>Publisera</button>
+    </form>
   );
 };
 

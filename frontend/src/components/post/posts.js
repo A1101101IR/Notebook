@@ -1,5 +1,6 @@
 import useFatch from "../customHooks/useFetch";
 import { Link } from "react-router-dom";
+import UserSmByline from "../user/user-sm-byline";
 const Posts = () => {
   const { data: posts, error, isLoading } = useFatch("/posts");
   return (
@@ -14,7 +15,9 @@ const Posts = () => {
             key={post._id}
           >
             <div className="post-card-header">
-              <div className="post-author-info">{post.author}</div>
+              <div className="post-author-info">
+                <UserSmByline id={post.authorId} />
+              </div>
               <div className="post-options-nav">...</div>
             </div>
             <div className="post-card-body">

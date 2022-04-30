@@ -19,6 +19,8 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.use(morgan("dev"));
 app.use((req, res, next) => {
   console.log("new req made");
@@ -28,14 +30,12 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req, res) => {
-  /* res.redirect("/posts"); */
-  console.log("user is in homepage");
+/* app.get("/", (req, res) => {
   res.send(console.log(`Server is listening to ${PORT}`));
-});
+}); */
 
 /* create post */
-app.post("/create", (req, res) => {
+/* app.post("/create", (req, res) => {
   console.log("User created new post!");
   const post = new Post(req.body);
   post
@@ -46,7 +46,21 @@ app.post("/create", (req, res) => {
     .catch((err) => {
       console.log(err);
     });
-});
+}); */
+
+/* create post */
+/* app.post("/posts", (req, res) => {
+  const post = req.body;
+  db.collection("posts")
+    .insertOne(post)
+    .then((result) => {
+      res.status(201).json(result);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ err: "det gick ej!" });
+    });
+}); */
 
 /* get all posts */
 app.get("/posts", (req, res) => {
@@ -59,7 +73,7 @@ app.get("/posts", (req, res) => {
     });
 });
 
-/* get single post */
+/* get single post by id */
 app.get("/posts/:id", (req, res) => {
   db.collection("posts")
     .findOne({ _id: ObjectId(req.params.id) })
@@ -73,7 +87,6 @@ app.get("/posts/:id", (req, res) => {
 
 /* get all users */
 app.get("/users", (req, res) => {
-  console.log("User get all postdata!!");
   User.find()
     .then((result) => {
       res.send(result);
@@ -83,7 +96,7 @@ app.get("/users", (req, res) => {
     });
 });
 
-/* get singel user */
+/* get singel user by id */
 app.get("/users/:id", (req, res) => {
   db.collection("users")
     .findOne({ _id: ObjectId(req.params.id) })
@@ -96,14 +109,8 @@ app.get("/users/:id", (req, res) => {
 });
 
 /* Create new user */
-app.get("/new-user", (req, res) => {
-  const user = new User({
-    username: "nobody",
-    firstname: "nob",
-    lastname: "nabizadeh",
-    email: "nabizadeh@gmail.com",
-    phone: 0730307201,
-  });
+app.post("/adduser", (req, res) => {
+  const user = new User(req.body);
   user
     .save()
     .then((result) => {
@@ -115,12 +122,8 @@ app.get("/new-user", (req, res) => {
 });
 
 /* create new post */
-app.get("/new-post", (req, res) => {
-  const post = new Post({
-    title: "new post",
-    author: "nobody",
-    body: "Hello World! this is a new post 4!",
-  });
+app.post("/newpost", (req, res) => {
+  const post = new Post(req.body);
   post
     .save()
     .then((result) => {

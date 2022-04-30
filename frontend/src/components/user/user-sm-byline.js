@@ -1,15 +1,21 @@
-import useFatch from "./useFetch";
-const Users = () => {
-  const { data: users, error, isLoading } = useFatch("/users");
+import { useParams, Link } from "react-router-dom";
+import useFatch from "../customHooks/useFetch";
+const UserSmByline = (id) => {
+  /* const { id } = useParams(); */
+
+  const { data: user, error, isLoading } = useFatch(`/users/${id.id}`);
+  console.log(user);
   return (
     <>
-      <div>
+      <div className="user-sm-byline-preview">
         {error && <p>{error}</p>}
         {isLoading && <p>{isLoading}</p>}
-        {users && users.map((user) => <p key={user._id}>{user.username}</p>)}
+        <Link to={`/users/${user._id}`}>
+          {user && user.firstname + " " + user.lastname}
+        </Link>
       </div>
     </>
   );
 };
 
-export default Users;
+export default UserSmByline;

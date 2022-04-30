@@ -141,6 +141,24 @@ header {
     }
   }
 }
+.post-form {
+  width: 820px;
+  display: flex;
+  flex-direction: column;
+  .auto-input {
+    display: none;
+  }
+  textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    min-height: 120px;
+    border-radius: 10px;
+    border: 1px solid rgb(238, 237, 236);
+  }
+  button {
+    height: 36px;
+  }
+}
 main {
   display: flex;
   flex-wrap: wrap;
@@ -161,7 +179,6 @@ main {
   }
 }
 .user-card-preview {
-  background-color: rgb(87, 92, 96);
   @include FlexAllCenter();
   flex-direction: column;
   height: 400px;
@@ -184,22 +201,23 @@ main {
   display: flex;
   flex-direction: column;
   width: 800px;
-  height: auto;
+  height: 200px;
   padding: 10px;
-  background-color: gray;
+  border: 1px solid rgb(225, 224, 224);
+  background-color: rgb(238, 237, 236);
   border-radius: 10px;
   text-decoration: none;
   color: black;
   .post-card-header {
     @include FlexCenterSpaceBetween();
   }
-  .post-card-body {
-    
-  }
   .post-card-footer {
     @include FlexCenterSpaceBetween();
     
   }
+}
+.user-sm-byline-preview {
+  background-color: rgb(175, 52, 52);
 }
 footer {
   height: 40px;

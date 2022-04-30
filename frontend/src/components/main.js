@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import Create from "./create";
+import Posts from "./post/posts";
 import Users from "./user/users";
 const Main = () => {
   /* const [data, setData] = useState();
@@ -12,7 +14,9 @@ const Main = () => {
   return (
     <>
       {/* <h1 className="hello">{!data ? "loading..." : data[0].title}</h1> */}
-      <Users />
+      <Create />
+      {/* <Users /> */}
+      <Posts />
     </>
   );
 };
