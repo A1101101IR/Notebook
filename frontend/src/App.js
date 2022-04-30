@@ -7,8 +7,18 @@ import Navbar from "./components/navbar";
 import Posts from "./components/post/posts";
 import User from "./components/user/user";
 import Aside from "./aside";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [islogged, setIslogged] = useState();
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setIslogged(true);
+    } else {
+      setIslogged(false);
+    }
+    console.log(islogged);
+  });
   return (
     <section>
       <Navbar />

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 import Create from "./create";
+import Welcome from "./login/welcome";
 import Posts from "./post/posts";
 import Users from "./user/users";
 const Main = () => {
@@ -15,10 +16,10 @@ const Main = () => {
   return (
     <main>
       {/* <h1 className="hello">{!data ? "loading..." : data[0].title}</h1> */}
-
-      <Create />
       {/* <Users /> */}
-      <Posts />
+      {/* <Create />
+      <Posts /> */}
+      <Welcome />
     </main>
   );
 };

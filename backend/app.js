@@ -2,6 +2,7 @@ const express = require("express");
 const { ObjectId } = require("mongodb");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
 const Post = require("./models/post");
 const User = require("./models/user");
 const { db } = require("./models/user");
@@ -28,6 +29,44 @@ app.use((req, res, next) => {
   console.log("path:", req.path);
   console.log("method", req.method);
   next();
+});
+
+/* user reg new */
+app.post("/register", async (req, res) => {
+  console.log(req.body);
+  try {
+    const user = await User.create({
+      username: req.body.username,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      password: req.body.password,
+    });
+    res.json({ status: "ok" });
+  } catch (err) {
+    res.json({ status: "not ok" });
+  }
+});
+/* user login */
+app.post("/login", async (req, res) => {
+  console.log(req.body);
+  const user = await User.findOne({
+    email: req.body.email,
+    password: req.body.password,
+  });
+  if (user) {
+    const token = jwt.sign(
+      {
+        email: req.body.email,
+        firstname: req.body.firstname,
+      },
+      "secret123"
+    );
+    /* console.log(localStorage.getItem("token")); */
+    return res.json({ token: token });
+  } else {
+    res.json({ status: "not ok" });
+  }
 });
 
 /* app.get("/", (req, res) => {
