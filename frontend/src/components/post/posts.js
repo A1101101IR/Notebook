@@ -8,7 +8,7 @@ const Posts = () => {
       {error && <p>{error}</p>}
       {isLoading && <p>{isLoading}</p>}
       {posts &&
-        posts.map((post) => (
+        posts.reverse().map((post) => (
           <Link
             to={`/posts/${post._id}`}
             className="post-card-preview"
@@ -27,7 +27,8 @@ const Posts = () => {
             <div className="post-card-footer">
               <button>Like</button>
               <button>Comment</button>
-              <button>Share</button>
+              <input type="text" placeholder="Comment" />
+              {/* <button>Share</button> */}
             </div>
           </Link>
         ))}

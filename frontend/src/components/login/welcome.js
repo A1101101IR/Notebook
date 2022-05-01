@@ -3,7 +3,7 @@ import SignIn from "./signin";
 
 const Welcome = () => {
   return (
-    <div>
+    <div className="welcome">
       <Login />
       <SignIn />
     </div>

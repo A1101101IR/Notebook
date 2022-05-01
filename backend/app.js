@@ -35,16 +35,23 @@ app.use((req, res, next) => {
 app.post("/register", async (req, res) => {
   console.log(req.body);
   try {
-    const user = await User.create({
-      username: req.body.username,
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
+    const userInDatabase = await User.findOne({
       email: req.body.email,
-      password: req.body.password,
     });
-    res.json({ status: "ok" });
+    if (userInDatabase) {
+      res.json({ status: "user exists" });
+    } else {
+      const user = await User.create({
+        username: req.body.username,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        password: req.body.password,
+      });
+      res.json({ status: "user created" });
+    }
   } catch (err) {
-    res.json({ status: "not ok" });
+    res.json({ status: "error", error: err });
   }
 });
 /* user login */
@@ -58,14 +65,12 @@ app.post("/login", async (req, res) => {
     const token = jwt.sign(
       {
         email: req.body.email,
-        firstname: req.body.firstname,
       },
       "secret123"
     );
-    /* console.log(localStorage.getItem("token")); */
     return res.json({ token: token });
   } else {
-    res.json({ status: "not ok" });
+    res.json({ status: "cannot find" });
   }
 });
 

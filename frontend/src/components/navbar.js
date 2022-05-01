@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
 const Navbar = () => {
+  const loggut = () => {
+    localStorage.removeItem("token");
+    window.location.reload(false);
+  };
   return (
     <>
       <header>
@@ -7,9 +11,9 @@ const Navbar = () => {
           <h1>Blog</h1>
         </Link>
         <div className="header-serach-bar">
-          <span className="search-icon"></span>
+          {/* <span className="search-icon"></span> */}
           <input type="text" placeholder="Sreach?" className="search-bar" />
-          <span className="search-close-icon"></span>
+          {/* <span className="search-close-icon"></span> */}
         </div>
         <nav>
           <Link to="/">Home</Link>
@@ -17,7 +21,14 @@ const Navbar = () => {
           <Link to="/create">Create</Link>
         </nav>
         <div className="header-btns">
-          <a href="#">Login</a>
+          <a
+            href="#"
+            onClick={() => {
+              loggut();
+            }}
+          >
+            Loggut
+          </a>
         </div>
       </header>
     </>

@@ -15,11 +15,9 @@ const Login = () => {
       }),
     });
     const data = await response.json();
-
     localStorage.setItem("token", JSON.stringify(data));
     if (localStorage.getItem("token")) {
-      console.log("yes det finns");
-      console.log(localStorage.getItem("token"));
+      window.location.reload(false);
     }
   }
   return (

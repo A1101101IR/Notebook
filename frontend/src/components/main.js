@@ -17,9 +17,9 @@ const Main = () => {
     <main>
       {/* <h1 className="hello">{!data ? "loading..." : data[0].title}</h1> */}
       {/* <Users /> */}
-      {/* <Create />
-      <Posts /> */}
-      <Welcome />
+      <Create />
+      <Posts />
+      {/* <Welcome /> */}
     </main>
   );
 };

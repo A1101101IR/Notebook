@@ -8,7 +8,7 @@ import Posts from "./components/post/posts";
 import User from "./components/user/user";
 import Aside from "./aside";
 import { useEffect, useState } from "react";
-
+import Welcome from "./components/login/welcome";
 function App() {
   const [islogged, setIslogged] = useState();
   useEffect(() => {
@@ -17,22 +17,27 @@ function App() {
     } else {
       setIslogged(false);
     }
-    console.log(islogged);
   });
   return (
     <section>
-      <Navbar />
-      <div className="site">
-        <Aside />
-        <Routes>
-          <Route path="/" element={<Main />}></Route>
-          <Route path="/posts" element={<Posts />}></Route>
-          <Route path="/posts/:id" element={<Post />}></Route>
-          <Route path="/users/:id" element={<User />}></Route>
-          <Route path="/create" element={<Create />}></Route>
-        </Routes>
-      </div>
-      <Footer />
+      {islogged ? (
+        <>
+          <Navbar />
+          <div className="site">
+            <Aside />
+            <Routes>
+              <Route path="/" element={<Main />}></Route>
+              <Route path="/posts" element={<Posts />}></Route>
+              <Route path="/posts/:id" element={<Post />}></Route>
+              <Route path="/users/:id" element={<User />}></Route>
+              <Route path="/create" element={<Create />}></Route>
+            </Routes>
+          </div>
+          <Footer />
+        </>
+      ) : (
+        <Welcome />
+      )}
     </section>
   );
 }

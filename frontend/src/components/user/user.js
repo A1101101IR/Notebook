@@ -5,7 +5,9 @@ const User = () => {
   const { data: user, error, isLoading } = useFatch(`/users/${id}`);
   return (
     <>
-      <h1>{user && user.firstname}</h1>
+      {error && <p>{error}</p>}
+      {isLoading && <p>{isLoading}</p>}
+      {user && <h4>{user.firstname + " " + user.lastname}</h4>}
     </>
   );
 };
