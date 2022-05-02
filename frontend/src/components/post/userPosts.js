@@ -1,8 +1,8 @@
 import useFatch from "../customHooks/useFetch";
 import { Link } from "react-router-dom";
 import UserSmByline from "../user/user-sm-byline";
-const Posts = () => {
-  const { data: posts, error, isLoading } = useFatch("/posts");
+const UserPosts = (id) => {
+  const { data: posts, error, isLoading } = useFatch(`/userposts/${id.id}`);
   return (
     <>
       {error && <p>{error}</p>}
@@ -37,4 +37,4 @@ const Posts = () => {
     </>
   );
 };
-export default Posts;
+export default UserPosts;

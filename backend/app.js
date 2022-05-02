@@ -129,6 +129,17 @@ app.get("/posts/:id", (req, res) => {
     });
 });
 
+/* get users posts */
+app.get("/userposts/:id", (req, res) => {
+  Post.find({ authorId: req.params.id })
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 /* get all users */
 app.get("/users", (req, res) => {
   User.find()

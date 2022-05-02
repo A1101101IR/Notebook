@@ -33,7 +33,7 @@ function App() {
               <Route path="/create" element={<Create />}></Route>
             </Routes>
           </div>
-          <Footer />
+          {/* <Footer /> */}
         </>
       ) : (
         <Welcome />

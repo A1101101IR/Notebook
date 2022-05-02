@@ -1,7 +1,7 @@
 // classes
-$c1: #afafaf;
-$c2: #ffffff;
-$c3: #262626a4;
+$c1: #ffffff;
+$c2: #F1F0F2;
+$c3: #007EFF;
 $c4: #000000;
 $c5: #fe0707;
 
@@ -16,6 +16,11 @@ $c5: #fe0707;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+@mixin FlexCenterSpaceEvenly {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 @mixin ScreenSize {
   /* Extra small devices (phones, 600px and down) */
@@ -86,7 +91,7 @@ section {
     max-width: 992px;
   }
   @media only screen and (min-width: 1200px) {
-    max-width: 1280px;
+    max-width: 1230px;
   }
 }
 
@@ -192,7 +197,8 @@ header {
   }
 }
 .user-card-preview {
-  @include FlexAllCenter();
+  @include FlexCenterSpaceEvenly;
+  border: 1px solid rgb(225, 224, 224);
   flex-direction: column;
   height: 400px;
   width: 400px;
@@ -207,9 +213,12 @@ header {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 120px;
-    width: 120px;
-    border-radius: 65px;
+    height: 220px;
+    width: 220px;
+    border-radius: 150px;
+  }
+  .user-card-info {
+    margin-bottom: 20px;
   }
 }
 .post-card-preview {
@@ -217,7 +226,7 @@ header {
   flex-direction: column;
   margin-bottom: 10px;
   width: 800px;
-  height: 200px;
+  height: auto;
   padding: 10px;
   border: 1px solid rgb(225, 224, 224);
   background-color: $c2;
@@ -226,14 +235,37 @@ header {
   color: $c4;
   .post-card-header {
     @include FlexCenterSpaceBetween();
+    min-height: 35px;
+    margin-bottom: 10px;
+    .post-options-nav {
+      height: 35px;
+      width: 35px;
+      @include FlexAllCenter()
+    }
+  }
+  .post-card-body {
+    letter-spacing: 1px;
+    font-weight: 500;
   }
   .post-card-footer {
     @include FlexCenterSpaceBetween();
-    
+    min-height: 35px;
+    margin-top: 10px;
   }
 }
 .user-sm-byline-preview {
-  background-color: rgb(175, 52, 52);
+  a {
+    display: flex;
+    align-items: center;
+    .user-img-sm {
+      background-color: #021C26;
+      height: 35px;
+      width: 35px;
+      border-radius: 25px;
+      margin-right: 10px;
+    }
+  }
+  
 }
 footer {
   height: 40px;

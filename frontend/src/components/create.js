@@ -1,9 +1,8 @@
 import { useState } from "react";
 
 const Create = () => {
-  const [authorId, setAuthorId] = useState();
+  const authorId = "626da81fbf53b876a68bc65f";
   const [body, setBody] = useState();
-  const aid = "626da495422f688882f886d0";
   async function createPost(event) {
     event.preventDefault();
     const response = await fetch("/newpost", {
@@ -22,11 +21,6 @@ const Create = () => {
   return (
     <>
       <form className="post-form" onSubmit={createPost}>
-        <input
-          type="text"
-          onChange={(e) => setAuthorId(e.target.value)}
-          placeholder="id"
-        />
         <textarea
           type="text"
           onChange={(e) => setBody(e.target.value)}

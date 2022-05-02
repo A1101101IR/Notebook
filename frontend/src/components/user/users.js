@@ -2,6 +2,7 @@ import useFatch from "../customHooks/useFetch";
 import { Link } from "react-router-dom";
 const Users = () => {
   const { data: users, error, isLoading } = useFatch("/users");
+  console.log(users);
   return (
     <>
       {error && <p>{error}</p>}
@@ -9,7 +10,7 @@ const Users = () => {
       {users &&
         users.map((user) => (
           <Link
-            to={`/users/${users._id}`}
+            to={`/users/${user._id}`}
             className="user-card-preview"
             key={user._id}
           >
