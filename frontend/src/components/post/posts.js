@@ -1,7 +1,7 @@
 import useFatch from "../customHooks/useFetch";
 import { Link } from "react-router-dom";
 import UserSmByline from "../user/user-sm-byline";
-const Posts = () => {
+const Posts = (url) => {
   const { data: posts, error, isLoading } = useFatch("/posts");
   return (
     <>

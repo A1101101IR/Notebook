@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 const Navbar = () => {
   const loggut = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     window.location.reload(false);
   };
   return (

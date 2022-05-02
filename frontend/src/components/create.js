@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useFatch from "./customHooks/useFetch";
 
 const Create = () => {
-  const authorId = "626da81fbf53b876a68bc65f";
+  const authorId = localStorage.getItem("user");
+  const { data: user, error, isLoading } = useFatch(`/users/${authorId}`);
   const [body, setBody] = useState();
   async function createPost(event) {
     event.preventDefault();
@@ -16,15 +18,17 @@ const Create = () => {
       }),
     });
     const data = await response.json();
+    window.location.reload(false);
     console.log(data);
   }
+
   return (
     <>
       <form className="post-form" onSubmit={createPost}>
         <textarea
           type="text"
           onChange={(e) => setBody(e.target.value)}
-          placeholder="body"
+          placeholder={user && "Hej " + user.firstname + "! Vad händer? "}
         />
         <button>Publish</button>
       </form>

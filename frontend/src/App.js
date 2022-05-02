@@ -12,7 +12,7 @@ import Welcome from "./components/login/welcome";
 function App() {
   const [islogged, setIslogged] = useState();
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("user")) {
       setIslogged(true);
     } else {
       setIslogged(false);

@@ -15,10 +15,20 @@ const Login = () => {
       }),
     });
     const data = await response.json();
-    localStorage.setItem("token", JSON.stringify(data));
-    if (localStorage.getItem("token")) {
+    const currentUser = data.currentUser._id;
+    console.log(data.currentUser._id);
+    if (currentUser) {
+      localStorage.setItem("user", currentUser);
       window.location.reload(false);
+    } else {
+      localStorage.setItem("user", false);
+      /* error needed! */
     }
+    /* localStorage.setItem("token", JSON.stringify(data)); */
+    /* console.log(JSON.parse(localStorage.getItem("token"))); */
+    /* if (localStorage.getItem("token")) {
+      
+    } */
   }
   return (
     <>

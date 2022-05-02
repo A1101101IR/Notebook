@@ -62,13 +62,15 @@ app.post("/login", async (req, res) => {
     password: req.body.password,
   });
   if (user) {
+    const userId = user;
     const token = jwt.sign(
       {
         email: req.body.email,
       },
       "secret123"
     );
-    return res.json({ token: token });
+    /* return res.json({ token: token }); */
+    return res.json({ currentUser: user });
   } else {
     res.json({ status: "cannot find" });
   }
