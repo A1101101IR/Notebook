@@ -1,5 +1,7 @@
 const Profile = (data) => {
   const user = data.data;
+  const currentUser = localStorage.getItem("user");
+
   return (
     <>
       {user && (

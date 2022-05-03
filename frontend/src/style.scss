@@ -314,3 +314,9 @@ button {
 button:hover {
   background-color: $c5;
 }
+.delete-btn {
+  width: 35px;
+  height: 35px;
+  background-image: url(./img/delete.png);
+  background-size: cover;
+}

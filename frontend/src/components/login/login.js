@@ -21,7 +21,8 @@ const Login = () => {
       localStorage.setItem("user", currentUser);
       window.location.reload(false);
     } else {
-      localStorage.setItem("user", false);
+      /* localStorage.setItem("user", false); */
+      console.log("error");
       /* error needed! */
     }
     /* localStorage.setItem("token", JSON.stringify(data)); */

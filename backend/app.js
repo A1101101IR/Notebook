@@ -117,6 +117,18 @@ app.get("/posts/:id", (req, res) => {
     });
 });
 
+/* get single post by id and delete */
+app.delete("/posts/:id", (req, res) => {
+  const id = req.params.id;
+  Post.findByIdAndDelete(id)
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 /* Create new user */
 app.post("/adduser", (req, res) => {
   const user = new User(req.body);
