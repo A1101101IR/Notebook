@@ -29,8 +29,9 @@ const Posts = (url) => {
             <div className="post-card-footer">
               <button>Like</button>
               <button>Comment</button>
-              <input type="text" placeholder="Comment" />
-              {/* <button>Share</button> */}
+              <div className="comment-box">
+                <input type="text" placeholder="Comment" />
+              </div>
             </div>
           </Link>
         ))}

@@ -15,11 +15,11 @@ const Navbar = () => {
           <input type="text" placeholder="Sreach?" className="search-bar" />
           {/* <span className="search-close-icon"></span> */}
         </div>
-        <nav>
+        {/* <nav>
           <Link to="/">Home</Link>
           <Link to="/posts">Posts</Link>
           <Link to="/create">Create</Link>
-        </nav>
+        </nav> */}
         <div className="header-btns">
           <a
             href="#"
@@ -27,7 +27,7 @@ const Navbar = () => {
               loggut();
             }}
           >
-            Loggut
+            <button>Loggut</button>
           </a>
         </div>
       </header>

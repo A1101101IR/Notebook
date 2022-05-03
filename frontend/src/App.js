@@ -9,6 +9,7 @@ import User from "./components/user/user";
 import Aside from "./aside";
 import { useEffect, useState } from "react";
 import Welcome from "./components/login/welcome";
+import useFatch from "./components/customHooks/useFetch";
 function App() {
   const [islogged, setIslogged] = useState();
   useEffect(() => {
@@ -24,12 +25,14 @@ function App() {
         <>
           <Navbar />
           <div className="site">
-            <Aside />
+            {/* <Aside /> */}
             <Routes>
+              {/* <Route path="/users/:id" element={<Aside />}></Route> */}
               <Route path="/" element={<Main />}></Route>
               <Route path="/posts" element={<Posts />}></Route>
               <Route path="/posts/:id" element={<Post />}></Route>
               <Route path="/users/:id" element={<User />}></Route>
+              {/* <Route path="/users/:id" element={<Aside />}></Route> */}
               <Route path="/create" element={<Create />}></Route>
             </Routes>
           </div>

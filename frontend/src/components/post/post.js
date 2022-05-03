@@ -1,13 +1,16 @@
 import useFatch from "../customHooks/useFetch";
 import { Link, useParams } from "react-router-dom";
 import UserSmByline from "../user/user-sm-byline";
+import Profile from "../user/userProfile";
 const Post = () => {
+  const currentUserId = localStorage.getItem("user");
+  const { data: userData } = useFatch(`/users/${currentUserId}`);
   const { id } = useParams();
   const { data: post, error, isLoading } = useFatch(`/posts/${id}`);
-  console.log(post, error, isLoading);
   return (
     <>
-      <div>
+      <Profile data={userData} />
+      <main>
         {isLoading && <p>{isLoading}</p>}
         {post && (
           <div className="post-card-preview">
@@ -29,7 +32,7 @@ const Post = () => {
           </div>
         )}
         {error && <p>{error}</p>}
-      </div>
+      </main>
     </>
   );
 };
