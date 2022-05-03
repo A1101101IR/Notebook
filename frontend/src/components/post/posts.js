@@ -1,12 +1,9 @@
-import useFatch from "../customHooks/useFetch";
 import { Link } from "react-router-dom";
 import UserSmByline from "../user/user-sm-byline";
-const Posts = (url) => {
-  const { data: posts, error, isLoading } = useFatch("/posts");
+const Posts = (postsData) => {
+  const posts = postsData.data;
   return (
     <>
-      {error && <p>{error}</p>}
-      {isLoading && <p>{isLoading}</p>}
       {posts &&
         posts.reverse().map((post) => (
           <Link

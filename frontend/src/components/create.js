@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import useFatch from "./customHooks/useFetch";
 
-const Create = () => {
+const Create = (currentUser) => {
   const authorId = localStorage.getItem("user");
-  const { data: user, error, isLoading } = useFatch(`/users/${authorId}`);
+  const currentUserData = currentUser.data;
   const [body, setBody] = useState();
   async function createPost(event) {
     event.preventDefault();
-    const response = await fetch("/newpost", {
+    const response = await fetch("/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,7 +18,7 @@ const Create = () => {
       }),
     });
     const data = await response.json();
-    window.location.reload(false);
+    /* window.location.reload(false); */
     console.log(data);
   }
 
@@ -28,7 +28,10 @@ const Create = () => {
         <textarea
           type="text"
           onChange={(e) => setBody(e.target.value)}
-          placeholder={user && "Hej " + user.firstname + "! Vad händer? "}
+          placeholder={
+            currentUserData &&
+            "Hej " + currentUserData.firstname + "! Vad händer? "
+          }
         />
         <button>Publish</button>
       </form>

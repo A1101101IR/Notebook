@@ -1,8 +1,4 @@
-import useFatch from "../customHooks/useFetch";
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 const Profile = (data) => {
-  console.log(data);
   const user = data.data;
   return (
     <>
@@ -16,7 +12,7 @@ const Profile = (data) => {
               <h2 className="user-name">
                 {user.firstname} {user.lastname}
               </h2>
-              <p className="user-card-bio">Fotograf - bildjournalist</p>
+              <p className="user-card-bio">user bio</p>
             </div>
             <div className="user-card-btns">
               <button>Follow</button>

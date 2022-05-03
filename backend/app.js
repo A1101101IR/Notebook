@@ -21,17 +21,18 @@ mongoose
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 app.use(morgan("dev"));
+
+/* tell me if any req is made */
 app.use((req, res, next) => {
   console.log("new req made");
-  console.log("host: ", req.hostname);
+  /* console.log("host: ", req.hostname);
   console.log("path:", req.path);
-  console.log("method", req.method);
+  console.log("method", req.method); */
   next();
 });
 
-/* user reg new */
+/* User register api */
 app.post("/register", async (req, res) => {
   console.log(req.body);
   try {
@@ -54,7 +55,7 @@ app.post("/register", async (req, res) => {
     res.json({ status: "error", error: err });
   }
 });
-/* user login */
+/* user login api */
 app.post("/login", async (req, res) => {
   console.log(req.body);
   const user = await User.findOne({
@@ -76,37 +77,22 @@ app.post("/login", async (req, res) => {
   }
 });
 
-/* app.get("/", (req, res) => {
+app.get("/", (req, res) => {
   res.send(console.log(`Server is listening to ${PORT}`));
-}); */
+});
 
-/* create post */
-/* app.post("/create", (req, res) => {
-  console.log("User created new post!");
+/* create new post */
+app.post("/create", (req, res) => {
   const post = new Post(req.body);
   post
     .save()
     .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}); */
-
-/* create post */
-/* app.post("/posts", (req, res) => {
-  const post = req.body;
-  db.collection("posts")
-    .insertOne(post)
-    .then((result) => {
       res.status(201).json(result);
     })
     .catch((err) => {
-      console.log(err);
-      res.status(500).json({ err: "det gick ej!" });
+      res.status(500).json(err);
     });
-}); */
+});
 
 /* get all posts */
 app.get("/posts", (req, res) => {
@@ -131,14 +117,16 @@ app.get("/posts/:id", (req, res) => {
     });
 });
 
-/* get users posts */
-app.get("/userposts/:id", (req, res) => {
-  Post.find({ authorId: req.params.id })
+/* Create new user */
+app.post("/adduser", (req, res) => {
+  const user = new User(req.body);
+  user
+    .save()
     .then((result) => {
-      res.send(result);
+      res.status(201).json(result);
     })
     .catch((err) => {
-      console.log(err);
+      res.status(500).json(err);
     });
 });
 
@@ -158,35 +146,21 @@ app.get("/users/:id", (req, res) => {
   db.collection("users")
     .findOne({ _id: ObjectId(req.params.id) })
     .then((result) => {
+      /* res.send(result); */
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
+});
+
+/* get users posts */
+app.get("/userposts/:id", (req, res) => {
+  Post.find({ authorId: req.params.id })
+    .then((result) => {
       res.send(result);
     })
     .catch((err) => {
       console.log(err);
-    });
-});
-
-/* Create new user */
-app.post("/adduser", (req, res) => {
-  const user = new User(req.body);
-  user
-    .save()
-    .then((result) => {
-      res.status(201).json(result);
-    })
-    .catch((err) => {
-      res.status(500).json(err);
-    });
-});
-
-/* create new post */
-app.post("/newpost", (req, res) => {
-  const post = new Post(req.body);
-  post
-    .save()
-    .then((result) => {
-      res.status(201).json(result);
-    })
-    .catch((err) => {
-      res.status(500).json(err);
     });
 });

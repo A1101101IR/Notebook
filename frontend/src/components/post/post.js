@@ -9,7 +9,7 @@ const Post = () => {
   const { data: post, error, isLoading } = useFatch(`/posts/${id}`);
   return (
     <>
-      <Profile data={userData} />
+      {userData && <Profile data={userData} />}
       <main>
         {isLoading && <p>{isLoading}</p>}
         {post && (
