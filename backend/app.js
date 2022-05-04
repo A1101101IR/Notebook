@@ -60,16 +60,16 @@ app.post("/login", async (req, res) => {
   console.log(req.body);
   const user = await User.findOne({
     email: req.body.email,
-    password: req.body.password,
+    /* password: req.body.password, */
   });
   if (user) {
-    const userId = user;
+    /* const userId = user;
     const token = jwt.sign(
       {
         email: req.body.email,
       },
       "secret123"
-    );
+    ); */
     /* return res.json({ token: token }); */
     return res.json({ currentUser: user });
   } else {

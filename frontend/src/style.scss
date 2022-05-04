@@ -235,8 +235,7 @@ header {
   border: 1px solid rgb(225, 224, 224);
   background-color: $c2;
   border-radius: 10px;
-  text-decoration: none;
-  color: $c4;
+  
   .post-card-header {
     @include FlexCenterSpaceBetween();
     min-height: 35px;
@@ -244,12 +243,14 @@ header {
     .post-options-nav {
       height: 35px;
       width: 35px;
-      @include FlexAllCenter()
+      @include FlexAllCenter();
     }
   }
   .post-card-body {
     letter-spacing: 1px;
     font-weight: 500;
+    text-decoration: none;
+    color: $c4;
   }
   .post-card-footer {
     @include FlexCenterSpaceBetween();
@@ -261,6 +262,8 @@ header {
   a {
     display: flex;
     align-items: center;
+    text-decoration: none;
+    color: $c4;
     .user-img-sm {
       background-color: #021C26;
       height: 35px;
@@ -275,29 +278,42 @@ footer {
   height: 40px;
 }
 .welcome {
+  height: 100vh;
+  @include FlexAllCenter();
   form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include FlexAllCenter();
     border: 1px solid black;
     color: $c4;
     background-color: #021C26;
     border-radius: 10px;
     min-width: 400px;
-    min-height: 400px;
+    min-height: 500px;
     display: flex;
     flex-direction: column;
+    .login-message {
+      background-color: #7de323;
+      text-align: center;
+      height: 30px;
+      width: 350px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
     input {
       color: $c4;
       background-color: $c2;
-      height: 34px;
+      height: 30px;
       width: 340px;
       margin-bottom: 10px;
       padding: 2px 6px;
+      border-radius: 10px;
     }
     button {
       width: 356px;
-      height: 34px;
+      height: 38px;
+    }
+    span {
+      color: #F1F0F2;
+      margin: 8px;
     }
   }
 }

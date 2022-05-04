@@ -25,11 +25,6 @@ const Login = () => {
       console.log("error");
       /* error needed! */
     }
-    /* localStorage.setItem("token", JSON.stringify(data)); */
-    /* console.log(JSON.parse(localStorage.getItem("token"))); */
-    /* if (localStorage.getItem("token")) {
-      
-    } */
   }
   return (
     <>
