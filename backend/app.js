@@ -97,10 +97,12 @@ app.post("/create", (req, res) => {
 app.get("/posts", (req, res) => {
   Post.find()
     .then((result) => {
-      res.send(result);
+      /* res.send(result); */
+      res.status(201).json(result);
     })
     .catch((err) => {
-      console.log(err);
+      /* console.log(err); */
+      res.status(500).json(err);
     });
 });
 
@@ -109,10 +111,12 @@ app.get("/posts/:id", (req, res) => {
   db.collection("posts")
     .findOne({ _id: ObjectId(req.params.id) })
     .then((result) => {
-      res.send(result);
+      /* res.send(result); */
+      res.status(201).json(result);
     })
     .catch((err) => {
-      console.log(err);
+      /* console.log(err); */
+      res.status(500).json(err);
     });
 });
 
@@ -121,10 +125,12 @@ app.delete("/posts/:id", (req, res) => {
   const id = req.params.id;
   Post.findByIdAndDelete(id)
     .then((result) => {
-      res.send(result);
+      /* res.send(result); */
+      res.status(200).json(result);
     })
     .catch((err) => {
-      console.log(err);
+      /* console.log(err); */
+      res.status(500).json(err);
     });
 });
 
@@ -145,10 +151,12 @@ app.post("/adduser", (req, res) => {
 app.get("/users", (req, res) => {
   User.find()
     .then((result) => {
-      res.send(result);
+      /* res.send(result); */
+      res.status(201).json(result);
     })
     .catch((err) => {
-      console.log(err);
+      /* console.log(err); */
+      res.status(500).json(err);
     });
 });
 
@@ -169,9 +177,11 @@ app.get("/users/:id", (req, res) => {
 app.get("/userposts/:id", (req, res) => {
   Post.find({ authorId: req.params.id })
     .then((result) => {
-      res.send(result);
+      /* res.send(result); */
+      res.status(200).json(result);
     })
     .catch((err) => {
-      console.log(err);
+      /* console.log(err); */
+      res.status(500).json(err);
     });
 });

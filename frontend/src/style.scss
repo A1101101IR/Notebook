@@ -40,30 +40,6 @@ $c5: #fe0707;
 }
 
 
-/* $small: ('max-width: 600px');
-$phone: ("min-width: 600px");
-$tablet: ('min-width: 768px');
-$laptop: ('min-width: 992px');
-$bigScreen: ('min-width: 1280px'); */
-/* $small: 600px;
-$phone: 601px;
-$tablet: 768px;
-$laptop: 992px;
-$bigScreen: 1280px;
-
-@mixin responsiv() {
-  @if width == $small {
-    background-color: rgb(192, 58, 58);
-  } @else if width == $phone {
-    background-color: rgb(40, 32, 32);
-  } @else if width == $tablet {
-    background-color: rgb(91, 69, 69);
-  } @else if width == $laptop {
-    background-color: rgb(146, 142, 142);
-  } @else if width == $bigScreen {
-    background-color: rgb(176, 171, 171);
-  }
-} */
 
 * {
   margin: 0;

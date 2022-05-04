@@ -25,13 +25,7 @@ const Users = () => {
                 </h2>
                 <p className="user-card-bio">
                   Ut mauris odio, tristique sit amet ante vitae, faucibus
-                  imperdiet leo. Nullam molestie ligula ante, vitae fermentum
-                  nibh molestie et. Aenean posuere laoreet elit, in aliquam
-                  tellus suscipit id. Quisque pulvinar feugiat lacinia. Aliquam
-                  quis lectus id leo scelerisque elementum. Cras viverra
-                  ultrices malesuada. Mauris ornare orci augue, sit amet
-                  tincidunt odio aliquam eu. Duis auctor aliquam enim pulvinar
-                  vestibulum. Ut nec mattis risus.
+                  imperdiet leo.
                 </p>
               </div>
               <div className="user-card-btns">
