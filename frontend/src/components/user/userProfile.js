@@ -1,7 +1,16 @@
+import { useEffect, useState } from "react";
+
 const Profile = (data) => {
   const user = data.data;
   const currentUser = localStorage.getItem("user");
-
+  const [sidebar, setSidebar] = useState(false);
+  useEffect(() => {
+    console.log(user._id);
+    if (user._id === currentUser) {
+      console.log("yeah");
+      setSidebar(true);
+    }
+  });
   return (
     <>
       {user && (
@@ -22,6 +31,7 @@ const Profile = (data) => {
               <button>Status</button>
             </div>
           </div>
+          {sidebar && <div>this is user sidebar</div>}
         </div>
       )}
     </>

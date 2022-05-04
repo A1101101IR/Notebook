@@ -34,7 +34,6 @@ app.use((req, res, next) => {
 
 /* User register api */
 app.post("/register", async (req, res) => {
-  console.log(req.body);
   try {
     const userInDatabase = await User.findOne({
       email: req.body.email,

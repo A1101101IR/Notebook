@@ -1,7 +1,7 @@
 import { useState } from "react";
 const Welcome = () => {
   const [output, setOutput] = useState(false);
-  const [message, setMessage] = useState("hello");
+  const [message, setMessage] = useState("Log in please!");
   const [username, setUsername] = useState();
   const [firstname, setFirstname] = useState();
   const [lastname, setLastname] = useState();
@@ -35,7 +35,14 @@ const Welcome = () => {
       setMessage("can't find account!");
     }
   }
-
+  const displayLogIn = () => {
+    setOutput(false);
+    setMessage("Log in please!");
+  };
+  const displaySignIn = () => {
+    setOutput(true);
+    setMessage("Create your account!");
+  };
   async function register(event) {
     event.preventDefault();
     const response = await fetch("/register", {
@@ -52,88 +59,107 @@ const Welcome = () => {
       }),
     });
     const data = await response.json();
-    if (data.status === "ok") {
-      /* history.push("/login"); */
-      console.log("yes");
+    /* if (data.status == "user created") {
+      setMessage(data.status);
+    } */
+    if (data.status === "user exists") {
+      setMessage(data.status);
+      setTimeout(() => {
+        displayLogIn();
+      }, 500);
+    } else if (data.status === "user created") {
+      setMessage(data.status);
+      setTimeout(() => {
+        displayLogIn();
+      }, 500);
+    } else {
+      setMessage(data.status);
     }
   }
-  const displayLogIn = () => {
-    setOutput(true);
-  };
-  const displaySignIn = () => {
-    setOutput(false);
-  };
+
   return (
     <div className="welcome">
-      {output && (
-        <form onSubmit={login}>
-          <p className="login-message">{message}</p>
-          <input
-            type="Email"
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="email"
-            required
-          />
-          <input
-            type="Password"
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="password"
-            required
-          />
-          <button>Login</button>
-          <span>Or</span>
-          <button
-            onClick={() => {
-              displaySignIn();
-            }}
-          >
-            SignIn
-          </button>
-        </form>
-      )}
       {!output && (
-        <form onSubmit={register}>
-          <p className="login-message">{message}</p>
-          <input
-            type="text"
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="username"
-            required
-          />
-          <input
-            type="text"
-            onChange={(e) => setFirstname(e.target.value)}
-            placeholder="Firstname"
-            required
-          />
-          <input
-            type="text"
-            onChange={(e) => setLastname(e.target.value)}
-            placeholder="Lastname"
-            required
-          />
-          <input
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            required
-          />
-          <input
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-            required
-          />
-          <button type="submit">SignIn</button>
-          <span>Or</span>
-          <button
-            onClick={() => {
-              displayLogIn();
-            }}
-          >
-            Login
-          </button>
-        </form>
+        <div className="form-container">
+          <div className="login-message">
+            <p>{message}</p>
+          </div>
+          <form onSubmit={login}>
+            <input
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              required
+            />
+            <input
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              required
+            />
+            <button>Login</button>
+          </form>
+          <div className="or-box">
+            <span>or</span>
+            <button
+              onClick={() => {
+                displaySignIn();
+              }}
+            >
+              Create a account
+            </button>
+          </div>
+        </div>
+      )}
+      {output && (
+        <div className="form-container">
+          <div className="login-message">
+            <p>{message}</p>
+          </div>
+          <form onSubmit={register}>
+            <input
+              type="text"
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="username"
+              required
+            />
+            <input
+              type="text"
+              onChange={(e) => setFirstname(e.target.value)}
+              placeholder="Firstname"
+              required
+            />
+            <input
+              type="text"
+              onChange={(e) => setLastname(e.target.value)}
+              placeholder="Lastname"
+              required
+            />
+            <input
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              required
+            />
+            <input
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              required
+            />
+            <button type="submit">Sign in</button>
+          </form>
+          <div className="or-box">
+            <span>Have an Account Already?</span>
+            <button
+              onClick={() => {
+                displayLogIn();
+              }}
+            >
+              Log in
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );

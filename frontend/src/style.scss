@@ -204,7 +204,7 @@ header {
   @include FlexCenterSpaceEvenly;
   border: 1px solid rgb(225, 224, 224);
   flex-direction: column;
-  height: 400px;
+  min-height: 400px;
   width: 400px;
   text-decoration: none;
   text-align: center;
@@ -280,42 +280,75 @@ footer {
 .welcome {
   height: 100vh;
   @include FlexAllCenter();
-  form {
-    @include FlexAllCenter();
-    border: 1px solid black;
-    color: $c4;
+  .form-container {
+    min-width: 400px;
+    padding: 26px 0px 35px 0px;
     background-color: #021C26;
     border-radius: 10px;
-    min-width: 400px;
-    min-height: 500px;
-    display: flex;
-    flex-direction: column;
     .login-message {
-      background-color: #7de323;
-      text-align: center;
-      height: 30px;
-      width: 350px;
+      /* background-color: #7de323; */
+      @include FlexAllCenter();
+      width: 360px;
+      height: 50px;
       margin-bottom: 10px;
       border-radius: 5px;
+      p{
+        color: white;
+        font-family: Lato;
+        font-size: 20px;
+        font-weight: 600
+      }
+      
     }
-    input {
+    form {
+      @include FlexAllCenter();
+      /* border: 1px solid black; */
       color: $c4;
-      background-color: $c2;
-      height: 30px;
-      width: 340px;
-      margin-bottom: 10px;
-      padding: 2px 6px;
+      padding-top: 10px;
+      /* padding: 14px 0px; */
+      /* background-color: #021C26; */
       border-radius: 10px;
+      min-width: 380px;
+      max-height: 300px;
+      display: flex;
+      flex-direction: column;
+      input {
+        color: $c4;
+        background-color: $c2;
+        height: 34px;
+        width: 340px;
+        margin-bottom: 10px;
+        padding: 2px 6px;
+        border-radius: 6px;
+        border: none;
+      }
+      button {
+        width: 356px;
+        height: 38px;
+      }
+      button:hover {
+        border: 2px solid white;
+      }
     }
-    button {
-      width: 356px;
-      height: 38px;
-    }
-    span {
-      color: #F1F0F2;
-      margin: 8px;
+    .or-box {
+      @include FlexAllCenter();
+      flex-direction: column;
+      span {
+        color: #F1F0F2;
+        margin: 14px 5px;
+        font-size: 14px;
+      }
+      button {
+        width: 356px;
+        height: 38px;
+        background-color: green;
+      }
+      button:hover {
+        border: 2px solid white;
+      }
     }
   }
+  
 }
 button {
   color: $c1;
@@ -328,7 +361,7 @@ button {
   /* border: 1px soild $c1; */
 }
 button:hover {
-  background-color: $c5;
+  background-color: green;
 }
 .delete-btn {
   width: 35px;
