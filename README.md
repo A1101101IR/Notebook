@@ -1,3 +1,12 @@
-My server will be running in port 3001 (npm start)
-my api address is http://localhost:3001/blablabla
-My frontend will run in port 3000 (npm start)
+# Fullstack projekt
+
+# För att se hur appen fungerar. 👇🏻👇🏻👇🏻👇🏻
+
+```bash
+# Clona ner den och kör (npm i) i fullstack mappen.
+npm i
+# sen navigera till backend mappen och kör
+npm start
+# sen navigera också till frontend mappen och kör
+npm start
+```
