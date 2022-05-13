@@ -10,6 +10,18 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
+    comments: [
+      {
+        authorId: {
+          type: String,
+          required: true,
+        },
+        body: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );

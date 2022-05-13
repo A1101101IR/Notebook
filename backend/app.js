@@ -32,6 +32,11 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get("/blabla", (req, res) => {
+  /* res.send(console.log(`Server is listening to ${PORT}`)); */
+  res.status(201).json(`Server is listening to ${PORT}`);
+});
+
 /* User register api */
 app.post("/register", async (req, res) => {
   try {
@@ -47,6 +52,8 @@ app.post("/register", async (req, res) => {
         lastname: req.body.lastname,
         email: req.body.email,
         password: req.body.password,
+        followers: [],
+        following: [],
       });
       res.json({ status: "user created" });
     }
@@ -74,10 +81,6 @@ app.post("/login", async (req, res) => {
   } else {
     res.json({ status: "cannot find" });
   }
-});
-
-app.get("/", (req, res) => {
-  res.send(console.log(`Server is listening to ${PORT}`));
 });
 
 /* create new post */
@@ -134,8 +137,30 @@ app.delete("/posts/:id", (req, res) => {
     });
 });
 
+/* get single post by id */
+app.patch("/posts/:id", (req, res) => {
+  db.collection("posts")
+    .updateOne(
+      { _id: ObjectId(req.params.id) },
+      {
+        $set: {
+          comments: {
+            authorId: "627166bc79eef718de4c48ca",
+            body: "hello 2 world!",
+          },
+        },
+      }
+    )
+    .then((result) => {
+      res.status(201).json(result);
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
+});
+
 /* Create new user */
-app.post("/adduser", (req, res) => {
+/* app.post("/adduser", (req, res) => {
   const user = new User(req.body);
   user
     .save()
@@ -145,7 +170,7 @@ app.post("/adduser", (req, res) => {
     .catch((err) => {
       res.status(500).json(err);
     });
-});
+}); */
 
 /* get all users */
 app.get("/users", (req, res) => {

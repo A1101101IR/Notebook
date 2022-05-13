@@ -33,7 +33,7 @@ const Posts = (postsData) => {
             </Link>
             <div className="post-card-footer">
               <button>Like</button>
-              <button>Comment</button>
+              {/* <button>Comment</button> */}
               <div className="comment-box">
                 <input type="text" placeholder="Comment" />
               </div>
