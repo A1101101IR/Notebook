@@ -5,9 +5,7 @@ const Profile = (data) => {
   const currentUser = localStorage.getItem("user");
   const [sidebar, setSidebar] = useState(false);
   useEffect(() => {
-    console.log(user._id);
     if (user._id === currentUser) {
-      console.log("yeah");
       setSidebar(true);
     }
   });

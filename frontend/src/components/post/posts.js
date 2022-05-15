@@ -1,45 +1,67 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import UserSmByline from "../user/user-sm-byline";
 const Posts = (postsData) => {
-  const posts = postsData.data;
+  /* const posts = postsData.data; */
+  const [posts, setPosts] = useState(postsData.data);
   const handleDelete = (id) => {
     fetch(`/posts/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
       .catch((err) => console.log(err));
+    setPosts(postsData.data);
+  };
+  const addComment = () => {
+    console.log("New comment!");
+  };
+  const addLike = () => {
+    console.log("New Like!");
   };
   return (
     <>
       {posts &&
-        posts.reverse().map((post) => (
-          <div className="post-card-preview" key={post._id}>
-            <div className="post-card-header">
-              <div className="post-author-info">
-                <UserSmByline id={post.authorId} />
+        posts
+          .slice(0)
+          .reverse()
+          .map((post) => (
+            <div className="post-card-preview" key={post._id}>
+              <div className="post-card-header">
+                <div className="post-author-info">
+                  <UserSmByline id={post.authorId} />
+                </div>
+                <div className="post-options-nav">
+                  <span
+                    onClick={() => {
+                      handleDelete(post._id);
+                    }}
+                    className="delete-btn"
+                  ></span>
+                </div>
               </div>
-              <div className="post-options-nav">
-                <span
+              <Link to={`/posts/${post._id}`} className="post-card-body">
+                {/* <h2>{post.title}</h2> */}
+                <p>{post.body}</p>
+              </Link>
+              <div className="post-card-footer">
+                <button
                   onClick={() => {
-                    handleDelete(post._id);
+                    addLike();
                   }}
-                  className="delete-btn"
-                ></span>
+                >
+                  Like
+                </button>
+                {/* <button>Comment</button> */}
+                <div className="comment-box">
+                  <input
+                    onKeyPress={(e) => e.key === "Enter" && addComment()}
+                    type="text"
+                    placeholder="Comment"
+                  />
+                </div>
               </div>
             </div>
-            <Link to={`/posts/${post._id}`} className="post-card-body">
-              {/* <h2>{post.title}</h2> */}
-              <p>{post.body}</p>
-            </Link>
-            <div className="post-card-footer">
-              <button>Like</button>
-              {/* <button>Comment</button> */}
-              <div className="comment-box">
-                <input type="text" placeholder="Comment" />
-              </div>
-            </div>
-          </div>
-        ))}
+          ))}
     </>
   );
 };
