@@ -154,6 +154,25 @@ app.post("/comment/:id", (req, res) => {
     });
 });
 
+/* add like to post */
+app.put("/like/:id", (req, res) => {
+  db.collection("posts")
+    .updateOne(
+      { _id: ObjectId(req.params.id) },
+      {
+        $set: {
+          likes: req.body.like,
+        },
+      }
+    )
+    .then((result) => {
+      res.status(201).json(result);
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
+});
+
 /* get all users */
 app.get("/users", (req, res) => {
   User.find()

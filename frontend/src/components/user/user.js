@@ -15,7 +15,7 @@ const User = () => {
       {error && <p>{error}</p>}
       {isLoading && <p>{isLoading}</p>}
       <aside>{userData && <Profile data={userData} />}</aside>
-      <main>{postsData && <Posts data={postsData} />}</main>
+      <main>{userData && <Posts id={id} />}</main>
     </>
   );
 };

@@ -256,17 +256,30 @@ header {
   }
   .post-card-footer {
     @include FlexCenterSpaceBetween();
+    align-items: flex-start;
+    
     min-height: 35px;
     margin-top: 10px;
     .comment-box {
       width: 100%;
-      @include FlexAllCenter();
+      /* @include FlexAllCenter();
+      flex-direction: column; */
       input {
-        width: 100%;
+        width: 99%;
         height: 30px;
         border-radius: 4px;
         border: none;
         padding-left: 10px;
+      }
+      .comment {
+        display: none;
+        height: auto;
+        width: 99%;
+        border-radius: 6px;
+        font-size: 14px;
+        margin-top: 5px;
+        padding: 5px;
+        background-color: $c1;
       }
       
     }
@@ -384,4 +397,9 @@ button:hover {
   height: 35px;
   background-image: url(./img/delete.png);
   background-size: cover;
+}
+.comment {
+  height: 100px;
+  width: 100px;
+  display: fixed;
 }

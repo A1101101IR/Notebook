@@ -1,23 +1,29 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import UserSmByline from "../user/user-sm-byline";
-const Posts = (postsData) => {
-  /* const posts = postsData.data; */
-  const [posts, setPosts] = useState(postsData.data);
-  const handleDelete = (id) => {
-    fetch(`/posts/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .catch((err) => console.log(err));
-    setPosts(postsData.data);
-  };
+const Posts = (user) => {
+  const [posts, setPosts] = useState();
+  async function getPosts() {
+    const res = await fetch(`/userposts/${user.id}`);
+    const data = await res.json();
+    setPosts(data);
+  }
 
-  const [comment, setComment] = useState();
+  async function deletePost(id) {
+    const res = await fetch(`/posts/${id}`, {
+      method: "DELETE",
+    });
+    const data = await res.json();
+    if (res.status === 200) {
+      getPosts();
+    }
+  }
+
   const authorId = localStorage.getItem("user");
-  const addComment = (id) => {
+  const [comment, setComment] = useState();
+  async function addComment(id) {
     console.log(comment);
-    fetch(`/comment/${id}`, {
+    const res = await fetch(`/comment/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,13 +32,27 @@ const Posts = (postsData) => {
         authorId,
         comment,
       }),
-    })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    });
+    const data = res.json();
+    getPosts();
+  }
+
+  const [likeStatus, setLikeStatus] = useState(false);
+  const addLike = (currentLikes) => {
+    if (!likeStatus) {
+      console.log(currentLikes + 1);
+      setLikeStatus(true);
+    }
+    if (likeStatus) {
+      console.log(currentLikes - 0);
+      setLikeStatus(false);
+    }
   };
-  const addLike = () => {
-    console.log("New Like!");
-  };
+
+  useEffect(() => {
+    getPosts();
+  }, []);
+
   return (
     <>
       {posts &&
@@ -48,26 +68,24 @@ const Posts = (postsData) => {
                 <div className="post-options-nav">
                   <span
                     onClick={() => {
-                      handleDelete(post._id);
+                      deletePost(post._id);
                     }}
                     className="delete-btn"
                   ></span>
                 </div>
               </div>
               <Link to={`/posts/${post._id}`} className="post-card-body">
-                {/* <h2>{post.title}</h2> */}
                 <p>{post.body}</p>
               </Link>
               <div className="post-card-footer">
                 <button
                   id={post._id}
                   onClick={() => {
-                    addLike();
+                    addLike(post.likes);
                   }}
                 >
-                  Like
+                  {post.likes} Like
                 </button>
-                {/* <button>Comment</button> */}
                 <div className="comment-box">
                   <input
                     onKeyPress={(e) =>

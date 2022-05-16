@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+
 const postSchema = new Schema(
   {
     authorId: {
@@ -10,9 +11,7 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
-    likes: {
-      type: Number,
-    },
+    likes: { type: Number },
     comments: [
       {
         authorId: {
