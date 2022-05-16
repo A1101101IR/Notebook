@@ -5,6 +5,7 @@ const Create = (currentUser) => {
   const authorId = localStorage.getItem("user");
   const currentUserData = currentUser.data;
   const [body, setBody] = useState();
+
   async function createPost(event) {
     event.preventDefault();
     const response = await fetch("/create", {

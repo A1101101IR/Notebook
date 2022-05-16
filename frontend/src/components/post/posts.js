@@ -12,8 +12,23 @@ const Posts = (postsData) => {
       .catch((err) => console.log(err));
     setPosts(postsData.data);
   };
-  const addComment = () => {
-    console.log("New comment!");
+
+  const [comment, setComment] = useState();
+  const authorId = localStorage.getItem("user");
+  const addComment = (id) => {
+    console.log(comment);
+    fetch(`/comment/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        authorId,
+        comment,
+      }),
+    })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
   const addLike = () => {
     console.log("New Like!");
@@ -45,6 +60,7 @@ const Posts = (postsData) => {
               </Link>
               <div className="post-card-footer">
                 <button
+                  id={post._id}
                   onClick={() => {
                     addLike();
                   }}
@@ -54,7 +70,10 @@ const Posts = (postsData) => {
                 {/* <button>Comment</button> */}
                 <div className="comment-box">
                   <input
-                    onKeyPress={(e) => e.key === "Enter" && addComment()}
+                    onKeyPress={(e) =>
+                      e.key === "Enter" && addComment(post._id)
+                    }
+                    onChange={(e) => setComment(e.target.value)}
                     type="text"
                     placeholder="Comment"
                   />

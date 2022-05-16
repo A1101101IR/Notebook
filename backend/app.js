@@ -101,7 +101,7 @@ app.post("/create", (req, res) => {
 app.get("/posts", (req, res) => {
   Post.find()
     .then((result) => {
-      res.status(201).json(result);
+      res.status(200).json(result);
     })
     .catch((err) => {
       res.status(500).json(err);
@@ -113,7 +113,7 @@ app.get("/posts/:id", (req, res) => {
   db.collection("posts")
     .findOne({ _id: ObjectId(req.params.id) })
     .then((result) => {
-      res.status(201).json(result);
+      res.status(200).json(result);
     })
     .catch((err) => {
       res.status(500).json(err);
@@ -132,16 +132,16 @@ app.delete("/posts/:id", (req, res) => {
     });
 });
 
-/* get single post by id */
-app.patch("/posts/:id", (req, res) => {
+/* add comment to post */
+app.post("/comment/:id", (req, res) => {
   db.collection("posts")
     .updateOne(
       { _id: ObjectId(req.params.id) },
       {
-        $set: {
+        $push: {
           comments: {
-            authorId: "627166bc79eef718de4c48ca",
-            body: "hello 2 world!",
+            authorId: req.body.authorId,
+            body: req.body.comment,
           },
         },
       }
@@ -153,19 +153,6 @@ app.patch("/posts/:id", (req, res) => {
       res.status(500).json(err);
     });
 });
-
-/* Create new user */
-/* app.post("/adduser", (req, res) => {
-  const user = new User(req.body);
-  user
-    .save()
-    .then((result) => {
-      res.status(201).json(result);
-    })
-    .catch((err) => {
-      res.status(500).json(err);
-    });
-}); */
 
 /* get all users */
 app.get("/users", (req, res) => {

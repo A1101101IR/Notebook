@@ -15,6 +15,21 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    biography: {
+      type: String,
+    },
+    educations: [
+      {
+        school: {
+          type: String,
+          required: true,
+        },
+        education: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
     email: {
       type: String,
       required: true,
