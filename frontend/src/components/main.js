@@ -1,17 +1,21 @@
 import { useState, useEffect } from "react";
 import useFatch from "./customHooks/useFetch";
 import Profile from "./user/userProfile";
-import { Link } from "react-router-dom";
+import { forwardRef, useRef, useImperativeHandle } from "react";
+import { Link, useParams } from "react-router-dom";
 import UserSmByline from "./user/user-sm-byline";
+import Posts from "./post/posts";
 const Main = () => {
   const authorId = localStorage.getItem("user");
   /* const currentUserId = localStorage.getItem("user"); */
+  const [currentUserOptions, setCurrentUserOptions] = useState();
 
   /* UserData for profile componenet */
   const { data: userData, error, isLoading } = useFatch(`/users/${authorId}`);
 
   /*  */
   const [body, setBody] = useState();
+  const getPostsRef = useRef();
   async function createPost(event) {
     event.preventDefault();
     const response = await fetch("/create", {
@@ -26,11 +30,13 @@ const Main = () => {
       }),
     });
     const data = await response.json();
-    getPosts();
+    getPostsRef.current.reload();
+    /* getPosts(); */
   }
 
   /*  */
   const [posts, setPosts] = useState();
+
   async function getPosts() {
     const res = await fetch("/posts");
     const data = await res.json();
@@ -115,6 +121,7 @@ const Main = () => {
   }
 
   const [loading, setLoading] = useState(true);
+  const x = localStorage.getItem("user");
   useEffect(() => {
     getPosts();
     setTimeout(() => {
@@ -142,7 +149,8 @@ const Main = () => {
             <h3>Loading...</h3>
           </div>
         )}
-        {posts &&
+        <Posts ref={getPostsRef} />
+        {/* {posts &&
           posts
             .slice(0)
             .reverse()
@@ -153,12 +161,14 @@ const Main = () => {
                     <UserSmByline id={post.authorId} />
                   </div>
                   <div className="post-options-nav">
-                    <span
-                      onClick={() => {
-                        deletePost(post._id);
-                      }}
-                      className="delete-btn"
-                    ></span>
+                    {authorId === post.authorId && (
+                      <span
+                        onClick={() => {
+                          deletePost(post._id);
+                        }}
+                        className="delete-btn"
+                      ></span>
+                    )}
                   </div>
                 </div>
                 <Link to={`/posts/${post._id}`} className="post-card-body">
@@ -186,7 +196,6 @@ const Main = () => {
                     {post.comments &&
                       post.comments.map((comment) => (
                         <div style={myStyle} className={`comment @{post._id}`}>
-                          {console.log(comment.authorId)}
                           <UserSmByline id={comment.authorId} />
                           <p>{comment.body}</p>
                         </div>
@@ -194,7 +203,7 @@ const Main = () => {
                   </div>
                 </div>
               </div>
-            ))}
+            ))} */}
       </main>
     </>
   );
