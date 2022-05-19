@@ -29,7 +29,7 @@ const Profile = (data) => {
               <button>Status</button>
             </div>
           </div>
-          {sidebar && <div>this is user sidebar</div>}
+          {/* {sidebar && <div>this is user sidebar</div>} */}
         </div>
       )}
     </>

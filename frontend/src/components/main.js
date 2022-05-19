@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import useFatch from "./customHooks/useFetch";
-import Welcome from "./login/welcome";
-import Posts from "./post/posts";
 import Profile from "./user/userProfile";
-import Users from "./user/users";
 import { Link } from "react-router-dom";
 import UserSmByline from "./user/user-sm-byline";
 const Main = () => {
@@ -16,6 +13,7 @@ const Main = () => {
   }
   /* const currentUserData = currentUser.data; */
   const [body, setBody] = useState();
+
   async function createPost(event) {
     event.preventDefault();
     const response = await fetch("/create", {
@@ -70,30 +68,55 @@ const Main = () => {
 
   const [myStyle, SetMyStyle] = useState();
   const showComments = (id) => {
-    console.log("ys");
     SetMyStyle({ display: "block" });
   };
 
   const [likeStatus, setLikeStatus] = useState(false);
-  const addLike = (currentLikes) => {
+  async function addLike(id, currentLikes) {
     if (!likeStatus) {
-      console.log(currentLikes + 1);
+      const res = await fetch(`like/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          like: currentLikes + 1,
+        }),
+        redirect: "follow",
+      });
+      const data = await res.json();
+      console.log(res.status);
       setLikeStatus(true);
+      getPosts();
     }
     if (likeStatus) {
-      console.log(currentLikes - 0);
+      const res = await fetch(`like/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          like: currentLikes - 1,
+        }),
+        redirect: "follow",
+      });
+      const data = await res.json();
+      console.log(res.status);
       setLikeStatus(false);
+      getPosts();
     }
-    getPosts();
-  };
-
-  function handleLike(e, id) {
-    e.preventDefault();
-    console.log(id);
   }
 
+  function likes(like) {
+    if (like === 0 || null) {
+      return "";
+    } else {
+      return like;
+    }
+  }
+
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     getPosts();
+    setTimeout(() => {
+      setLoading(false);
+    }, 350);
   }, []);
   return (
     <>
@@ -111,18 +134,17 @@ const Main = () => {
           />
           <button>Publish</button>
         </form>
+        {loading && (
+          <div className="loading">
+            <h3>Loading...</h3>
+          </div>
+        )}
         {posts &&
           posts
             .slice(0)
             .reverse()
             .map((post) => (
-              <div
-                className="post-card-preview"
-                key={post._id}
-                onClick={() => {
-                  handleLike(post._id);
-                }}
-              >
+              <div className="post-card-preview" key={post._id}>
                 <div className="post-card-header">
                   <div className="post-author-info">
                     <UserSmByline id={post.authorId} />
@@ -137,17 +159,16 @@ const Main = () => {
                   </div>
                 </div>
                 <Link to={`/posts/${post._id}`} className="post-card-body">
-                  {/* <h2>{post.title}</h2> */}
                   <p>{post.body}</p>
                 </Link>
                 <div className="post-card-footer">
                   <button
-                    id={post._id}
                     onClick={() => {
-                      addLike(post.likes);
+                      addLike(post._id, post.likes);
                     }}
+                    value={post.likes}
                   >
-                    {post.likes} Like
+                    {likes(post.likes)} Like
                   </button>
                   <div className="comment-box">
                     <input
@@ -161,11 +182,7 @@ const Main = () => {
                     />
                     {post.comments &&
                       post.comments.map((comment) => (
-                        <div
-                          style={myStyle}
-                          className={`comment @{post._id}`}
-                          key={comment.authorId}
-                        >
+                        <div style={myStyle} className={`comment @{post._id}`}>
                           {comment.body}
                         </div>
                       ))}
