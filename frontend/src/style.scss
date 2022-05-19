@@ -268,6 +268,7 @@ header {
       width: 100%;
       /* @include FlexAllCenter();
       flex-direction: column; */
+      
       input {
         width: 99%;
         height: 30px;
@@ -279,7 +280,9 @@ header {
         }
       }
       .comment {
+
         display: none;
+        
         height: auto;
         width: 99%;
         border-radius: 6px;
@@ -287,6 +290,15 @@ header {
         margin-top: 5px;
         padding: 5px;
         background-color: $c1;
+        .user-img-sm {
+          height: 25px;
+          width: 25px;
+        }
+        p {
+          opacity: 80%;
+          margin-left: 35px;
+          margin-bottom: 4px;
+        }
       }
       
     }

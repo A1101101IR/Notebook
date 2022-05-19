@@ -5,15 +5,13 @@ import { Link } from "react-router-dom";
 import UserSmByline from "./user/user-sm-byline";
 const Main = () => {
   const authorId = localStorage.getItem("user");
-  const [posts, setPosts] = useState();
-  async function getPosts() {
-    const res = await fetch("/posts");
-    const data = await res.json();
-    setPosts(data);
-  }
-  /* const currentUserData = currentUser.data; */
-  const [body, setBody] = useState();
+  /* const currentUserId = localStorage.getItem("user"); */
 
+  /* UserData for profile componenet */
+  const { data: userData, error, isLoading } = useFatch(`/users/${authorId}`);
+
+  /*  */
+  const [body, setBody] = useState();
   async function createPost(event) {
     event.preventDefault();
     const response = await fetch("/create", {
@@ -31,13 +29,15 @@ const Main = () => {
     getPosts();
   }
 
-  const currentUserId = localStorage.getItem("user");
-  const {
-    data: userData,
-    error,
-    isLoading,
-  } = useFatch(`/users/${currentUserId}`);
+  /*  */
+  const [posts, setPosts] = useState();
+  async function getPosts() {
+    const res = await fetch("/posts");
+    const data = await res.json();
+    setPosts(data);
+  }
 
+  /*  */
   async function deletePost(id) {
     const res = await fetch(`/posts/${id}`, {
       method: "DELETE",
@@ -49,7 +49,6 @@ const Main = () => {
   }
 
   const [comment, setComment] = useState();
-  /* const authorId = localStorage.getItem("user"); */
   async function addComment(id) {
     console.log(comment);
     const res = await fetch(`/comment/${id}`, {
@@ -66,11 +65,13 @@ const Main = () => {
     getPosts();
   }
 
+  /* When user click on comment input other comments will display */
   const [myStyle, SetMyStyle] = useState();
   const showComments = (id) => {
     SetMyStyle({ display: "block" });
   };
 
+  /* Like function */
   const [likeStatus, setLikeStatus] = useState(false);
   async function addLike(id, currentLikes) {
     if (!likeStatus) {
@@ -103,6 +104,8 @@ const Main = () => {
     }
   }
 
+  /* This function will check if there is any like */
+  /* If there is likes, it will display if else nothing! */
   function likes(like) {
     if (like === 0 || null) {
       return "";
@@ -183,7 +186,9 @@ const Main = () => {
                     {post.comments &&
                       post.comments.map((comment) => (
                         <div style={myStyle} className={`comment @{post._id}`}>
-                          {comment.body}
+                          {console.log(comment.authorId)}
+                          <UserSmByline id={comment.authorId} />
+                          <p>{comment.body}</p>
                         </div>
                       ))}
                   </div>
