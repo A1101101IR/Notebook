@@ -39,8 +39,22 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    followers: [],
-    following: [],
+    followers: [
+      {
+        followersId: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+    following: [
+      {
+        followingId: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );

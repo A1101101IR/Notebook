@@ -196,6 +196,75 @@ app.get("/users/:id", (req, res) => {
     });
 });
 
+/* uppdate user info */
+app.patch("/edituser/:id", (req, res) => {
+  console.log(req.body);
+  db.collection("users")
+    .updateOne(
+      { _id: ObjectId(req.params.id) },
+      {
+        /* $push: {
+          username: req.body.username,
+          educations: {
+            school: req.body.school,
+            education: req.body.education,
+          },
+        }, */
+        $set: {
+          username: req.body.username,
+          firstname: req.body.firstname,
+          lastname: req.body.lastname,
+          biography: req.body.biography,
+          email: req.body.email,
+          password: req.body.password,
+        },
+      }
+    )
+    .then((result) => {
+      res.status(201).json(result);
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
+});
+
+/* uppdate user info */
+app.post("/edituser/:id", (req, res) => {
+  console.log(req.body);
+  db.collection("users")
+    .updateOne(
+      { _id: ObjectId(req.params.id) },
+      {
+        $push: {
+          /* educations: {
+            school: req.body.school,
+            education: req.body.education,
+          }, */
+          followers: {
+            followersId: req.body.followersId,
+          },
+          following: {
+            followingId: req.body.followingId,
+          },
+        },
+        /* $set: {
+          username: req.body.username,
+          firstname: req.body.firstname,
+          lastname: req.body.lastname,
+          biography: req.body.biography,
+          email: req.body.email,
+          password: req.body.password,
+        }, */
+      }
+    )
+    .then((result) => {
+      res.status(201).json(result);
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
+});
+
 /* get users posts */
 app.get("/userposts/:id", (req, res) => {
   Post.find({ authorId: req.params.id })
