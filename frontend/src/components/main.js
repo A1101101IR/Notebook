@@ -7,44 +7,48 @@ import UserSmByline from "./user/user-sm-byline";
 import Posts from "./post/posts";
 const Main = () => {
   const authorId = localStorage.getItem("user");
-  /* const currentUserId = localStorage.getItem("user"); */
-  const [currentUserOptions, setCurrentUserOptions] = useState();
-
-  /* UserData for profile componenet */
   const { data: userData, error, isLoading } = useFatch(`/users/${authorId}`);
 
-  /*  */
-  const [body, setBody] = useState();
+  const [body, setBody] = useState(null);
   const getPostsRef = useRef();
   async function createPost(event) {
     event.preventDefault();
-    const response = await fetch("/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        authorId,
-        body,
-        likes: 0,
-      }),
-    });
-    const data = await response.json();
-    getPostsRef.current.reload();
-    /* getPosts(); */
+    if (body === null || body === "") {
+      console.log(body);
+    } else {
+      console.log(body);
+      const response = await fetch("/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          authorId,
+          body,
+          likes: 0,
+        }),
+      });
+      const data = await response.json();
+      if (response.status === 201) {
+        getPostsRef.current.reload();
+        setBody("");
+      } else {
+        console.log(response.status);
+      }
+    }
   }
 
   /*  */
-  const [posts, setPosts] = useState();
+  /* const [posts, setPosts] = useState();
 
   async function getPosts() {
     const res = await fetch("/posts");
     const data = await res.json();
     setPosts(data);
-  }
+  } */
 
   /*  */
-  async function deletePost(id) {
+  /* async function deletePost(id) {
     const res = await fetch(`/posts/${id}`, {
       method: "DELETE",
     });
@@ -52,9 +56,9 @@ const Main = () => {
     if (res.status === 200) {
       getPosts();
     }
-  }
+  } */
 
-  const [comment, setComment] = useState();
+  /* const [comment, setComment] = useState();
   async function addComment(id) {
     console.log(comment);
     const res = await fetch(`/comment/${id}`, {
@@ -69,16 +73,16 @@ const Main = () => {
     });
     const data = res.json();
     getPosts();
-  }
+  } */
 
   /* When user click on comment input other comments will display */
-  const [myStyle, SetMyStyle] = useState();
+  /* const [myStyle, SetMyStyle] = useState();
   const showComments = (id) => {
     SetMyStyle({ display: "block" });
-  };
+  }; */
 
   /* Like function */
-  const [likeStatus, setLikeStatus] = useState(false);
+  /* const [likeStatus, setLikeStatus] = useState(false);
   async function addLike(id, currentLikes) {
     if (!likeStatus) {
       const res = await fetch(`like/${id}`, {
@@ -108,47 +112,51 @@ const Main = () => {
       setLikeStatus(false);
       getPosts();
     }
-  }
+  } */
 
   /* This function will check if there is any like */
   /* If there is likes, it will display if else nothing! */
-  function likes(like) {
+  /* function likes(like) {
     if (like === 0 || null) {
       return "";
     } else {
       return like;
     }
-  }
+  } */
 
   const [loading, setLoading] = useState(true);
-  const x = localStorage.getItem("user");
   useEffect(() => {
-    getPosts();
+    /* getPosts(); */
     setTimeout(() => {
       setLoading(false);
     }, 350);
   }, []);
   return (
     <>
-      {error && <p>{error}</p>}
-      {isLoading && <p>{isLoading}</p>}
+      {/* {error && <p>{error}</p>}
+      {isLoading && <p>{isLoading}</p>} */}
+      {loading && (
+        <div className="loading">
+          <h3>Loading...</h3>
+        </div>
+      )}
       <aside>{userData && <Profile data={userData} />}</aside>
       <main>
         <form className="post-form" onSubmit={createPost}>
           <textarea
             type="text"
+            value={body}
             onChange={(e) => setBody(e.target.value)}
             placeholder={
               userData && "Hej " + userData.firstname + "! Vad händer? "
             }
           />
-          <button>Publish</button>
+          {body ? (
+            <button>Publish</button>
+          ) : (
+            <button style={{ cursor: "not-allowed" }}>Publish</button>
+          )}
         </form>
-        {loading && (
-          <div className="loading">
-            <h3>Loading...</h3>
-          </div>
-        )}
         <Posts ref={getPostsRef} />
         {/* {posts &&
           posts

@@ -1,6 +1,5 @@
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import useFatch from "../customHooks/useFetch";
 import UserSmByline from "../user/user-sm-byline";
 const Posts = forwardRef((props, ref) => {
   const id = useParams();
@@ -10,14 +9,8 @@ const Posts = forwardRef((props, ref) => {
     },
   }));
 
-  /* const id = user.id; */
-  const authorId = localStorage.getItem("user");
-  /* const currentUserId = localStorage.getItem("user"); */
-  const [currentUserOptions, setCurrentUserOptions] = useState();
-
-  /* UserData for profile componenet */
-  const { data: userData, error, isLoading } = useFatch(`/users/${authorId}`);
-
+  /* const authorId = localStorage.getItem("user"); */
+  const currentUser = localStorage.getItem("user");
   /*  */
   const [body, setBody] = useState();
   async function createPost(event) {
@@ -28,7 +21,7 @@ const Posts = forwardRef((props, ref) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        authorId,
+        currentUser,
         body,
         likes: 0,
       }),
@@ -39,16 +32,6 @@ const Posts = forwardRef((props, ref) => {
 
   /*  */
   const [posts, setPosts] = useState();
-  const [url, setUrl] = useState();
-  /* const url = id ? `/userposts/${id.id}` : "/posts"; */
-  /* console.log(id.id); */
-  /* if (id.id == null || undefined) {
-    console.log("under");
-    setUrl("/posts");
-  } else {
-    console.log(id);
-    setUrl(`/userposts/${id.id}`);
-  } */
   async function getPosts() {
     if (id.id == null || undefined) {
       const res = await fetch("/posts");
@@ -80,7 +63,7 @@ const Posts = forwardRef((props, ref) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        authorId,
+        authorId: currentUser,
         comment,
       }),
     });
@@ -88,17 +71,16 @@ const Posts = forwardRef((props, ref) => {
     getPosts();
   }
 
-  /* When user click on comment input other comments will display */
   const [myStyle, SetMyStyle] = useState();
   const showComments = (id) => {
     SetMyStyle({ display: "block" });
   };
 
-  /* Like function */
   const [likeStatus, setLikeStatus] = useState(false);
   async function addLike(id, currentLikes) {
+    console.log(`like/${id}`);
     if (!likeStatus) {
-      const res = await fetch(`like/${id}`, {
+      const res = await fetch(`http://localhost:3000/like/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -112,7 +94,7 @@ const Posts = forwardRef((props, ref) => {
       getPosts();
     }
     if (likeStatus) {
-      const res = await fetch(`like/${id}`, {
+      const res = await fetch(`http://localhost:3000/like/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -137,12 +119,8 @@ const Posts = forwardRef((props, ref) => {
     }
   }
 
-  const [loading, setLoading] = useState(true);
   useEffect(() => {
     getPosts();
-    setTimeout(() => {
-      setLoading(false);
-    }, 350);
   }, []);
 
   return (
@@ -158,7 +136,7 @@ const Posts = forwardRef((props, ref) => {
                   <UserSmByline id={post.authorId} />
                 </div>
                 <div className="post-options-nav">
-                  {authorId === post.authorId && (
+                  {currentUser === post.authorId && (
                     <span
                       onClick={() => {
                         deletePost(post._id);
@@ -194,6 +172,7 @@ const Posts = forwardRef((props, ref) => {
                     post.comments.map((comment) => (
                       <div style={myStyle} className={`comment @{post._id}`}>
                         <UserSmByline id={comment.authorId} />
+                        {/* {console.log(comment)} */}
                         <p>{comment.body}</p>
                       </div>
                     ))}
