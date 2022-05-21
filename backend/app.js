@@ -265,6 +265,43 @@ app.post("/edituser/:id", (req, res) => {
     });
 });
 
+/* follow and onfollow */
+app.post("/follow/:id", (req, res) => {
+  console.log(req.body);
+  db.collection("users").updateOne(
+    { _id: ObjectId(req.params.id) },
+    {
+      $push: {
+        following: {
+          followingId: req.body.followersId,
+        },
+      },
+    }
+  );
+  db.collection("users")
+    .updateOne(
+      { _id: ObjectId(req.body.followersId) },
+      {
+        $push: {
+          followers: {
+            followersId: followingId,
+          },
+        },
+      }
+    )
+    .then((res) => {
+      res.status(201).json(res);
+    })
+    .then((err) => {
+      res.status(500).json(err);
+    });
+  /* try {
+    res.sendStatus(201).json({ status: "succ" });
+  } catch (err) {
+    res.status(500).json(err);
+  } */
+});
+
 /* get users posts */
 app.get("/userposts/:id", (req, res) => {
   Post.find({ authorId: req.params.id })
