@@ -55,10 +55,9 @@ body {
 }
 section {
   width: 100%;
-  /* padding: 0 10px; */
-  /* margin: 0 10px; */
   @media only screen and (max-width: 600px) {
     width: 100%;
+    margin: 0px 10px;
   }
   @media only screen and (min-width: 600px) {
     max-width: 600px;
@@ -81,6 +80,7 @@ section {
 
 
 header {
+  display: none;
   height: 60px;
   @include FlexCenterSpaceBetween();
   .logo {
@@ -201,19 +201,47 @@ header {
   flex-direction: column;
   min-height: 400px;
   min-width: 400px;
-  @media only screen and (max-width: 995px) {
+  /* @media only screen and (max-width: 995px) {
     width: 100%;
     min-height: 200px;
     display: flex;
     flex-direction: row;
-    
   }
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+    min-height: 200px;
+    display: flex;
+    flex-direction: row;
+  } */
   text-decoration: none;
   text-align: center;
   color: black;
   margin-bottom: 10px;
   background-color: $c2;
   border-radius: 10px;
+  .user-card-header {
+    margin-top: 15px;
+  }
+  @media only screen and (max-width: 455px) {
+    .user-card-body {
+      width: 280px;
+    }
+    .user-img {
+      height: 120px;
+      width: 120px;
+    }
+    .user-card-info {
+      margin-bottom: 10px;
+      h2 {
+        margin: 5px 5px;
+      }
+      p {
+        margin-top: 10px;
+        max-width: 380px;
+      }
+    }
+  }
+  
   .user-img {
     background-image: url(./img/user.png);
     background-repeat: no-repeat;
@@ -223,13 +251,67 @@ header {
     width: 220px;
     border-radius: 150px;
     @media only screen and (max-width: 995px) {
-      height: 150px;
-      width: 150px;
+      height: 120px;
+      width: 120px;
       border-radius: 100px;
     }
   }
   .user-card-info {
     margin-bottom: 20px;
+    h2 {
+      margin: 15px 5px;
+    }
+    p {
+      margin-top: 10px;
+      max-width: 380px;
+    }
+  }
+  .educations {
+    height: 60px;
+  }
+  .user-card-btns {
+    margin-bottom: 15px;
+    div{
+      display: flex;
+      justify-content: space-evenly;
+      span {
+        min-width: 120px;
+        margin-left: 5px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+.user-setting-body {
+  background-color: $c2;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  max-width: 800px;
+  width: 800px;
+  padding: 10px;
+  border: 1px solid rgb(225, 224, 224);
+  background-color: $c2;
+  border-radius: 10px;
+  form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    input,textarea {
+      color: #000000;
+      background-color: $c1;
+      height: 34px;
+      width: 340px;
+      margin-bottom: 10px;
+      padding: 2px 6px;
+      border-radius: 6px;
+      border: none;
+    }
+    textarea {
+      height: 100px;
+    }
+    
   }
 }
 .post-card-preview {
