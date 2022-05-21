@@ -228,7 +228,7 @@ app.patch("/edituser/:id", (req, res) => {
     });
 });
 
-/* uppdate user info */
+/* uppdate user arrays info */
 app.post("/edituser/:id", (req, res) => {
   console.log(req.body);
   db.collection("users")
