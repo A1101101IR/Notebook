@@ -37,7 +37,9 @@ const Main = () => {
       }
     }
   }
-
+  /* async function follow() {
+    const res = await fetch
+  } */
   /*  */
   /* const [posts, setPosts] = useState();
 

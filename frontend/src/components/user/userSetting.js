@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import useFatch from "../customHooks/useFetch";
 
 const UserSetting = (data) => {
   const { id } = useParams();
-  const userInfo = data.data;
 
+  const { data: userInfo, error, isLoading } = useFatch(`/users/${id}`);
   const [username, setUsername] = useState(/* userInfo.username */);
   const [firstname, setFirstname] = useState(/* userInfo.firstname */);
   const [lastname, setLastname] = useState(/* userInfo.lastname */);
@@ -34,6 +35,7 @@ const UserSetting = (data) => {
     /* console.log(res.status); */
     console.log(event.target.id);
   }
+  useEffect(() => {}, []);
   return (
     <div className="user-setting-body">
       {userInfo && (
