@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Logout from "../img/logout.png";
 const Navbar = () => {
   const loggut = () => {
     localStorage.removeItem("user");

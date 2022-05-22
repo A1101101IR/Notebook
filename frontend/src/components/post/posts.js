@@ -1,6 +1,8 @@
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import UserSmByline from "../user/user-sm-byline";
+import Like from "../../img/like.png";
+
 const Posts = forwardRef((props, ref) => {
   const id = useParams();
   useImperativeHandle(ref, () => ({
@@ -144,6 +146,7 @@ const Posts = forwardRef((props, ref) => {
                       className="delete-btn"
                     ></span>
                   )}
+                  {/* {!currentUser === post.authorId && <span>...</span>} */}
                 </div>
               </div>
               <Link to={`/posts/${post._id}`} className="post-card-body">
@@ -156,8 +159,10 @@ const Posts = forwardRef((props, ref) => {
                   }}
                   value={post.likes}
                 >
-                  {likes(post.likes)} Like
+                  {likes(post.likes)} like
+                  {/* <img src={Like} alt="likebtn" className="img-btns" /> */}
                 </button>
+
                 <div className="comment-box">
                   <input
                     onKeyPress={(e) =>

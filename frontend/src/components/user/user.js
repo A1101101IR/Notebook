@@ -19,8 +19,8 @@ const User = () => {
       {isLoading && <p>{isLoading}</p>}
       <aside>{userData && <Profile data={userData} />}</aside>
       <main>
-        {/* <Posts /> */}
-        {editnow}
+        <Posts />
+        {/* {editnow} */}
       </main>
     </>
   );

@@ -211,12 +211,12 @@ app.patch("/edituser/:id", (req, res) => {
           },
         }, */
         $set: {
-          username: req.body.username,
           firstname: req.body.firstname,
           lastname: req.body.lastname,
           biography: req.body.biography,
+          /* username: req.body.username,
           email: req.body.email,
-          password: req.body.password,
+          password: req.body.password, */
         },
       }
     )
