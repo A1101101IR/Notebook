@@ -267,19 +267,35 @@ app.post("/edituser/:id", (req, res) => {
 
 /* follow and onfollow */
 app.post("/follow/:id", (req, res) => {
+  db.collection("users")
+    .updateOne(
+      { _id: ObjectId(req.params.id) },
+      {
+        $push: {
+          followers: {
+            followersId: req.body.followersId,
+          },
+        },
+      }
+    )
+    .then((result) => {
+      res.status(201).json({ status: result });
+    })
+    .then((err) => {
+      res.status(500).json(err);
+    });
+});
+
+/* add followers after follow */
+app.post("/following/:id", (req, res) => {
   console.log(req.body);
   db.collection("users")
     .updateOne(
       { _id: ObjectId(req.params.id) },
       {
-        /* $push: {
-          following: {
-            followingId: req.body.followersId,
-          },
-        }, */
         $push: {
-          followers: {
-            followersId: req.body.followersId,
+          following: {
+            followingId: req.body.followingId,
           },
         },
       }

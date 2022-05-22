@@ -154,16 +154,15 @@ const Posts = forwardRef((props, ref) => {
                 <p>{post.body}</p>
               </Link>
               <div className="post-card-footer">
-                <button
+                {/* <button
                   onClick={() => {
                     addLike(post._id, post.likes);
                   }}
                   value={post.likes}
                 >
                   {likes(post.likes)} like
-                  {/* <img src={Like} alt="likebtn" className="img-btns" /> */}
-                </button>
-
+                </button> */}
+                {console.log(post.likes)}
                 <div className="comment-box">
                   <input
                     onKeyPress={(e) =>

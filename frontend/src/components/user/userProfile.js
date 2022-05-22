@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import useFatch from "../customHooks/useFetch";
 import UserMediumByline from "./user-m-byline";
 
 const Profile = (data) => {
   /*  */
+
   const user = data.data;
   const [edit, setEdit] = useState(false);
   const [sidebar, setSidebar] = useState(false);
@@ -10,26 +12,45 @@ const Profile = (data) => {
   const [firstname, setFirstname] = useState(user.firstname);
   const [lastname, setLastname] = useState(user.lastname);
   const [biography, setBiography] = useState(user.biography);
+  const { data: posts, error, isLoading } = useFatch(`/userposts/${user._id}`);
 
   /*  */
   async function follow() {
     const followersId = currentUser;
     const followingId = await user._id;
+    const body = JSON.stringify({
+      followersId,
+    });
     const res = await fetch(`/follow/${followingId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        followersId,
-        /* followingId, */
-      }),
+      body: body,
       redirect: "follow",
     });
     const data = await res.json();
-    console.log(res.status);
-    if (res.status === 201) {
-    }
+    setTimeout(() => {
+      following();
+    }, 500);
+  }
+
+  async function following() {
+    const followersId = currentUser;
+    const followingId = await user._id;
+    const body = JSON.stringify({
+      followersId,
+      followingId,
+    });
+    const res = await fetch(`/following/${followersId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: body,
+      redirect: "follow",
+    });
+    const data = await res.json();
   }
 
   /*  */
@@ -51,8 +72,6 @@ const Profile = (data) => {
       setEdit(false);
     }
   }
-
-  /*  */
   useEffect(() => {
     if (user._id === currentUser) {
       setSidebar(true);
@@ -110,9 +129,9 @@ const Profile = (data) => {
               ))} */}
             <div className="user-card-btns">
               <div>
-                <span>Posts {user.followers && user.followers.length}</span>
+                <span>Posts {posts && posts.length}</span>
                 <span>Followers {user.followers && user.followers.length}</span>
-                <span>Following {user.followers && user.followers.length}</span>
+                <span>Following {user.following && user.following.length}</span>
               </div>
               <div>
                 {sidebar && (
@@ -128,7 +147,7 @@ const Profile = (data) => {
                 {!sidebar && (
                   <>
                     <button onClick={() => follow()}>Follow</button>
-                    <button>Contact</button>
+                    <button onClick={() => following()}>Contact</button>
                     <button>Share</button>
                   </>
                 )}

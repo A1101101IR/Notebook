@@ -44,6 +44,7 @@ const userSchema = new Schema(
         followersId: {
           type: String,
           required: true,
+          unique: true,
         },
       },
     ],
@@ -52,6 +53,7 @@ const userSchema = new Schema(
         followingId: {
           type: String,
           required: true,
+          unique: true,
         },
       },
     ],
