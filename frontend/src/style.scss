@@ -173,20 +173,22 @@ header {
 }
 .user-card-preview {
   @include FlexCenterSpaceEvenly;
-  border: 1px solid rgb(215, 215, 215);
+  
   flex-direction: column;
   min-height: 400px;
   min-width: 400px;
-  @media only screen and (max-width: 600px) {
-    width: 100%;
-    min-width: 300px;
-  }
   text-decoration: none;
   text-align: center;
   color: black;
   margin-bottom: 10px;
   background-color: $c2;
+  border: 1px solid rgb(215, 215, 215);
   border-radius: 10px;
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+    min-width: 300px;
+  }
+  
   .user-card-header {
     margin-top: 15px;
   }
@@ -209,7 +211,6 @@ header {
       }
     }
   }
-  
   .user-img {
     background-image: url(./img/user.png);
     background-repeat: no-repeat;
@@ -330,6 +331,54 @@ header {
       }
     }
   }
+}
+.user-card-preview-medium {
+  @include FlexCenterSpaceEvenly();
+  margin-bottom: 10px;
+  border-radius: 10px;
+  height: 120px;
+  background-color: $c2;
+  border: 1px solid rgb(215, 215, 215);
+  text-decoration: none;
+  .user-img {
+    background-image: url(./img/user.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100px;
+    width: 100px;
+    border-radius: 60px;
+    @media only screen and (max-width: 995px) {
+      height: 120px;
+      width: 120px;
+      border-radius: 100px;
+    }
+  }
+  .user-card-body {
+    width: 250px;
+    height: 80px;
+    @include FlexAllCenter();
+    flex-direction: column;
+    .user-name {
+      font-size: 20px;
+      
+      margin-bottom: 5px;
+    }
+    .user-card-bio {
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .btns {
+      button {
+      margin-left: 5px;
+      }
+    }
+
+  }
+  /* .user-card-header {
+    
+  } */
 }
 .user-sm-byline-preview {
   a {

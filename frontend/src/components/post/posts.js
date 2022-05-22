@@ -1,7 +1,6 @@
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
-import { Link, useParams } from "react-router-dom";
 import UserSmByline from "../user/user-sm-byline";
-import Like from "../../img/like.png";
+import { Link, useParams } from "react-router-dom";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 
 const Posts = forwardRef((props, ref) => {
   const id = useParams();
@@ -10,9 +9,8 @@ const Posts = forwardRef((props, ref) => {
       getPosts();
     },
   }));
-
-  /* const authorId = localStorage.getItem("user"); */
   const currentUser = localStorage.getItem("user");
+
   /*  */
   const [body, setBody] = useState();
   async function createPost(event) {
@@ -57,6 +55,7 @@ const Posts = forwardRef((props, ref) => {
     }
   }
 
+  /*  */
   const [comment, setComment] = useState();
   async function addComment(id) {
     const res = await fetch(`/comment/${id}`, {
@@ -73,11 +72,13 @@ const Posts = forwardRef((props, ref) => {
     getPosts();
   }
 
+  /*  */
   const [myStyle, SetMyStyle] = useState();
   const showComments = (id) => {
     SetMyStyle({ display: "block" });
   };
 
+  /*  */
   const [likeStatus, setLikeStatus] = useState(false);
   async function addLike(id, currentLikes) {
     console.log(`like/${id}`);

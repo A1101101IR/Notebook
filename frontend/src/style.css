@@ -179,7 +179,6 @@ header button {
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
-  border: 1px solid #d7d7d7;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -191,6 +190,7 @@ header button {
   color: black;
   margin-bottom: 10px;
   background-color: #F1F0F2;
+  border: 1px solid #d7d7d7;
   border-radius: 10px;
 }
 
@@ -451,6 +451,78 @@ header button {
   opacity: 80%;
   margin-left: 35px;
   margin-bottom: 4px;
+}
+
+.user-card-preview-medium {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  height: 120px;
+  background-color: #F1F0F2;
+  border: 1px solid #d7d7d7;
+  text-decoration: none;
+  /* .user-card-header {
+    
+  } */
+}
+
+.user-card-preview-medium .user-img {
+  background-image: url(./img/user.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100px;
+  width: 100px;
+  border-radius: 60px;
+}
+
+@media only screen and (max-width: 995px) {
+  .user-card-preview-medium .user-img {
+    height: 120px;
+    width: 120px;
+    border-radius: 100px;
+  }
+}
+
+.user-card-preview-medium .user-card-body {
+  width: 250px;
+  height: 80px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.user-card-preview-medium .user-card-body .user-name {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.user-card-preview-medium .user-card-body .user-card-bio {
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.user-card-preview-medium .user-card-body .btns button {
+  margin-left: 5px;
 }
 
 .user-sm-byline-preview a {

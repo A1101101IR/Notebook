@@ -1,34 +1,40 @@
 import { useEffect, useState } from "react";
+import UserMediumByline from "./user-m-byline";
 
 const Profile = (data) => {
+  /*  */
   const user = data.data;
-  const currentUser = localStorage.getItem("user");
-  const [sidebar, setSidebar] = useState(false);
   const [edit, setEdit] = useState(false);
+  const [sidebar, setSidebar] = useState(false);
+  const currentUser = localStorage.getItem("user");
   const [firstname, setFirstname] = useState(user.firstname);
   const [lastname, setLastname] = useState(user.lastname);
   const [biography, setBiography] = useState(user.biography);
+
+  /*  */
   async function follow() {
-    console.log("res.status");
     const followersId = currentUser;
     const followingId = await user._id;
-    const res = await fetch("/follow", {
+    const res = await fetch(`/follow/${followingId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         followersId,
-        followingId,
+        /* followingId, */
       }),
       redirect: "follow",
     });
+    const data = await res.json();
     console.log(res.status);
+    if (res.status === 201) {
+    }
   }
+
+  /*  */
   async function editUser(event) {
     event.preventDefault();
-    console.log("ye");
-
     const res = await fetch(`/edituser/${user._id}`, {
       method: "PATCH",
       headers: {
@@ -45,6 +51,8 @@ const Profile = (data) => {
       setEdit(false);
     }
   }
+
+  /*  */
   useEffect(() => {
     if (user._id === currentUser) {
       setSidebar(true);
