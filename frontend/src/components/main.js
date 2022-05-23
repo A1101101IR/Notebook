@@ -6,10 +6,10 @@ import useFatch from "./customHooks/useFetch";
 import Users from "./user/users";
 import UserMediumByline from "./user/user-m-byline";
 const Main = () => {
+  const getPostsRef = useRef();
+  const [body, setBody] = useState(null);
   const authorId = localStorage.getItem("user");
   const { data: userData, error, isLoading } = useFatch(`/users/${authorId}`);
-  const [body, setBody] = useState(null);
-  const getPostsRef = useRef();
 
   /*  */
   async function createPost(event) {
@@ -54,7 +54,14 @@ const Main = () => {
         </div>
       )}
       <aside>
-        {userData && <Profile data={userData} />} <UserMediumByline />
+        {userData && (
+          <div className="profile-box">
+            <Profile data={userData} />
+          </div>
+        )}
+        <div className="users-box">
+          <UserMediumByline />
+        </div>
       </aside>
       <main>
         <form className="post-form" onSubmit={createPost}>

@@ -1,5 +1,5 @@
-import { useParams } from "react-router-dom";
 import Users from "./components/user/users";
+import { useParams } from "react-router-dom";
 
 const Aside = () => {
   const { id } = useParams();

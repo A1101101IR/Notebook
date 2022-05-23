@@ -11,15 +11,7 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
-    likes: [
-      {
-        like: {
-          type: String,
-          required: true,
-          unique: true,
-        },
-      },
-    ],
+    likes: { type: Number },
     comments: [
       {
         authorId: {

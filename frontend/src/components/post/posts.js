@@ -1,7 +1,7 @@
 import UserSmByline from "../user/user-sm-byline";
 import { Link, useParams } from "react-router-dom";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
-
+import Like from "../../img/like.png";
 const Posts = forwardRef((props, ref) => {
   const id = useParams();
   useImperativeHandle(ref, () => ({
@@ -69,6 +69,7 @@ const Posts = forwardRef((props, ref) => {
       }),
     });
     const data = res.json();
+    setComment("");
     getPosts();
   }
 
@@ -154,15 +155,15 @@ const Posts = forwardRef((props, ref) => {
                 <p>{post.body}</p>
               </Link>
               <div className="post-card-footer">
-                {/* <button
+                <button
                   onClick={() => {
                     addLike(post._id, post.likes);
                   }}
                   value={post.likes}
                 >
                   {likes(post.likes)} like
-                </button> */}
-                {console.log(post.likes)}
+                </button>
+
                 <div className="comment-box">
                   <input
                     onKeyPress={(e) =>
@@ -170,6 +171,7 @@ const Posts = forwardRef((props, ref) => {
                     }
                     onClick={() => showComments()}
                     onChange={(e) => setComment(e.target.value)}
+                    value={comment}
                     type="text"
                     placeholder="Comment"
                   />
@@ -177,7 +179,6 @@ const Posts = forwardRef((props, ref) => {
                     post.comments.map((comment) => (
                       <div style={myStyle} className={`comment @{post._id}`}>
                         <UserSmByline id={comment.authorId} />
-                        {/* {console.log(comment)} */}
                         <p>{comment.body}</p>
                       </div>
                     ))}

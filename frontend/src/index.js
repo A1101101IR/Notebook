@@ -1,9 +1,8 @@
-import { createContext } from "react";
-import ReactDOM from "react-dom/client";
 import "./style.scss";
 import App from "./App";
+import ReactDOM from "react-dom/client";
+/* import React, { useContext } from "react"; */
 import { BrowserRouter } from "react-router-dom";
-import React, { useContext } from "react";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(

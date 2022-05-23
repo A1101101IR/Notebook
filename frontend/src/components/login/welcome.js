@@ -1,7 +1,7 @@
 import { useState } from "react";
 const Welcome = () => {
   const [output, setOutput] = useState(false);
-  const [message, setMessage] = useState("Log in please!");
+  const [message, setMessage] = useState("Login please!");
   const [username, setUsername] = useState();
   const [firstname, setFirstname] = useState();
   const [lastname, setLastname] = useState();
@@ -37,7 +37,7 @@ const Welcome = () => {
   }
   const displayLogIn = () => {
     setOutput(false);
-    setMessage("Log in please!");
+    setMessage("Login please!");
   };
   const displaySignIn = () => {
     setOutput(true);
@@ -156,7 +156,7 @@ const Welcome = () => {
                 displayLogIn();
               }}
             >
-              Log in
+              Login
             </button>
           </div>
         </div>

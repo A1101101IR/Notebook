@@ -1,10 +1,11 @@
-import { Routes, Route } from "react-router-dom";
-import Post from "./components/post/post";
 import Main from "./components/main";
 import Navbar from "./components/navbar";
 import User from "./components/user/user";
+import Post from "./components/post/post";
 import { useEffect, useState } from "react";
 import Welcome from "./components/login/welcome";
+import { Routes, Route } from "react-router-dom";
+
 function App() {
   const [islogged, setIslogged] = useState();
   useEffect(() => {

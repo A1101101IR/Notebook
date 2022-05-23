@@ -91,7 +91,9 @@ const Profile = (data) => {
                   <h2 className="user-name">
                     {user.firstname} {user.lastname}
                   </h2>
-                  <p className="user-card-bio">{user.biography}</p>
+                  <p className="user-card-bio">
+                    {user.biography.slice(0, 140)}
+                  </p>
                 </>
               )}
               {edit && (
@@ -128,30 +130,41 @@ const Profile = (data) => {
                 </div>
               ))} */}
             <div className="user-card-btns">
-              <div>
-                <span>Posts {posts && posts.length}</span>
+              <div className="info-box">
+                <div className="info">
+                  <span>Posts</span>
+                  <span>{posts && posts.length}</span>
+                </div>
+                <div className="info">
+                  <span>Followers</span>
+                  <span>{user.followers && user.followers.length}</span>
+                </div>
+                <div className="info">
+                  <span>Following</span>
+                  <span>{user.following && user.following.length}</span>
+                </div>
+              </div>
+              {/* <div>
                 <span>Followers {user.followers && user.followers.length}</span>
                 <span>Following {user.following && user.following.length}</span>
-              </div>
-              <div>
-                {sidebar && (
-                  <>
-                    {/* {edit && <button onClick={(e) => editUser()}>Save</button>} */}
-                    {!edit && (
-                      <button onClick={(e) => setEdit(true)}>
-                        Edit Profile
-                      </button>
-                    )}
-                  </>
-                )}
-                {!sidebar && (
-                  <>
-                    <button onClick={() => follow()}>Follow</button>
-                    <button onClick={() => following()}>Contact</button>
-                    <button>Share</button>
-                  </>
-                )}
-              </div>
+              </div> */}
+            </div>
+            <div className="btn-box">
+              {sidebar && (
+                <>
+                  {/* {edit && <button onClick={(e) => editUser()}>Save</button>} */}
+                  {!edit && (
+                    <button onClick={(e) => setEdit(true)}>Edit Profile</button>
+                  )}
+                </>
+              )}
+              {!sidebar && (
+                <>
+                  <button onClick={() => follow()}>Follow</button>
+                  <button onClick={() => following()}>Contact</button>
+                  {/* <button>Share</button> */}
+                </>
+              )}
             </div>
           </div>
         </div>
