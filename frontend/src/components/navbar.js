@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Logout from "../img/logout.png";
+import Account from "../img/account.png";
 import Home from "../img/home.png";
 import Open from "../img/open.png";
 import Close from "../img/close.png";
@@ -19,7 +20,7 @@ const Navbar = () => {
     } else setNav(false);
   }
   return (
-    <>
+    <Link to="/">
       <header>
         <nav className="smallNav">
           <UserSmByline id={currentUser} />
@@ -35,7 +36,6 @@ const Navbar = () => {
             />
           </div>
         </nav>
-
         {/* <nav>
           <Link to="/">Home</Link>
           <Link to="/posts">Posts</Link>
@@ -52,23 +52,9 @@ const Navbar = () => {
           </nav>
         )}
 
-        <nav className="largeNav">
-          <Link to="/" className="logo">
-            <h1>NoteBook</h1>
-          </Link>
-          <div className="header-btns">
-            <a
-              href="#"
-              onClick={() => {
-                loggut();
-              }}
-            >
-              <button>Loggut</button>
-            </a>
-          </div>
-        </nav>
+        <nav className="largeNav"></nav>
       </header>
-    </>
+    </Link>
   );
 };
 

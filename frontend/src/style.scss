@@ -6,8 +6,7 @@ $c4: #000000;
 $c5: #fe0707;
 
 
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;700&family=Poppins:wght@500&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;700&family=Poppins:wght@500&family=Secular+One&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
 @mixin FlexAllCenter {
   display: flex;
@@ -71,7 +70,11 @@ $c5: #fe0707;
   background-color: $c1;
   @include FlexAllCenter();
   font-family: 'Lato', sans-serif;
+
   font-family: 'Poppins', sans-serif;
+
+  font-family: 'Secular One', sans-serif;
+
   font-family: 'Ubuntu', sans-serif;
 }
 
@@ -111,20 +114,49 @@ section {
 
 
 header {
+  height: 60px;
+  display: flex;
+  margin-bottom: 10px;
+  background-color: $c2;
+  border-radius: 0px 0px 10px 10px;
+  border: 1px solid rgb(215, 215, 215);
   .largeNav {
-    display: none;
+    width: 100%;
+    @include FlexCenterSpaceBetween();
+    .logo-search {
+      @include FlexCenterSpaceBetween();
+      width: 400px;
+      .search-box {
+        @include FlexCenterSpaceBetween();
+        input {
+          height: 40px;
+          border: none;
+          width: 300px;
+          padding-left: 10px;
+          border-radius: 50px;
+          font-size: 18px;
+        }
+        
+      }
+    }
+    
+    /* display: none;
     height: 60px;
     @include FlexCenterSpaceBetween();
     .logo {
       text-decoration: none;
-      font-size: 20px;
+      font-size: 30px;
       margin-right: 20px;
+      letter-spacing: 1px;
+      
     }
     button {
       min-width: 80px;
       min-height: 35px;
       background-color: #007EFF;
-    }
+    } */
+    
+    
   }
   .smallNav {
     display: none;

@@ -92,7 +92,7 @@ const Profile = (data) => {
                     {user.firstname} {user.lastname}
                   </h2>
                   <p className="user-card-bio">
-                    {user.biography.slice(0, 140)}
+                    {user.biography && user.biography.slice(0, 140)}
                   </p>
                 </>
               )}

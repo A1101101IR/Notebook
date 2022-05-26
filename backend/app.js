@@ -24,20 +24,15 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 /* tell me if any req is made */
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
   console.log("new req made");
-  /* console.log("host: ", req.hostname);
+  console.log("host: ", req.hostname);
   console.log("path:", req.path);
-  console.log("method", req.method); */
+  console.log("method", req.method);
   next();
-});
+}); */
 
-app.get("/blabla", (req, res) => {
-  /* res.send(console.log(`Server is listening to ${PORT}`)); */
-  res.status(201).json(`Server is listening to ${PORT}`);
-});
-
-/* User register api */
+/* user register */
 app.post("/register", async (req, res) => {
   try {
     const userInDatabase = await User.findOne({
@@ -67,7 +62,6 @@ app.post("/login", async (req, res) => {
   console.log(req.body);
   const user = await User.findOne({
     email: req.body.email,
-    /* password: req.body.password, */
   });
   if (user) {
     /* const userId = user;
@@ -104,7 +98,7 @@ app.get("/posts", (req, res) => {
       res.status(200).json(result);
     })
     .catch((err) => {
-      res.status(500).json(err);
+      res.status(404).json(err);
     });
 });
 
@@ -116,7 +110,7 @@ app.get("/posts/:id", (req, res) => {
       res.status(200).json(result);
     })
     .catch((err) => {
-      res.status(500).json(err);
+      res.status(404).json(err);
     });
 });
 
@@ -203,20 +197,10 @@ app.patch("/edituser/:id", (req, res) => {
     .updateOne(
       { _id: ObjectId(req.params.id) },
       {
-        /* $push: {
-          username: req.body.username,
-          educations: {
-            school: req.body.school,
-            education: req.body.education,
-          },
-        }, */
         $set: {
           firstname: req.body.firstname,
           lastname: req.body.lastname,
           biography: req.body.biography,
-          /* username: req.body.username,
-          email: req.body.email,
-          password: req.body.password, */
         },
       }
     )
@@ -236,10 +220,6 @@ app.post("/edituser/:id", (req, res) => {
       { _id: ObjectId(req.params.id) },
       {
         $push: {
-          /* educations: {
-            school: req.body.school,
-            education: req.body.education,
-          }, */
           followers: {
             followersId: req.body.followersId,
           },
@@ -247,14 +227,6 @@ app.post("/edituser/:id", (req, res) => {
             followingId: req.body.followingId,
           },
         },
-        /* $set: {
-          username: req.body.username,
-          firstname: req.body.firstname,
-          lastname: req.body.lastname,
-          biography: req.body.biography,
-          email: req.body.email,
-          password: req.body.password,
-        }, */
       }
     )
     .then((result) => {
@@ -317,4 +289,17 @@ app.get("/userposts/:id", (req, res) => {
     .catch((err) => {
       res.status(500).json(err);
     });
+});
+
+/* user search */
+app.get("/search", async (req, res) => {
+  console.log(req.body.search);
+  try {
+    User.findOne({
+      firstname: req.body.search,
+    });
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(404).json(err);
+  }
 });
