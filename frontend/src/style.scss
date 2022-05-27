@@ -80,6 +80,9 @@ $c5: #fe0707;
 
 section {
   width: 100%;
+  a {
+    text-decoration: none;
+  }
   @media only screen and (max-width: 600px) {
     width: 96%;
   }
@@ -120,43 +123,25 @@ header {
   background-color: $c2;
   border-radius: 0px 0px 10px 10px;
   border: 1px solid rgb(215, 215, 215);
+  nav {
+    text-decoration: none;
+    @include FlexAllCenter();
+    a {
+      padding: 25px;
+      font-size: 20px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .logo {
+      color: #2900ae;
+      font-size: 26px;
+      filter: contrast(130%);
+      margin-right: 200px;
+    }
+  }
   .largeNav {
     width: 100%;
     @include FlexCenterSpaceBetween();
-    .logo-search {
-      @include FlexCenterSpaceBetween();
-      width: 400px;
-      .search-box {
-        @include FlexCenterSpaceBetween();
-        input {
-          height: 40px;
-          border: none;
-          width: 300px;
-          padding-left: 10px;
-          border-radius: 50px;
-          font-size: 18px;
-        }
-        
-      }
-    }
-    
-    /* display: none;
-    height: 60px;
-    @include FlexCenterSpaceBetween();
-    .logo {
-      text-decoration: none;
-      font-size: 30px;
-      margin-right: 20px;
-      letter-spacing: 1px;
-      
-    }
-    button {
-      min-width: 80px;
-      min-height: 35px;
-      background-color: #007EFF;
-    } */
-    
-    
   }
   .smallNav {
     display: none;
@@ -245,6 +230,7 @@ header {
   text-decoration: none;
   text-align: center;
   color: black;
+  height: 100%;
   margin-bottom: 10px;
   background-color: $c2;
   border: 1px solid rgb(215, 215, 215);
@@ -550,6 +536,31 @@ header {
   }
 }
 
+.search-body {
+  margin-bottom: 10px;
+  background-color: $c2;
+  border-radius: 10px;
+  border: 1px solid rgb(215, 215, 215);
+  .search-box {
+    @include FlexCenterSpaceBetween();
+    border: 1px solid rgb(215, 215, 215);
+    margin: 5px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    input {
+      height: 36px;
+      width: 100%;
+      background-color: $c2;
+      border: none;
+      padding-left: 10px;
+      font-size: 18px;
+      background-color: #ffffff;
+    }
+    input:focus {
+      outline: none;
+    }
+  }
+}
 
 
 

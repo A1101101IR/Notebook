@@ -1,19 +1,31 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Logout from "../img/logout.png";
+import SearchImg from "../img/search.png";
 import Account from "../img/account.png";
+import Manage from "../img/manage.png";
+import Notifications from "../img/notifications.png";
 import Home from "../img/home.png";
 import Open from "../img/open.png";
 import Close from "../img/close.png";
 import Notes from "../img/notes.png";
 import UserSmByline from "./user/user-sm-byline";
+import Search from "./search";
 const Navbar = () => {
   const currentUser = localStorage.getItem("user");
   const loggut = () => {
     localStorage.removeItem("user");
     window.location.reload(false);
   };
+  const displaySearchBar = () => {
+    if (searchBar == false) {
+      setSearchBar(true);
+    } else {
+      setSearchBar(false);
+    }
+  };
   const [nav, setNav] = useState(false);
+  const [searchBar, setSearchBar] = useState(false);
   function toggleNav() {
     if (nav == false) {
       setNav(true);
@@ -36,11 +48,6 @@ const Navbar = () => {
             />
           </div>
         </nav>
-        {/* <nav>
-          <Link to="/">Home</Link>
-          <Link to="/posts">Posts</Link>
-          <Link to="/create">Create</Link>
-        </nav> */}
         {nav && (
           <nav>
             <Link to="/">
@@ -51,8 +58,26 @@ const Navbar = () => {
             </Link>
           </nav>
         )}
-
-        <nav className="largeNav"></nav>
+        <nav className="largeNav">
+          <nav>
+            <Link className="logo" to="/">
+              NOTEBOOK
+            </Link>
+            {!searchBar && (
+              <>
+                <Link to="/">Home</Link>
+                <Link to="/">Create</Link>
+                <Link to="/">Explore</Link>
+              </>
+            )}
+            {searchBar && <Search />}
+          </nav>
+          <div className="nav-icons">
+            <img src={SearchImg} alt="search icon" onClick={displaySearchBar} />
+            {/* <img src={Notifications} alt="" /> */}
+            <img src={Logout} alt="logout icon" onClick={loggut} />
+          </div>
+        </nav>
       </header>
     </Link>
   );

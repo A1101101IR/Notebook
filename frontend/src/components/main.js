@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import useFatch from "./customHooks/useFetch";
 import Users from "./user/users";
 import UserMediumByline from "./user/user-m-byline";
+import Search from "./search";
 const Main = () => {
   const getPostsRef = useRef();
   const [body, setBody] = useState(null);
@@ -60,7 +61,7 @@ const Main = () => {
           </div>
         )}
         <div className="users-box">
-          <UserMediumByline />
+          {/* <UserMediumByline /> */} <Search />
         </div>
       </aside>
       <main>

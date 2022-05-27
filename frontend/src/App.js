@@ -26,6 +26,7 @@ function App() {
               <Route path="/" element={<Main />}></Route>
               <Route path="/posts/:id" element={<Post />}></Route>
               <Route path="/users/:id" element={<User />}></Route>
+              <Route path="/setting" element={<User />}></Route>
               {/* <Route path="/users/:id" element={<Aside />}></Route> */}
               {/* <Route path="/posts" element={<Posts />}></Route> */}
               {/* <Route path="/users/:id" element={<Aside />}></Route> */}
