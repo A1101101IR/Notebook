@@ -180,12 +180,13 @@ const Post = () => {
                   type="text"
                   placeholder="Comment"
                 />
-                {post.comments.map((comment) => (
-                  <div style={myStyle} className={`comment @{post._id}`}>
-                    <UserSmByline id={comment.authorId} />
-                    <p>{comment.body}</p>
-                  </div>
-                ))}
+                {post.comment &&
+                  post.comments.map((comment) => (
+                    <div style={myStyle} className={`comment @{post._id}`}>
+                      <UserSmByline id={comment.authorId} />
+                      <p>{comment.body}</p>
+                    </div>
+                  ))}
               </div>
             </div>
           </div>

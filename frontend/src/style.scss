@@ -238,7 +238,7 @@ header {
   text-decoration: none;
   text-align: center;
   color: black;
-  height: 100%;
+  
   margin-bottom: 10px;
   background-color: $c2;
   border: 1px solid rgb(215, 215, 215);
@@ -352,6 +352,9 @@ header {
     @include FlexCenterSpaceBetween();
     .post-options-nav {
       @include FlexAllCenter();
+      img {
+        max-width: 38px;
+      }
     }
   }
   .post-card-body {
@@ -361,7 +364,7 @@ header {
   }
   .post-card-footer {
     display: flex;
-    min-height: 35px;
+    /* min-height: 35px; */
     margin-top: 10px;
     align-items: flex-start;
     .comment-box {

@@ -278,7 +278,6 @@ header .smallNav {
   text-decoration: none;
   text-align: center;
   color: black;
-  height: 100%;
   margin-bottom: 10px;
   background-color: #F1F0F2;
   border: 1px solid #d7d7d7;
@@ -510,6 +509,10 @@ header .smallNav {
           justify-content: center;
 }
 
+.post-card-preview .post-card-header .post-options-nav img {
+  max-width: 38px;
+}
+
 .post-card-preview .post-card-body {
   color: #000000;
   min-height: 50px;
@@ -520,7 +523,7 @@ header .smallNav {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  min-height: 35px;
+  /* min-height: 35px; */
   margin-top: 10px;
   -webkit-box-align: start;
       -ms-flex-align: start;

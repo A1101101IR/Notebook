@@ -8,6 +8,9 @@ import {
   useRef,
 } from "react";
 import Like from "../../img/like.png";
+import More from "../../img/more.png";
+import Bookmark from "../../img/bookmark.png";
+import Delete from "../../img/delete.png";
 const Posts = forwardRef((props, ref) => {
   const id = useParams();
   useImperativeHandle(ref, () => ({
@@ -153,14 +156,17 @@ const Posts = forwardRef((props, ref) => {
                 </div>
                 <div className="post-options-nav">
                   {currentUser === post.authorId && (
-                    <span
+                    <img
+                      src={Delete}
+                      alt=""
                       onClick={() => {
                         deletePost(post._id);
                       }}
-                      className="delete-btn"
-                    ></span>
+                    />
                   )}
-                  {currentUser !== post.authorId && <span>...</span>}
+                  {currentUser !== post.authorId && (
+                    <img src={Bookmark} alt="" />
+                  )}
                 </div>
               </div>
               <Link to={`/posts/${post._id}`} className="post-card-body">
@@ -185,12 +191,16 @@ const Posts = forwardRef((props, ref) => {
                     type="text"
                     placeholder="Comment"
                   />
-                  {post.comments.map((comment) => (
-                    <div style={myStyle} id={post._id} className="comment">
-                      <UserSmByline id={comment.authorId} key={comment.body} />
-                      <p>{comment.body}</p>
-                    </div>
-                  ))}
+                  {post.comments &&
+                    post.comments.map((comment) => (
+                      <div style={myStyle} id={post._id} className="comment">
+                        <UserSmByline
+                          id={comment.authorId}
+                          key={comment.body}
+                        />
+                        <p>{comment.body}</p>
+                      </div>
+                    ))}
                   {/* ref={showComment} */}
                 </div>
               </div>
