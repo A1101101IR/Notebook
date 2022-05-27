@@ -1,6 +1,12 @@
 import UserSmByline from "../user/user-sm-byline";
 import { Link, useParams } from "react-router-dom";
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useState,
+  useRef,
+} from "react";
 import Like from "../../img/like.png";
 const Posts = forwardRef((props, ref) => {
   const id = useParams();
@@ -57,6 +63,12 @@ const Posts = forwardRef((props, ref) => {
 
   /*  */
   const [comment, setComment] = useState();
+  /* const commentBox = useRef([]);
+  commentBox.current = [];
+  const showComment = (el) => {
+    console.log(el);
+  }; */
+
   async function addComment(id) {
     const res = await fetch(`/comment/${id}`, {
       method: "POST",
@@ -75,7 +87,7 @@ const Posts = forwardRef((props, ref) => {
 
   /*  */
   const [myStyle, SetMyStyle] = useState();
-  const showComments = (id) => {
+  const showComments = () => {
     SetMyStyle({ display: "block" });
   };
 
@@ -148,7 +160,7 @@ const Posts = forwardRef((props, ref) => {
                       className="delete-btn"
                     ></span>
                   )}
-                  {/* {!currentUser === post.authorId && <span>...</span>} */}
+                  {currentUser !== post.authorId && <span>...</span>}
                 </div>
               </div>
               <Link to={`/posts/${post._id}`} className="post-card-body">
@@ -163,25 +175,23 @@ const Posts = forwardRef((props, ref) => {
                 >
                   {likes(post.likes)} like
                 </button>
-
-                <div className="comment-box">
+                <div className={`comment-box ${post._id}`}>
                   <input
                     onKeyPress={(e) =>
                       e.key === "Enter" && addComment(post._id)
                     }
-                    onClick={() => showComments()}
                     onChange={(e) => setComment(e.target.value)}
-                    value={comment}
+                    onClick={showComments}
                     type="text"
                     placeholder="Comment"
                   />
-                  {post.comments &&
-                    post.comments.map((comment) => (
-                      <div style={myStyle} className={`comment @{post._id}`}>
-                        <UserSmByline id={comment.authorId} />
-                        <p>{comment.body}</p>
-                      </div>
-                    ))}
+                  {post.comments.map((comment) => (
+                    <div style={myStyle} id={post._id} className="comment">
+                      <UserSmByline id={comment.authorId} key={comment.body} />
+                      <p>{comment.body}</p>
+                    </div>
+                  ))}
+                  {/* ref={showComment} */}
                 </div>
               </div>
             </div>

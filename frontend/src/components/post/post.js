@@ -3,7 +3,7 @@ import useFatch from "../customHooks/useFetch";
 import UserSmByline from "../user/user-sm-byline";
 import Profile from "../user/userProfile";
 
-import { Link, useParams, useNavigate, Navigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 const Post = () => {
   const currentUserId = localStorage.getItem("user");
@@ -177,17 +177,15 @@ const Post = () => {
                   onKeyPress={(e) => e.key === "Enter" && addComment(post._id)}
                   onClick={() => showComments()}
                   onChange={(e) => setComment(e.target.value)}
-                  value={comment}
                   type="text"
                   placeholder="Comment"
                 />
-                {post.comments &&
-                  post.comments.map((comment) => (
-                    <div style={myStyle} className={`comment @{post._id}`}>
-                      <UserSmByline id={comment.authorId} />
-                      <p>{comment.body}</p>
-                    </div>
-                  ))}
+                {post.comments.map((comment) => (
+                  <div style={myStyle} className={`comment @{post._id}`}>
+                    <UserSmByline id={comment.authorId} />
+                    <p>{comment.body}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

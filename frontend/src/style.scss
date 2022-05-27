@@ -151,15 +151,23 @@ header {
       display: none;
     }
     .smallNav {
-      height: 50px;
+      height: 60px;
+      width: 100%;
+      
       @include FlexCenterSpaceBetween();
-      align-items: center;
-      .toggleNav {
-        @include HandlerBtn();
-        button {
-          background-color: #007EFF;
-          height: 36px;
-        }
+      .logo {
+        margin: 0;
+        padding: 0;
+      }
+      img {
+        padding: 5px
+      }
+    }
+    div {
+      @include FlexAllCenter();
+      a {
+        padding: 0;
+        @include FlexAllCenter();
       }
     }
   }
