@@ -68,7 +68,6 @@ const Main = () => {
         <form className="post-form" onSubmit={createPost}>
           <textarea
             type="text"
-            value={body}
             onChange={(e) => setBody(e.target.value)}
             placeholder={
               userData && "Hej " + userData.firstname + "! Vad händer? "

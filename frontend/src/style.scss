@@ -243,6 +243,8 @@ header {
   background-color: $c2;
   border: 1px solid rgb(215, 215, 215);
   border-radius: 10px;
+  
+  
   @media only screen and (max-width: 600px) {
     width: 100%;
     min-width: 300px;
@@ -318,7 +320,6 @@ header {
       margin: 10px;
     }
     margin-bottom: 10px 0px;
-    
   }
 }
 
@@ -341,6 +342,16 @@ header {
   display: flex;
   padding: 10px;
   max-width: 800px;
+  @media only screen and (min-width: 1200px) {
+    min-width: 800px;
+  }
+  @media only screen and (max-width: 1200px) {
+    
+    min-width: 558px;
+  }
+  @media only screen and (max-width: 992px) {
+    min-width: 558px;
+  }
   margin-bottom: 10px;
   border-radius: 10px;
   background-color: $c2;
@@ -372,7 +383,7 @@ header {
       margin-left: 8px;
       input {
         width: 99%;
-        height: 30px;
+        min-height: 30px;
         border: none;
         padding-left: 10px;
         border-radius: 4px;
@@ -383,6 +394,7 @@ header {
       .comment {
         width: 99%;
         padding: 5px;
+        
         height: auto;
         display: none;
         font-size: 14px;
@@ -398,6 +410,23 @@ header {
           margin-left: 35px;
           margin-bottom: 4px;
         }
+      }
+    }
+    .like-box {
+      @include FlexAllCenter();
+      width: 80px;
+      height: 30px;
+      border-radius: 6px;
+      background-color: $c1;
+      img {
+        max-width: 25px;
+      }
+      span {
+        font-size: 16px;
+        min-width: 25px;
+        min-height: 25px;
+        margin-bottom: 2px;
+        @include FlexCenterSpaceEvenly();
       }
     }
   }
@@ -474,7 +503,6 @@ header {
 .welcome {
   height: 100vh;
   @include FlexAllCenter();
-  
   .form-container {
     min-width: 400px;
     border-radius: 10px;

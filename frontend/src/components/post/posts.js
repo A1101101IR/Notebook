@@ -89,15 +89,27 @@ const Posts = forwardRef((props, ref) => {
   }
 
   /*  */
-  const [myStyle, SetMyStyle] = useState();
-  const showComments = () => {
-    SetMyStyle({ display: "block" });
+  const [myStyle, setMyStyle] = useState();
+  const [commentBox, setCommentBox] = useState();
+  const showComments = (id) => {
+    setCommentBox(id);
+    setMyStyle({ display: "block" });
   };
 
-  /*  */
-  async function addLike(id, currentLikes) {
-    console.log(`like/${id}`);
+  /* const myArr = [1, 2, 3, 4]; */
+  function likeBTN(myArr, currentUser) {
+    for (let i = 0; i < myArr.length; i++) {
+      console.log(myArr[i].like);
+      if (myArr[i].like === currentUser) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
 
+  /*  */
+  async function addLike(id) {
     const res = await fetch(`http://localhost:3000/like/${id}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -158,34 +170,43 @@ const Posts = forwardRef((props, ref) => {
                 <p>{post.body}</p>
               </Link>
               <div className="post-card-footer">
-                <button
+                <div
+                  className="like-box"
                   onClick={() => {
                     addLike(post._id, post.likes);
                   }}
                 >
-                  {post.likes.length} like
-                </button>
-                <div className={`comment-box ${post._id}`}>
+                  <img src={Like} alt="likeeee" />
+                  {post.likes.length !== 0 && <span>{post.likes.length}</span>}
+                </div>
+                <div className={"comment-box"}>
                   <input
                     onKeyPress={(e) =>
                       e.key === "Enter" && addComment(post._id)
                     }
                     onChange={(e) => setComment(e.target.value)}
-                    onClick={showComments}
+                    onClick={() => showComments(post._id)}
                     type="text"
                     placeholder="Comment"
                   />
                   {post.comments &&
                     post.comments.map((comment) => (
-                      <div style={myStyle} id={post._id} className="comment">
-                        <UserSmByline
-                          id={comment.authorId}
-                          key={comment.body}
-                        />
-                        <p>{comment.body}</p>
-                      </div>
+                      <>
+                        {commentBox === post._id && (
+                          <div
+                            key={comment.body}
+                            className={"comment"}
+                            style={myStyle}
+                          >
+                            <UserSmByline
+                              id={comment.authorId}
+                              key={comment.body}
+                            />
+                            <p>{comment.body}</p>
+                          </div>
+                        )}
+                      </>
                     ))}
-                  {/* ref={showComment} */}
                 </div>
               </div>
             </div>

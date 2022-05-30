@@ -28,6 +28,7 @@ const Navbar = () => {
       setSearchBar(false);
     }
   };
+
   const [nav, setNav] = useState(false);
   const [searchBar, setSearchBar] = useState(false);
   function toggleNav() {
@@ -36,46 +37,44 @@ const Navbar = () => {
     } else setNav(false);
   }
   return (
-    <Link to="/">
-      <header>
-        <nav className="smallNav">
-          {/* <UserSmByline id={currentUser} /> */}
-          <div>
-            <Link to={`/users/${currentUser}`}>
-              <img src={Account} alt="" />
-            </Link>
-            <Link className="logo" to="/">
-              NOTEBOOK
-            </Link>
-          </div>
-          <div>
-            <img src={SearchImg} alt="search icon" onClick={displaySearchBar} />
-            <img src={Logout} alt="logout icon" onClick={loggut} />
-          </div>
-        </nav>
+    <header>
+      <nav className="smallNav">
+        {/* <UserSmByline id={currentUser} /> */}
+        <div>
+          <Link to={`/users/${currentUser}`}>
+            <img src={Account} alt="" />
+          </Link>
+          <Link className="logo" to="/">
+            NOTEBOOK
+          </Link>
+        </div>
+        <div>
+          <img src={SearchImg} alt="search icon" onClick={displaySearchBar} />
+          <img src={Logout} alt="logout icon" onClick={loggut} />
+        </div>
+      </nav>
 
-        <nav className="largeNav">
-          <nav>
-            <Link className="logo" to="/">
-              NOTEBOOK
-            </Link>
-            {!searchBar && (
-              <>
-                <Link to="/">Home</Link>
-                <Link to="/">Create</Link>
-                <Link to="/">Explore</Link>
-              </>
-            )}
-            {searchBar && <Search />}
-          </nav>
-          <div className="nav-icons">
-            <img src={SearchImg} alt="search icon" onClick={displaySearchBar} />
-            {/* <img src={Notifications} alt="" /> */}
-            <img src={Logout} alt="logout icon" onClick={loggut} />
-          </div>
+      <nav className="largeNav">
+        <nav>
+          <Link className="logo" to="/">
+            NOTEBOOK
+          </Link>
+          {!searchBar && (
+            <>
+              <Link to="/">Home</Link>
+              <Link to="/">Create</Link>
+              <Link to="/">Explore</Link>
+            </>
+          )}
+          {searchBar && <Search />}
         </nav>
-      </header>
-    </Link>
+        <div className="nav-icons">
+          <img src={SearchImg} alt="search icon" onClick={displaySearchBar} />
+          {/* <img src={Notifications} alt="" /> */}
+          <img src={Logout} alt="logout icon" onClick={loggut} />
+        </div>
+      </nav>
+    </header>
   );
 };
 

@@ -121,7 +121,7 @@ const Post = () => {
   }, []);
   return (
     <>
-      {userData && <Profile data={userData} />}
+      <aside>{userData && <Profile data={userData} />}</aside>
       <main>
         {isLoading && <p>{isLoading}</p>}
         {post && (
