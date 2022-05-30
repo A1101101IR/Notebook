@@ -9,7 +9,7 @@ const { db } = require("./models/user");
 const PORT = process.env.PORT || 3000;
 const app = express();
 const databaseURL =
-  "mongodb+srv://amir:Amir2022@cluster0.s6vjp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+  "mongodb+srv://fullstack:9K4ADMWCdbfPe9bI@cluster0.s6vjp.mongodb.net/fullstack01?retryWrites=true&w=majority";
 
 mongoose
   .connect(databaseURL, {

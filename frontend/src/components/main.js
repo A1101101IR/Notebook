@@ -35,7 +35,7 @@ const Main = () => {
         getPostsRef.current.reload();
         setBody("");
       } else {
-        console.log(response.status);
+        console.log(data);
       }
     }
   }
