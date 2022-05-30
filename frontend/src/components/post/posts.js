@@ -95,46 +95,31 @@ const Posts = forwardRef((props, ref) => {
   };
 
   /*  */
-  const [likeStatus, setLikeStatus] = useState(false);
   async function addLike(id, currentLikes) {
     console.log(`like/${id}`);
-    if (!likeStatus) {
-      const res = await fetch(`http://localhost:3000/like/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          like: currentLikes + 1,
-        }),
-        redirect: "follow",
-      });
-      const data = await res.json();
-      console.log(res.status);
-      setLikeStatus(true);
-      getPosts();
-    }
-    if (likeStatus) {
-      const res = await fetch(`http://localhost:3000/like/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          like: currentLikes - 1,
-        }),
-        redirect: "follow",
-      });
-      const data = await res.json();
-      console.log(res.status);
-      setLikeStatus(false);
-      getPosts();
-    }
-  }
 
-  /* This function will check if there is any like */
-  /* If there is likes, it will display if else nothing! */
-  function likes(like) {
-    if (like === 0 || null) {
-      return "";
+    const res = await fetch(`http://localhost:3000/like/${id}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        like: currentUser,
+      }),
+      redirect: "follow",
+    });
+    const data = await res.json();
+    if (data.modifiedCount === 1) {
+      getPosts();
     } else {
-      return like;
+      const res = await fetch(`http://localhost:3000/like/${id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          like: currentUser,
+        }),
+        redirect: "follow",
+      });
+      const data = await res.json();
+      data.modifiedCount === 1 ? getPosts() : console.log("ERROR!");
     }
   }
 
@@ -177,9 +162,8 @@ const Posts = forwardRef((props, ref) => {
                   onClick={() => {
                     addLike(post._id, post.likes);
                   }}
-                  value={post.likes}
                 >
-                  {likes(post.likes)} like
+                  {post.likes.length} like
                 </button>
                 <div className={`comment-box ${post._id}`}>
                   <input

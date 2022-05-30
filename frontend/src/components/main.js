@@ -27,7 +27,7 @@ const Main = () => {
         body: JSON.stringify({
           authorId,
           body,
-          likes: 0,
+          likes: [],
         }),
       });
       const data = await response.json();
