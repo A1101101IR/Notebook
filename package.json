@@ -1,0 +1,22 @@
+{
+  "name": "fullstack",
+  "version": "1.0.0",
+  "description": "# För att se hur appen fungerar. 👇🏻👇🏻👇🏻👇🏻",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nabizadehse/fullstack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nabizadehse/fullstack/issues"
+  },
+  "homepage": "https://github.com/Nabizadehse/fullstack#readme",
+  "devDependencies": {
+    "jsdoc": "^3.6.10"
+  }
+}

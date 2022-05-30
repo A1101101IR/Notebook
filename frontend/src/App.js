@@ -7,6 +7,7 @@ import Welcome from "./components/login/welcome";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
+  /** this is a comment */
   const [islogged, setIslogged] = useState();
   useEffect(() => {
     if (localStorage.getItem("user")) {
