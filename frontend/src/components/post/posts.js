@@ -24,7 +24,7 @@ const Posts = forwardRef((props, ref) => {
   const [body, setBody] = useState();
   async function createPost(event) {
     event.preventDefault();
-    const response = await fetch("/create", {
+    const response = await fetch("posts/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -47,7 +47,7 @@ const Posts = forwardRef((props, ref) => {
       const data = await res.json();
       setPosts(data);
     } else {
-      const res = await fetch(`/userposts/${id.id}`);
+      const res = await fetch(`/posts/user/${id.id}`);
       const data = await res.json();
       setPosts(data);
     }
@@ -166,9 +166,9 @@ const Posts = forwardRef((props, ref) => {
                   )}
                 </div>
               </div>
-              <Link to={`/posts/${post._id}`} className="post-card-body">
+              <div className="post-card-body">
                 <p>{post.body}</p>
-              </Link>
+              </div>
               <div className="post-card-footer">
                 <div
                   className="like-box"

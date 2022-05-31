@@ -1,11 +1,14 @@
-const express = require("express");
-const { ObjectId } = require("mongodb");
 const morgan = require("morgan");
-const mongoose = require("mongoose");
+const express = require("express");
 const jwt = require("jsonwebtoken");
-const Post = require("./models/post");
+const mongoose = require("mongoose");
+const { result } = require("lodash");
 const User = require("./models/user");
+const Post = require("./models/post");
+const { ObjectId } = require("mongodb");
 const { db } = require("./models/user");
+
+/*  */
 const PORT = process.env.PORT || 3000;
 const app = express();
 const databaseURL =
@@ -19,10 +22,11 @@ mongoose
   .then((res) => app.listen(3001))
   .catch((err) => console.log(err));
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 app.use(morgan("dev"));
+app.use(express.json());
 app.use("/uploads", express.static("uploads"));
+app.use(express.urlencoded({ extended: true }));
+
 /* tell me if any req is made */
 /* app.use((req, res, next) => {
   console.log("new req made");
@@ -32,26 +36,13 @@ app.use("/uploads", express.static("uploads"));
   next();
 }); */
 
-const upload = require("./models/upload");
-/* add avatar */
-app.post("/avatar/:id", upload.single("file"), (req, res) => {
-  console.log(req.file.path);
-  db.collection("users")
-    .updateOne(
-      { _id: ObjectId(req.params.id) },
-      {
-        $set: {
-          avatar: req.file.path,
-        },
-      }
-    )
-    .then((result) => {
-      res.status(201).json(result);
-    })
-    .catch((err) => {
-      res.status(500).json(err);
-    });
-});
+const postRoute = require("./route/postRoute");
+const userRoute = require("./route/userRoute");
+const likeRoute = require("./route/likeRoute");
+
+app.use(postRoute);
+app.use(userRoute);
+app.use(likeRoute);
 
 /* user register */
 app.post("/register", async (req, res) => {
@@ -99,54 +90,6 @@ app.post("/login", async (req, res) => {
   }
 });
 
-/* create new post */
-app.post("/create", (req, res) => {
-  const post = new Post(req.body);
-  post
-    .save()
-    .then((result) => {
-      res.status(201).json(result);
-    })
-    .catch((err) => {
-      res.status(500).json(err);
-    });
-});
-
-/* get all posts */
-app.get("/posts", (req, res) => {
-  Post.find()
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((err) => {
-      res.status(404).json(err);
-    });
-});
-
-/* get single post by id */
-app.get("/posts/:id", (req, res) => {
-  db.collection("posts")
-    .findOne({ _id: ObjectId(req.params.id) })
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((err) => {
-      res.status(404).json(err);
-    });
-});
-
-/* get single post by id and delete */
-app.delete("/posts/:id", (req, res) => {
-  const id = req.params.id;
-  Post.findByIdAndDelete(id)
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((err) => {
-      res.status(500).json(err);
-    });
-});
-
 /* add comment to post */
 app.post("/comment/:id", (req, res) => {
   db.collection("posts")
@@ -157,117 +100,6 @@ app.post("/comment/:id", (req, res) => {
           comments: {
             authorId: req.body.authorId,
             body: req.body.comment,
-          },
-        },
-      }
-    )
-    .then((result) => {
-      res.status(201).json(result);
-    })
-    .catch((err) => {
-      res.status(500).json(err);
-    });
-});
-
-/* add like to post */
-app.post("/like/:id", (req, res) => {
-  db.collection("posts")
-    .updateOne(
-      { _id: ObjectId(req.params.id) },
-      {
-        $addToSet: {
-          likes: {
-            like: req.body.like,
-          },
-        },
-      }
-    )
-    .then((result) => {
-      res.status(201).json(result);
-    })
-    .catch((err) => {
-      res.status(500).json(err);
-    });
-});
-/* delete like from post */
-app.delete("/like/:id", (req, res) => {
-  db.collection("posts")
-    .updateOne(
-      { _id: ObjectId(req.params.id) },
-      {
-        $pull: {
-          likes: {
-            like: req.body.like,
-          },
-        },
-      }
-    )
-    .then((result) => {
-      res.status(201).json(result);
-    })
-    .catch((err) => {
-      res.status(500).json(err);
-    });
-});
-
-/* get all users */
-app.get("/users", (req, res) => {
-  User.find()
-    .then((result) => {
-      res.status(201).json(result);
-    })
-    .catch((err) => {
-      res.status(500).json(err);
-    });
-});
-
-/* get singel user by id */
-app.get("/users/:id", (req, res) => {
-  db.collection("users")
-    .findOne({ _id: ObjectId(req.params.id) })
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((err) => {
-      res.status(500).json(err);
-    });
-});
-
-/* uppdate user info */
-app.patch("/edituser/:id", (req, res) => {
-  console.log(req.body);
-  db.collection("users")
-    .updateOne(
-      { _id: ObjectId(req.params.id) },
-      {
-        $set: {
-          firstname: req.body.firstname,
-          lastname: req.body.lastname,
-          biography: req.body.biography,
-        },
-      }
-    )
-    .then((result) => {
-      res.status(201).json(result);
-    })
-    .catch((err) => {
-      res.status(500).json(err);
-    });
-});
-
-/* uppdate user arrays info */
-app.post("/edituser/:id", (req, res) => {
-  console.log(req.body);
-  db.collection("users")
-    .updateOne(
-      { _id: ObjectId(req.params.id) },
-      {
-        $push: {
-          followers: {
-            followersId: req.body.followersId,
-          },
-          following: {
-            followingId: req.body.followingId,
           },
         },
       }
@@ -323,8 +155,37 @@ app.post("/following/:id", (req, res) => {
     });
 });
 
+/*  */
+
+/*  */
+
+/* uppdate user arrays info */
+/* app.post("/edituser/:id", (req, res) => {
+  console.log(req.body);
+  db.collection("users")
+    .updateOne(
+      { _id: ObjectId(req.params.id) },
+      {
+        $push: {
+          followers: {
+            followersId: req.body.followersId,
+          },
+          following: {
+            followingId: req.body.followingId,
+          },
+        },
+      }
+    )
+    .then((result) => {
+      res.status(201).json(result);
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
+}); */
+
 /* get users posts */
-app.get("/userposts/:id", (req, res) => {
+/* app.get("/userposts/:id", (req, res) => {
   Post.find({ authorId: req.params.id })
     .then((result) => {
       res.status(200).json(result);
@@ -332,17 +193,43 @@ app.get("/userposts/:id", (req, res) => {
     .catch((err) => {
       res.status(500).json(err);
     });
-});
+}); */
 
 /* user search */
-app.get("/search", async (req, res) => {
-  console.log(req.body.search);
+/* app.get("/search", async (req, res) => {
   try {
-    User.findOne({
-      firstname: req.body.search,
-    });
-    res.status(200).json(result);
+    if (1 == 1) {
+      let results;
+      if (1 == 1) {
+        results = await client
+          .db("location")
+          .collection("users")
+          .aggregate([
+            {
+              $search: {
+                index: "default",
+                text: {
+                  query: req.body.search,
+                  path: {
+                    wildcard: "*",
+                  },
+                },
+              },
+            },
+            {
+              $porject: {
+                _id: 1,
+              },
+            },
+            {
+              $limit: 10,
+            },
+          ])
+          .toArray();
+        return res.status(200).json(results);
+      }
+    }
   } catch (err) {
     res.status(404).json(err);
   }
-});
+}); */

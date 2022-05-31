@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 const Aside = () => {
   const { id } = useParams();
-  console.log(id);
+
   return (
     <aside>
       <Users />

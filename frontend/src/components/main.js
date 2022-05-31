@@ -19,7 +19,7 @@ const Main = () => {
       console.log(body);
     } else {
       console.log(body);
-      const response = await fetch("/create", {
+      const response = await fetch("/posts/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,7 +61,7 @@ const Main = () => {
           </div>
         )}
         <div className="users-box">
-          {/* <UserMediumByline /> */} <Search />
+          <UserMediumByline /> {/* <Search /> */}
         </div>
       </aside>
       <main>

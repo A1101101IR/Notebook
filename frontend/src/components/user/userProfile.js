@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import useFatch from "../customHooks/useFetch";
-import UserMediumByline from "./user-m-byline";
-import AvatarIcon from "../../img/addavatar.png";
 const Profile = (data) => {
   /*  */
 
@@ -56,7 +54,7 @@ const Profile = (data) => {
   /*  */
   async function editUser(event) {
     event.preventDefault();
-    const res = await fetch(`/edituser/${user._id}`, {
+    const res = await fetch(`/users/${user._id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -81,7 +79,7 @@ const Profile = (data) => {
     const formdata = new FormData();
     formdata.append("file", file[0]);
     setUploading(true);
-    const res = await fetch(`/avatar/${user._id}`, {
+    const res = await fetch(`/users/${user._id}`, {
       method: "POST",
       body: formdata,
       redirect: "follow",
@@ -104,18 +102,20 @@ const Profile = (data) => {
           <div className="user-card-header">
             <img
               src={"http://localhost:3000/" + user.avatar}
-              alt=""
+              alt={user.firstname + user.lastname + "avatar"}
               className="user-img"
             />
-            <label htmlFor="add-avatar" className="avatar-input">
-              <input
-                type="file"
-                name="file"
-                id="add-avatar"
-                onChange={addAvatar}
-              />
-              Change Avatar
-            </label>
+            {sidebar && (
+              <label htmlFor="add-avatar" className="avatar-input">
+                <input
+                  type="file"
+                  name="file"
+                  id="add-avatar"
+                  onChange={addAvatar}
+                />
+                Change Avatar
+              </label>
+            )}
           </div>
           <div className="user-card-body">
             <div className="user-card-info">
@@ -154,14 +154,6 @@ const Profile = (data) => {
                 </>
               )}
             </div>
-            {/* {console.log(user.educations)}
-            {user.educations &&
-              user.educations.map((item) => (
-                <div className="educations">
-                  <h4>{item.school}</h4>
-                  <h4>{item.education}</h4>
-                </div>
-              ))} */}
             <div className="user-card-btns">
               <div className="info-box">
                 <div className="info">
@@ -177,15 +169,10 @@ const Profile = (data) => {
                   <span>{user.following && user.following.length}</span>
                 </div>
               </div>
-              {/* <div>
-                <span>Followers {user.followers && user.followers.length}</span>
-                <span>Following {user.following && user.following.length}</span>
-              </div> */}
             </div>
             <div className="btn-box">
               {sidebar && (
                 <>
-                  {/* {edit && <button onClick={(e) => editUser()}>Save</button>} */}
                   {!edit && (
                     <button onClick={(e) => setEdit(true)}>Edit Profile</button>
                   )}
@@ -195,7 +182,6 @@ const Profile = (data) => {
                 <>
                   <button onClick={() => follow()}>Follow</button>
                   <button onClick={() => following()}>Contact</button>
-                  {/* <button>Share</button> */}
                 </>
               )}
             </div>

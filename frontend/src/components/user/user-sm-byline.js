@@ -1,10 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import useFatch from "../customHooks/useFetch";
 const UserSmByline = (id) => {
-  /* const { id } = useParams(); */
-
   const { data: user, error, isLoading } = useFatch(`/users/${id.id}`);
-  /* console.log(user); */
+
   return (
     <>
       <div className="user-sm-byline-preview">

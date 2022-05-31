@@ -16,9 +16,6 @@ const UserMediumByline = () => {
           >
             <img src={user.avatar} alt="" className="user-img" />
             <div className="user-card-body">
-              {/* <div className="user-card-header">
-                <img src="#" alt="" className="user-img" />
-              </div> */}
               <h2 className="user-name">
                 {user.firstname} {user.lastname}
               </h2>
