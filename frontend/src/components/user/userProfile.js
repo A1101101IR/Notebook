@@ -10,7 +10,7 @@ const Profile = (data) => {
   const [firstname, setFirstname] = useState(user.firstname);
   const [lastname, setLastname] = useState(user.lastname);
   const [biography, setBiography] = useState(user.biography);
-  const { data: posts, error, isLoading } = useFatch(`/userposts/${user._id}`);
+  const { data: posts, error, isLoading } = useFatch(`/posts/user/${user._id}`);
 
   /*  */
   async function follow() {
@@ -105,7 +105,7 @@ const Profile = (data) => {
               alt={user.firstname + user.lastname + "avatar"}
               className="user-img"
             />
-            {sidebar && (
+            {edit && (
               <label htmlFor="add-avatar" className="avatar-input">
                 <input
                   type="file"

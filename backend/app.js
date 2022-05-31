@@ -7,7 +7,10 @@ const User = require("./models/user");
 const Post = require("./models/post");
 const { ObjectId } = require("mongodb");
 const { db } = require("./models/user");
-
+/*  */
+const dotenv = require("dotenv");
+const cors = require("cors");
+const { MongoClient } = require("mongodb");
 /*  */
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -19,7 +22,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then((res) => app.listen(3001))
+  .then((res) => app.listen(3001, console.log(`connected to ${PORT}`)))
   .catch((err) => console.log(err));
 
 app.use(morgan("dev"));
@@ -43,6 +46,58 @@ const likeRoute = require("./route/likeRoute");
 app.use(postRoute);
 app.use(userRoute);
 app.use(likeRoute);
+
+/* SEARCH FUNC */
+app.get("/search", async (req, res) => {
+  console.log(req.query.users);
+  try {
+    const userInDatabase = await User.findOne({
+      firstname: req.body.firstname,
+    });
+    res.json({ data: userInDatabase });
+  } catch (err) {
+    res.json({ status: "cannot find" });
+  }
+  /* try {
+    data = await databaseURL
+      .db("fullstack01")
+      .collection("users")
+      .aggregate([
+        {
+          $search: {
+            index: "default",
+            compound: {
+              must: [
+                {
+                  text: {
+                    query: req.body.query,
+                    path: "firstname",
+                    fuzzy: {
+                      maxEdits: 1,
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        },
+        {
+          $project: {
+            _id: 1,
+            firstname: 1,
+          },
+        },
+        {
+          $limit: 10,
+        },
+      ])
+      .toArray();
+    return res.send("data");
+  } catch (err) {
+    res.send(err);
+  }
+  console.log("hello"); */
+});
 
 /* user register */
 app.post("/register", async (req, res) => {
