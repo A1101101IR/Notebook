@@ -14,7 +14,7 @@ const UserMediumByline = () => {
             className="user-card-preview-medium"
             key={user._id}
           >
-            <img src="#" alt="" className="user-img" />
+            <img src={user.avatar} alt="" className="user-img" />
             <div className="user-card-body">
               {/* <div className="user-card-header">
                 <img src="#" alt="" className="user-img" />

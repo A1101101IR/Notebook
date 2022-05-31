@@ -12,7 +12,11 @@ const UserSmByline = (id) => {
         {isLoading && <p>{isLoading}</p>}
         {user && (
           <Link to={`/users/${user._id}`}>
-            <div className="user-img-sm"></div>
+            <img
+              src={"http://localhost:3000/" + user.avatar}
+              alt=""
+              className="user-img-sm"
+            />
             <span>{user.firstname + " " + user.lastname}</span>
           </Link>
         )}

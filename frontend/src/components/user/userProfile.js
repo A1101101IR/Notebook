@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useFatch from "../customHooks/useFetch";
 import UserMediumByline from "./user-m-byline";
-
+import AvatarIcon from "../../img/addavatar.png";
 const Profile = (data) => {
   /*  */
 
@@ -72,6 +72,26 @@ const Profile = (data) => {
       setEdit(false);
     }
   }
+
+  const [editAvatar, setEditAvatar] = useState(false);
+  const [uploading, setUploading] = useState();
+  const [avatar, setAvatar] = useState();
+  const addAvatar = async (e) => {
+    const file = e.target.files;
+    const formdata = new FormData();
+    formdata.append("file", file[0]);
+    setUploading(true);
+    const res = await fetch(`/avatar/${user._id}`, {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+    });
+    const data = await res.json();
+    setTimeout(() => {
+      setUploading(false);
+      window.location.reload();
+    }, 500);
+  };
   useEffect(() => {
     if (user._id === currentUser) {
       setSidebar(true);
@@ -82,7 +102,20 @@ const Profile = (data) => {
       {user && (
         <div className="user-card-preview">
           <div className="user-card-header">
-            <img src="#" alt="" className="user-img" />
+            <img
+              src={"http://localhost:3000/" + user.avatar}
+              alt=""
+              className="user-img"
+            />
+            <label htmlFor="add-avatar" className="avatar-input">
+              <input
+                type="file"
+                name="file"
+                id="add-avatar"
+                onChange={addAvatar}
+              />
+              Change Avatar
+            </label>
           </div>
           <div className="user-card-body">
             <div className="user-card-info">

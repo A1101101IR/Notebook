@@ -16,7 +16,7 @@ const Users = () => {
             key={user._id}
           >
             <div className="user-card-header">
-              <img src="#" alt="" className="user-img" />
+              <img src={user.avatar} alt="" className="user-img" />
             </div>
             <div className="user-card-body">
               <div className="user-card-info">

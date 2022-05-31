@@ -22,7 +22,7 @@ mongoose
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan("dev"));
-
+app.use("/uploads", express.static("uploads"));
 /* tell me if any req is made */
 /* app.use((req, res, next) => {
   console.log("new req made");
@@ -31,6 +31,27 @@ app.use(morgan("dev"));
   console.log("method", req.method);
   next();
 }); */
+
+const upload = require("./models/upload");
+/* add avatar */
+app.post("/avatar/:id", upload.single("file"), (req, res) => {
+  console.log(req.file.path);
+  db.collection("users")
+    .updateOne(
+      { _id: ObjectId(req.params.id) },
+      {
+        $set: {
+          avatar: req.file.path,
+        },
+      }
+    )
+    .then((result) => {
+      res.status(201).json(result);
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
+});
 
 /* user register */
 app.post("/register", async (req, res) => {

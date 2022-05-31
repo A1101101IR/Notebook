@@ -30,6 +30,7 @@ $c5: #fe0707;
   form {
     @include FlexAllCenter();
     flex-direction: column;
+    
     input,textarea {
       color: #000000;
       background-color: $c1;
@@ -251,6 +252,36 @@ header {
   }
   .user-card-header {
     margin-top: 15px;
+    .user-img {
+      background-image: url(./img/user.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      object-fit: cover;
+      height: 220px;
+      width: 220px;
+      border-radius: 150px;
+      @media only screen and (max-width: 995px) {
+        height: 120px;
+        width: 120px;
+        border-radius: 100px;
+      }
+    }
+    .avatar-input {
+      border: 1px solid #ccc;
+      background-color: $c1;
+      display: inline-block;
+      border-radius: 6px;
+      height: 34px;
+      width: 340px;
+      margin-bottom: 10px;
+      margin-top: 15px;
+      @include FlexAllCenter();
+      cursor: pointer;
+      input[type="file"] {
+        display: none;
+      }
+    }
   }
   @media only screen and (max-width: 455px) {
     .user-card-body {
@@ -271,20 +302,7 @@ header {
       }
     }
   }
-  .user-img {
-    background-image: url(./img/user.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    height: 220px;
-    width: 220px;
-    border-radius: 150px;
-    @media only screen and (max-width: 995px) {
-      height: 120px;
-      width: 120px;
-      border-radius: 100px;
-    }
-  }
+  
   .user-card-info {
     margin-bottom: 20px;
     h2 {
@@ -493,6 +511,7 @@ header {
       margin-right: 10px;
       border-radius: 25px;
       background-color: #021C26;
+      object-fit: cover;
     }
   }
 }
