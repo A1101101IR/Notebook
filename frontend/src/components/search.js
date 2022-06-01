@@ -1,26 +1,46 @@
 import { useState } from "react";
 import SearchImg from "../img/search.png";
+import UserMediumByline from "./user/user-m-byline";
 
 const Search = () => {
   const [search, setSearch] = useState();
-  function liveSearch() {
-    console.log(search);
-    fetch("/search", {
+  const [searchValue, setSearchValue] = useState();
+  const [searchResult, setSearchResult] = useState();
+  async function liveSearch() {
+    setSearchValue(search.charAt(0).toUpperCase() + search.slice(1));
+    const res = await fetch("/search", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstname: searchValue,
+      }),
       redirect: "follow",
-      body: JSON.stringify({ payload: search }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    });
+    const data = await res.json();
+    if (data !== null) {
+      setSearchResult(data);
+    } else {
+      console.log(data);
+    }
+    console.log(searchValue);
   }
   return (
     <>
       <div className="search-body">
+        {/* <h3>Find friends by search!</h3> */}
         <div className="search-box">
-          <input type="text" onChange={(e) => setSearch(e.target.value)} />
-          <img src={SearchImg} alt="" onKeyUp={liveSearch()} />
+          <input
+            type="text"
+            name="firstname"
+            placeholder="Find friends by search!"
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyUp={liveSearch}
+          />
+          <img src={SearchImg} alt="" onClick={() => liveSearch()} />
         </div>
-        {/* <div className="result-box">result</div> */}
+        {searchResult && <UserMediumByline users={searchResult} />}
       </div>
     </>
   );

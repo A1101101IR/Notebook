@@ -10,7 +10,7 @@ const Profile = (data) => {
   const [firstname, setFirstname] = useState(user.firstname);
   const [lastname, setLastname] = useState(user.lastname);
   const [biography, setBiography] = useState(user.biography);
-  const { data: posts, error, isLoading } = useFatch(`/posts/user/${user._id}`);
+  const { data: posts } = useFatch(`/posts/user/${user._id}`);
 
   /*  */
   async function follow() {
@@ -71,9 +71,9 @@ const Profile = (data) => {
     }
   }
 
-  const [editAvatar, setEditAvatar] = useState(false);
+  /* const [editAvatar, setEditAvatar] = useState(false); */
   const [uploading, setUploading] = useState();
-  const [avatar, setAvatar] = useState();
+  /* const [avatar, setAvatar] = useState(); */
   const addAvatar = async (e) => {
     const file = e.target.files;
     const formdata = new FormData();
@@ -97,14 +97,18 @@ const Profile = (data) => {
   });
   return (
     <>
+      {!user && <div className="user-card-preview">error</div>}
       {user && (
         <div className="user-card-preview">
           <div className="user-card-header">
-            <img
-              src={"http://localhost:3000/" + user.avatar}
-              alt={user.firstname + user.lastname + "avatar"}
-              className="user-img"
-            />
+            {uploading && "some animation"}
+            {!uploading && (
+              <img
+                src={"http://localhost:3000/" + user.avatar}
+                alt={user.firstname + user.lastname + "avatar"}
+                className="user-img"
+              />
+            )}
             {edit && (
               <label htmlFor="add-avatar" className="avatar-input">
                 <input

@@ -48,7 +48,7 @@ app.use(userRoute);
 app.use(likeRoute);
 
 /* SEARCH FUNC */
-app.get("/search", async (req, res) => {
+app.post("/search", async (req, res) => {
   console.log(req.query.users);
   try {
     const userInDatabase = await User.findOne({

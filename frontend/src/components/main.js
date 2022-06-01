@@ -40,31 +40,23 @@ const Main = () => {
     }
   }
 
-  /*  */
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 350);
-  }, []);
   return (
     <>
-      {loading && (
-        <div className="loading">
-          <h3>Loading...</h3>
-        </div>
-      )}
       <aside>
+        {error && <h3>{error}</h3>}
+        {isLoading && <h3>{isLoading}</h3>}
         {userData && (
           <div className="profile-box">
             <Profile data={userData} />
           </div>
         )}
         <div className="users-box">
-          <UserMediumByline /> {/* <Search /> */}
+          <Search />
         </div>
       </aside>
       <main>
+        {error && <h3>{error}</h3>}
+        {isLoading && <h3>{isLoading}</h3>}
         <form className="post-form" onSubmit={createPost}>
           <textarea
             type="text"
@@ -80,7 +72,6 @@ const Main = () => {
           )}
         </form>
         <Posts ref={getPostsRef} />
-        {/* <Users /> */}
       </main>
     </>
   );

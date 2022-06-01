@@ -596,13 +596,17 @@ header {
 
 .search-body {
   margin-bottom: 10px;
-  background-color: $c2;
+  /* background-color: $c2; */
+  min-width: 400px;
   border-radius: 10px;
-  border: 1px solid rgb(215, 215, 215);
+  /* border: 1px solid rgb(215, 215, 215); */
+  h3 {
+    margin: 10px
+  }
   .search-box {
     @include FlexCenterSpaceBetween();
     border: 1px solid rgb(215, 215, 215);
-    margin: 5px;
+    margin-bottom: 10px;
     border-radius: 10px;
     background-color: #ffffff;
     input {
