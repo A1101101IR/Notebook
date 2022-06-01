@@ -1,18 +1,28 @@
-import { useRef } from "react";
+import Search from "./search";
 import Posts from "./post/posts";
 import Profile from "./user/userProfile";
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
 import useFatch from "./customHooks/useFetch";
-import Users from "./user/users";
-import UserMediumByline from "./user/user-m-byline";
-import Search from "./search";
+
 const Main = () => {
+  /**
+   * using useRef hook to access getPost function from posts
+   * in order to getPosts after user create new post
+   */
   const getPostsRef = useRef();
+
   const [body, setBody] = useState(null);
   const authorId = localStorage.getItem("user");
+
+  /* using useFetch custom hook in order to fetching current user data */
   const { data: userData, error, isLoading } = useFatch(`/users/${authorId}`);
 
-  /*  */
+  /**
+   * This function will take input value and create post of it.
+   * @param {string} authoId  id of user who the create post
+   * @param {string} body     the content of post
+   * @param {arry}   like     a empty array for like
+   */
   async function createPost(event) {
     event.preventDefault();
     if (body === null || body === "") {

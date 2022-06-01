@@ -6,6 +6,13 @@ const Search = () => {
   const [search, setSearch] = useState();
   const [searchValue, setSearchValue] = useState();
   const [searchResult, setSearchResult] = useState();
+
+  /**
+   * This function will take input value and find a user
+   * @param {string} search          the input value
+   * @param {string} searchValue     the input value with uppercase character
+   * @param {string} searchResult    the search result
+   */
   async function liveSearch() {
     setSearchValue(search.charAt(0).toUpperCase() + search.slice(1));
     const res = await fetch("/search", {
@@ -29,7 +36,6 @@ const Search = () => {
   return (
     <>
       <div className="search-body">
-        {/* <h3>Find friends by search!</h3> */}
         <div className="search-box">
           <input
             type="text"

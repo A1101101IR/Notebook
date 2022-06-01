@@ -1,36 +1,25 @@
-import { useEffect, useState } from "react";
-
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import Logout from "../img/logout.png";
-import SearchImg from "../img/search.png";
 import Account from "../img/account.png";
-import Manage from "../img/manage.png";
-import Notifications from "../img/notifications.png";
-import Home from "../img/home.png";
-import Open from "../img/open.png";
-import Close from "../img/close.png";
-import Notes from "../img/notes.png";
-import UserSmByline from "./user/user-sm-byline";
-import Search from "./search";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const currentUser = localStorage.getItem("user");
   const navigate = useNavigate();
+  const currentUser = localStorage.getItem("user");
 
+  /**
+   * This function will remove current user info from localStorege
+   * in order to loggout the current user
+   */
   const loggut = () => {
     localStorage.removeItem("user");
     window.location.reload(false);
   };
-  const displaySearchBar = () => {
-    if (searchBar == false) {
-      setSearchBar(true);
-    } else {
-      setSearchBar(false);
-    }
-  };
 
   const [nav, setNav] = useState(false);
-  const [searchBar, setSearchBar] = useState(false);
+  /**
+   * This function will display toggle navbar in small screen mood.
+   */
   function toggleNav() {
     if (nav == false) {
       setNav(true);
@@ -39,7 +28,6 @@ const Navbar = () => {
   return (
     <header>
       <nav className="smallNav">
-        {/* <UserSmByline id={currentUser} /> */}
         <div>
           <Link to={`/users/${currentUser}`}>
             <img src={Account} alt="" />
@@ -49,7 +37,6 @@ const Navbar = () => {
           </Link>
         </div>
         <div>
-          <img src={SearchImg} alt="search icon" onClick={displaySearchBar} />
           <img src={Logout} alt="logout icon" onClick={loggut} />
         </div>
       </nav>
@@ -59,17 +46,13 @@ const Navbar = () => {
           <Link className="logo" to="/">
             NOTEBOOK
           </Link>
-          {!searchBar && (
-            <>
-              <Link to="/">Home</Link>
-              <Link to="/">Create</Link>
-              <Link to="/">Explore</Link>
-            </>
-          )}
-          {searchBar && <Search />}
+          <>
+            <Link to="/">Home</Link>
+            <Link to="/">Create</Link>
+            <Link to="/">Explore</Link>
+          </>
         </nav>
         <div className="nav-icons">
-          <img src={SearchImg} alt="search icon" onClick={displaySearchBar} />
           {/* <img src={Notifications} alt="" /> */}
           <img src={Logout} alt="logout icon" onClick={loggut} />
         </div>

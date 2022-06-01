@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import useFatch from "../customHooks/useFetch";
 const Profile = (data) => {
-  /*  */
-
   const user = data.data;
   const [edit, setEdit] = useState(false);
   const [sidebar, setSidebar] = useState(false);
@@ -12,7 +10,6 @@ const Profile = (data) => {
   const [biography, setBiography] = useState(user.biography);
   const { data: posts } = useFatch(`/posts/user/${user._id}`);
 
-  /*  */
   async function follow() {
     const followersId = currentUser;
     const followingId = await user._id;
