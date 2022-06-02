@@ -42,8 +42,10 @@ const Main = () => {
       const data = await response.json();
       if (response.status === 201) {
         getPostsRef.current.reload();
-        setBody("");
+        setBody(null);
+        document.getElementById("input").value = "";
       } else {
+        document.getElementById("input").value = "OBS! something's wrong.";
         console.log(data);
       }
     }
@@ -69,6 +71,7 @@ const Main = () => {
         <form className="post-form" onSubmit={createPost}>
           <textarea
             type="text"
+            id="input"
             onChange={(e) => setBody(e.target.value)}
             placeholder={
               userData && "Hej " + userData.firstname + "! Vad händer? "

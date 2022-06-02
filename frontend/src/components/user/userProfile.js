@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useFatch from "../customHooks/useFetch";
 const Profile = () => {
-  /* const userData = data.data; */
   const [user, setUser] = useState();
   const { id } = useParams();
   const [edit, setEdit] = useState(false);
@@ -12,7 +11,8 @@ const Profile = () => {
   const [lastname, setLastname] = useState();
   const [biography, setBiography] = useState();
   const { data: posts } = useFatch(`/posts/user/${id}`);
-  /* get user info */
+  const { data: userPosts } = useFatch(`/posts/user/${currentUser}`);
+
   async function getUser(id) {
     if (id) {
       const res = await fetch(`/users/${id}`);
@@ -27,6 +27,7 @@ const Profile = () => {
       setUser(data);
     }
   }
+
   async function follow() {
     const followersId = currentUser;
     const followingId = await user._id;
@@ -156,11 +157,15 @@ const Profile = () => {
     if (!id) {
       setSidebar(true);
     }
+    if (id === currentUser) {
+      setSidebar(true);
+    }
+
     getUser(id);
   }, []);
   return (
     <>
-      {!user && <div className="user-card-preview">error</div>}
+      {!user && <div className="isLoading">Loading...</div>}
       {user && (
         <div className="user-card-preview">
           <div className="user-card-header">
@@ -230,7 +235,18 @@ const Profile = () => {
               <div className="info-box">
                 <div className="info">
                   <span>Posts</span>
-                  <span>{posts && posts.length}</span>
+
+                  {id ? (
+                    <>{posts && <span>{posts.length}</span>}</>
+                  ) : (
+                    <>
+                      {userPosts && (
+                        <span>
+                          {userPosts.length !== 0 && userPosts.length}
+                        </span>
+                      )}
+                    </>
+                  )}
                 </div>
                 <div className="info">
                   <span>Followers</span>
@@ -253,12 +269,12 @@ const Profile = () => {
               {!sidebar && (
                 <>
                   {defineBTN(user.followers, currentUser) && (
-                    <button onClick={() => unfollow()}>unfollow</button>
+                    <button onClick={() => unfollow()}>Unfollow</button>
                   )}
                   {!defineBTN(user.followers, currentUser) && (
                     <button onClick={() => follow()}>Follow</button>
                   )}
-                  <button onClick={() => following()}>Contact</button>
+                  {/* <button onClick={() => following()}>Contact</button> */}
                 </>
               )}
             </div>

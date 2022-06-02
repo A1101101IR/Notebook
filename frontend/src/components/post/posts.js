@@ -1,7 +1,7 @@
 import Like from "../../img/like.png";
 import DisLike from "../../img/dislike.png";
 import Delete from "../../img/delete.png";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Bookmark from "../../img/bookmark.png";
 import UserSmByline from "../user/user-sm-byline";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
@@ -70,6 +70,7 @@ const Posts = forwardRef((props, ref) => {
     });
     const data = res.json();
     setComment("");
+    document.getElementById("comment-input").value = "";
     getPosts();
   }
 
@@ -149,9 +150,12 @@ const Posts = forwardRef((props, ref) => {
           .map((post) => (
             <div className="post-card-preview" key={post._id}>
               <div className="post-card-header">
-                <div className="post-author-info">
+                <Link
+                  to={`/users/${post.authorId}`}
+                  className="post-author-info"
+                >
                   <UserSmByline id={post.authorId} />
-                </div>
+                </Link>
                 <div className="post-options-nav">
                   {currentUser === post.authorId && (
                     <img
@@ -177,7 +181,6 @@ const Posts = forwardRef((props, ref) => {
                     addLike(post._id, post.likes);
                   }}
                 >
-                  {/*  */}
                   {defineBTN(post.likes, currentUser) && (
                     <img src={DisLike} alt="dislike button" />
                   )}
@@ -194,14 +197,15 @@ const Posts = forwardRef((props, ref) => {
                     onChange={(e) => setComment(e.target.value)}
                     onClick={() => showComments(post._id)}
                     type="text"
+                    id="comment-input"
                     placeholder="Comment"
                   />
                   {post.comments &&
                     post.comments.map((comment) => (
-                      <>
+                      <div key={comment.body}>
                         {commentBox === post._id && (
-                          <div
-                            key={comment.body}
+                          <Link
+                            to={`/users/${comment.authorId}`}
                             className={"comment"}
                             style={myStyle}
                           >
@@ -210,9 +214,9 @@ const Posts = forwardRef((props, ref) => {
                               key={comment.body}
                             />
                             <p>{comment.body}</p>
-                          </div>
+                          </Link>
                         )}
-                      </>
+                      </div>
                     ))}
                 </div>
               </div>

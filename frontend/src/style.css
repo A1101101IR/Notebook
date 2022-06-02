@@ -6,7 +6,6 @@
 }
 
 #root {
-  background-color: #000000;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -72,6 +71,121 @@ section a {
   }
 }
 
+.site {
+  gap: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  width: calc(100% + 0px);
+  min-height: calc(100vh - 100px);
+}
+
+@media only screen and (max-width: 992px) {
+  .site {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.form-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+button {
+  color: #000000;
+  border: none;
+  min-width: 120px;
+  min-height: 30px;
+  border-radius: 6px;
+  font-family: Poppins;
+  background-color: #ffffff;
+}
+
+button:hover {
+  border: 1px solid black;
+}
+
+.delete-btn {
+  width: 30px;
+  height: 30px;
+  background-size: cover;
+  background-image: url(./img/delete.png);
+}
+
+.comment {
+  width: 100px;
+  height: 100px;
+}
+
+@media only screen and (max-width: 992px) {
+  button {
+    min-width: 80px;
+    min-height: 26px;
+  }
+}
+
+.loading {
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #ffffff;
+}
+
+.loading h3 {
+  font-size: 3rem;
+}
+
+.isLoading {
+  width: 400px;
+  height: 400px;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #F1F0F2;
+  color: #000000;
+  font-size: 22px;
+}
+
+/* CSS FOR HEADER AND NAVBAR */
+/* CSS FOR HEADER AND NAVBAR */
+/* CSS FOR HEADER AND NAVBAR */
 header {
   height: 60px;
   display: -webkit-box;
@@ -81,6 +195,12 @@ header {
   background-color: #F1F0F2;
   border-radius: 0px 0px 10px 10px;
   border: 1px solid #d7d7d7;
+}
+
+@media only screen and (max-width: 992px) {
+  header {
+    margin-bottom: 0px;
+  }
 }
 
 header nav {
@@ -145,12 +265,50 @@ header .smallNav {
         -ms-flex-pack: justify;
             justify-content: space-between;
   }
-  header .smallNav .logo {
-    margin: 0;
-    padding: 0;
-  }
   header .smallNav img {
-    padding: 5px;
+    width: 40px;
+    padding-right: 10px;
+  }
+}
+
+@media only screen and (max-width: 992px) and (max-width: 400px) {
+  header .smallNav img {
+    width: 30px;
+    padding-right: 0px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  header .smallNav .logout {
+    display: none;
+    border: 1px solid black;
+    width: 30px;
+    height: 30px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    border-radius: 30px;
+    margin-right: 10px;
+  }
+  header .smallNav .logout img {
+    width: 25px;
+    padding: 0;
+    padding-bottom: 3px;
+    padding-left: 3px;
+  }
+  header .smallNav .logo {
+    padding: 0;
+    margin: 0;
+    padding-left: 15px;
+  }
+  header .smallNav .toggleNav a {
+    padding: 0;
   }
   header div {
     display: -webkit-box;
@@ -177,45 +335,9 @@ header .smallNav {
   }
 }
 
-.site {
-  gap: 10px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
-  width: calc(100% + 0px);
-  min-height: calc(100vh - 100px);
-}
-
-@media only screen and (max-width: 992px) {
-  .site {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-  }
-}
-
-.form-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
+/* CSS FOR CREATE SECTION */
+/* CSS FOR CREATE SECTION */
+/* CSS FOR CREATE SECTION */
 .post-form {
   max-width: 820px;
   width: 100%;
@@ -238,7 +360,6 @@ header .smallNav {
 }
 
 .post-form textarea {
-  width: 97%;
   padding: 10px;
   font-weight: 500;
   min-height: 120px;
@@ -259,6 +380,9 @@ header .smallNav {
   border: none;
 }
 
+/* CSS FOR USER CARDS */
+/* CSS FOR USER CARDS */
+/* CSS FOR USER CARDS */
 .user-card-preview {
   color: black;
   min-width: 400px;
@@ -470,28 +594,16 @@ header .smallNav {
 }
 
 .user-card-preview .btn-box button {
-  width: 120px;
-  height: 30px;
+  width: 150px;
+  height: 40px;
   margin: 10px;
+  font-size: 16px;
+  background-color: #007EFF;
 }
 
-.user-setting-body {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  margin-bottom: 10px;
-  max-width: 800px;
-  width: 800px;
-  padding: 10px;
-  border: 1px solid #d7d7d7;
-  background-color: #F1F0F2;
-  border-radius: 10px;
-}
-
+/* CSS FOR POST CARDS */
+/* CSS FOR POST CARDS */
+/* CSS FOR POST CARDS */
 .post-card-preview {
   height: auto;
   display: -webkit-box;
@@ -561,6 +673,31 @@ header .smallNav {
   display: none;
 }
 
+.post-card-preview .post-card-header .post-author-info div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.post-card-preview .post-card-header .post-author-info div img {
+  width: 35px;
+  height: 35px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 25px;
+  margin-right: 10px;
+}
+
+.post-card-preview .post-card-header .post-author-info div .user-card-body {
+  display: none;
+}
+
 .post-card-preview .post-card-body {
   color: #000000;
   min-height: 50px;
@@ -580,15 +717,6 @@ header .smallNav {
 .post-card-preview .post-card-footer .comment-box {
   width: 100%;
   margin-left: 8px;
-  /* @media only screen and (min-width: 1200px) {
-        width: 96%;
-      }
-      @media only screen and (max-width: 1200px) {
-        width: 96%;
-      }
-      @media only screen and (max-width: 992px) {
-        width: 96%;
-      } */
 }
 
 .post-card-preview .post-card-footer .comment-box input {
@@ -647,14 +775,28 @@ header .smallNav {
 }
 
 .post-card-preview .post-card-footer .comment-box .comment .user-img-sm {
-  height: 25px;
-  width: 25px;
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 15px;
 }
 
 .post-card-preview .post-card-footer .comment-box .comment p {
   opacity: 80%;
-  margin-left: 35px;
+  margin-left: 40px;
+  margin-top: 5px;
   margin-bottom: 4px;
+}
+
+.post-card-preview .post-card-footer .comment-box .comment .user-sm-byline-preview {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .post-card-preview .post-card-footer .comment-box .comment .user-sm-byline-preview .user-card-body {
@@ -697,71 +839,9 @@ header .smallNav {
           justify-content: space-evenly;
 }
 
-/* .user-card-preview-medium {
-  @include FlexCenterSpaceEvenly();
-  margin-bottom: 10px;
-  border-radius: 10px;
-  height: 120px;
-  background-color: $c2;
-  border: 1px solid rgb(215, 215, 215);
-  text-decoration: none;
-  .user-img {
-    background-image: url(./img/user.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    height: 100px;
-    width: 100px;
-    border-radius: 60px;
-    @media only screen and (max-width: 995px) {
-      height: 120px;
-      width: 120px;
-      border-radius: 100px;
-    }
-  }
-  .user-card-body {
-    width: 250px;
-    height: 80px;
-    @include FlexAllCenter();
-    flex-direction: column;
-    .user-name {
-      font-size: 20px;
-      
-      margin-bottom: 5px;
-    }
-    .user-card-bio {
-      font-size: 14px;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    .btns {
-      button {
-      margin-left: 5px;
-      }
-    }
-  }
-} */
-.user-sm-byline-preview a {
-  color: #000000;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  text-decoration: none;
-}
-
-.user-sm-byline-preview a .user-img-sm {
-  width: 35px;
-  height: 35px;
-  margin-right: 10px;
-  border-radius: 25px;
-  background-color: #021C26;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
+/* CSS FOR WELCOME PAGE */
+/* CSS FOR WELCOME PAGE */
+/* CSS FOR WELCOME PAGE */
 .welcome {
   height: 100vh;
   display: -webkit-box;
@@ -912,6 +992,9 @@ header .smallNav {
   }
 }
 
+/* CSS FOR SMALL SEARCH SECTION */
+/* CSS FOR SMALL SEARCH SECTION */
+/* CSS FOR SMALL SEARCH SECTION */
 .search-body {
   margin-bottom: 10px;
   min-width: 400px;
@@ -935,7 +1018,8 @@ header .smallNav {
   border: 1px solid #d7d7d7;
   margin-bottom: 10px;
   border-radius: 10px;
-  background-color: #ffffff;
+  background-color: #F1F0F2;
+  color: #000000;
 }
 
 .search-body .search-box input {
@@ -945,7 +1029,6 @@ header .smallNav {
   border: none;
   padding-left: 10px;
   font-size: 18px;
-  background-color: #ffffff;
 }
 
 .search-body .search-box input:focus {
@@ -956,7 +1039,7 @@ header .smallNav {
   display: none;
 }
 
-.search-body .user-sm-byline-preview a {
+.search-body .user-sm-byline-preview {
   color: #000000;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -973,7 +1056,7 @@ header .smallNav {
   min-height: 120px;
 }
 
-.search-body .user-sm-byline-preview a .user-img-sm {
+.search-body .user-sm-byline-preview .user-img-sm {
   height: 100px;
   width: 100px;
   border-radius: 60px;
@@ -984,7 +1067,7 @@ header .smallNav {
      object-fit: cover;
 }
 
-.search-body .user-sm-byline-preview a .user-card-body {
+.search-body .user-sm-byline-preview .user-card-body {
   width: 250px;
   height: 80px;
   display: -webkit-box;
@@ -1002,60 +1085,16 @@ header .smallNav {
           flex-direction: column;
 }
 
-.search-body .user-sm-byline-preview a .user-card-body .user-name {
+.search-body .user-sm-byline-preview .user-card-body .user-name {
   font-size: 20px;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 
-.search-body .user-sm-byline-preview a .user-card-body .user-card-bio {
-  font-size: 14px;
-  text-align: center;
-  margin-bottom: 10px;
+.search-body .user-sm-byline-preview .user-card-body .user-card-bio {
+  display: none;
 }
 
-.search-body .user-sm-byline-preview a .user-card-body .btns button {
-  margin-left: 5px;
-}
-
-button {
-  color: #000000;
-  border: none;
-  min-width: 120px;
-  min-height: 30px;
-  border-radius: 6px;
-  font-family: Poppins;
-  background-color: #ffffff;
-}
-
-button:hover {
-  border: 1px solid black;
-}
-
-.delete-btn {
-  width: 30px;
-  height: 30px;
-  background-size: cover;
-  background-image: url(./img/delete.png);
-}
-
-.comment {
-  width: 100px;
-  height: 100px;
-}
-
-@media only screen and (max-width: 992px) {
-  button {
-    min-width: 80px;
-    min-height: 26px;
-  }
-}
-
-.loading {
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
+.search-body .user-sm-byline-preview .user-card-body .btns {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1065,10 +1104,181 @@ button:hover {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-color: #ffffff;
 }
 
-.loading h3 {
-  font-size: 3rem;
+.search-body .user-sm-byline-preview .user-card-body .btns button {
+  margin-left: 5px;
+}
+
+/* CSS FOR USER SXPLORE PAGE */
+/* CSS FOR USER SXPLORE PAGE */
+/* CSS FOR USER SXPLORE PAGE */
+.user-explore .user-sm-byline-preview {
+  color: #000000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  text-decoration: none;
+  background-color: #F1F0F2;
+  border-radius: 10px;
+  min-height: 220px;
+  margin-bottom: 10px;
+}
+
+@media only screen and (min-width: 1200px) {
+  .user-explore .user-sm-byline-preview {
+    min-width: 820px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .user-explore .user-sm-byline-preview {
+    min-width: 580px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .user-explore .user-sm-byline-preview {
+    min-width: 300px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .user-explore .user-sm-byline-preview {
+    padding: 0px 10px;
+  }
+  .user-explore .user-sm-byline-preview .user-img-sm {
+    height: 120px;
+    width: 120px;
+    margin-right: 10px;
+    border-radius: 100px;
+  }
+}
+
+.user-explore .user-sm-byline-preview .user-img-sm {
+  height: 150px;
+  width: 150px;
+  margin-right: 10px;
+  border-radius: 100px;
+  background-color: #021C26;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.user-explore .user-sm-byline-preview span {
+  display: none;
+}
+
+.user-explore .user-sm-byline-preview .user-card-body {
+  width: 350px;
+  height: 80px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.user-explore .user-sm-byline-preview .user-card-body .user-name {
+  font-size: 26px;
+  margin-bottom: 14px;
+}
+
+.user-explore .user-sm-byline-preview .user-card-body .user-card-bio {
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.user-explore .user-sm-byline-preview .user-card-body .btns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.user-explore .user-sm-byline-preview .user-card-body .btns button {
+  margin-left: 5px;
+  width: 130px;
+  height: 36px;
+  margin: 10px;
+  font-size: 16px;
+  background-color: #007EFF;
+}
+
+@media only screen and (max-width: 600px) {
+  .user-explore .user-sm-byline-preview {
+    padding: 0px 10px;
+    min-height: 200px;
+  }
+  .user-explore .user-sm-byline-preview .user-img-sm {
+    height: 120px;
+    width: 120px;
+    margin-right: 10px;
+    border-radius: 100px;
+  }
+  .user-explore .user-sm-byline-preview .user-card-body {
+    width: 280px;
+    height: 80px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .user-explore .user-sm-byline-preview .user-card-body .user-name {
+    font-size: 22px;
+    margin-bottom: 5px;
+  }
+  .user-explore .user-sm-byline-preview .user-card-body .user-card-bio {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  .user-explore .user-sm-byline-preview .user-card-body .btns {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  .user-explore .user-sm-byline-preview .user-card-body .btns button {
+    margin-left: 5px;
+    width: 100px;
+    height: 32px;
+    margin: 10px;
+    font-size: 14px;
+    background-color: #007EFF;
+  }
 }
 /*# sourceMappingURL=style.css.map */

@@ -7,11 +7,6 @@ const User = require("./models/user");
 const Post = require("./models/post");
 const { ObjectId } = require("mongodb");
 const { db } = require("./models/user");
-/*  */
-const dotenv = require("dotenv");
-const cors = require("cors");
-const { MongoClient } = require("mongodb");
-/*  */
 const PORT = process.env.PORT || 3000;
 const app = express();
 const databaseURL =
@@ -167,78 +162,3 @@ app.post("/comment/:id", (req, res) => {
       res.status(500).json(err);
     });
 });
-
-/* uppdate user arrays info */
-/* app.post("/edituser/:id", (req, res) => {
-  console.log(req.body);
-  db.collection("users")
-    .updateOne(
-      { _id: ObjectId(req.params.id) },
-      {
-        $push: {
-          followers: {
-            followersId: req.body.followersId,
-          },
-          following: {
-            followingId: req.body.followingId,
-          },
-        },
-      }
-    )
-    .then((result) => {
-      res.status(201).json(result);
-    })
-    .catch((err) => {
-      res.status(500).json(err);
-    });
-}); */
-
-/* get users posts */
-/* app.get("/userposts/:id", (req, res) => {
-  Post.find({ authorId: req.params.id })
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((err) => {
-      res.status(500).json(err);
-    });
-}); */
-
-/* user search */
-/* app.get("/search", async (req, res) => {
-  try {
-    if (1 == 1) {
-      let results;
-      if (1 == 1) {
-        results = await client
-          .db("location")
-          .collection("users")
-          .aggregate([
-            {
-              $search: {
-                index: "default",
-                text: {
-                  query: req.body.search,
-                  path: {
-                    wildcard: "*",
-                  },
-                },
-              },
-            },
-            {
-              $porject: {
-                _id: 1,
-              },
-            },
-            {
-              $limit: 10,
-            },
-          ])
-          .toArray();
-        return res.status(200).json(results);
-      }
-    }
-  } catch (err) {
-    res.status(404).json(err);
-  }
-}); */
