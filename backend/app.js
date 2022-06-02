@@ -42,10 +42,14 @@ app.use(express.urlencoded({ extended: true }));
 const postRoute = require("./route/postRoute");
 const userRoute = require("./route/userRoute");
 const likeRoute = require("./route/likeRoute");
+const followRoute = require("./route/followRoute");
+const followingRoute = require("./route/followingRoute");
 
 app.use(postRoute);
 app.use(userRoute);
 app.use(likeRoute);
+app.use(followRoute);
+app.use(followingRoute);
 
 /* SEARCH FUNC */
 app.post("/search", async (req, res) => {
@@ -98,7 +102,6 @@ app.post("/search", async (req, res) => {
   }
   console.log("hello"); */
 });
-
 /* user register */
 app.post("/register", async (req, res) => {
   try {
@@ -123,7 +126,6 @@ app.post("/register", async (req, res) => {
     res.json({ status: "error", error: err });
   }
 });
-
 /* user login api */
 app.post("/login", async (req, res) => {
   console.log(req.body);
@@ -144,7 +146,6 @@ app.post("/login", async (req, res) => {
     res.json({ status: "cannot find" });
   }
 });
-
 /* add comment to post */
 app.post("/comment/:id", (req, res) => {
   db.collection("posts")
@@ -166,94 +167,6 @@ app.post("/comment/:id", (req, res) => {
       res.status(500).json(err);
     });
 });
-
-/* follow */
-app.post("/follow/:id", (req, res) => {
-  db.collection("users")
-    .updateOne(
-      { _id: ObjectId(req.params.id) },
-      {
-        $push: {
-          followers: {
-            followersId: req.body.followersId,
-          },
-        },
-      }
-    )
-    .then((result) => {
-      res.status(201).json({ status: result });
-    })
-    .then((err) => {
-      res.status(500).json(err);
-    });
-});
-/* Unfollow */
-app.delete("/follow/:id", (req, res) => {
-  db.collection("users")
-    .updateOne(
-      { _id: ObjectId(req.params.id) },
-      {
-        $pull: {
-          followers: {
-            followersId: req.body.followersId,
-          },
-        },
-      }
-    )
-    .then((result) => {
-      res.status(201).json({ status: result });
-    })
-    .then((err) => {
-      res.status(500).json(err);
-    });
-});
-
-/* add followers after follow */
-app.post("/following/:id", (req, res) => {
-  console.log(req.body);
-  db.collection("users")
-    .updateOne(
-      { _id: ObjectId(req.params.id) },
-      {
-        $push: {
-          following: {
-            followingId: req.body.followingId,
-          },
-        },
-      }
-    )
-    .then((result) => {
-      res.status(201).json({ status: result });
-    })
-    .then((err) => {
-      res.status(500).json(err);
-    });
-});
-/* delete followers after unfollow */
-app.delete("/following/:id", (req, res) => {
-  console.log(req.body);
-  db.collection("users")
-    .updateOne(
-      { _id: ObjectId(req.params.id) },
-      {
-        $pull: {
-          following: {
-            followingId: req.body.followingId,
-          },
-        },
-      }
-    )
-    .then((result) => {
-      res.status(201).json({ status: result });
-    })
-    .then((err) => {
-      res.status(500).json(err);
-    });
-});
-
-/*  */
-
-/*  */
 
 /* uppdate user arrays info */
 /* app.post("/edituser/:id", (req, res) => {

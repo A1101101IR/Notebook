@@ -102,14 +102,10 @@ const Profile = () => {
   }
 
   function defineBTN(array, currentUser) {
-    /* console.log(array); */
     for (let i = 0; i < array.length; i++) {
-      console.log(array[i].followersId);
       if (array[i].followersId === currentUser) {
-        console.log("yes");
         return true;
       } else {
-        console.log("no");
         return false;
       }
     }
