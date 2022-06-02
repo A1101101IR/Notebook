@@ -170,11 +170,16 @@ const Profile = () => {
           <div className="user-card-header">
             {uploading && "some animation"}
             {!uploading && (
-              <img
-                src={"http://localhost:3000/" + user.avatar}
-                alt={user.firstname + user.lastname + "avatar"}
-                className="user-img"
-              />
+              <>
+                {user.avatar && (
+                  <img
+                    src={"http://localhost:3000/" + user.avatar}
+                    alt={user.firstname + user.lastname + "avatar"}
+                    className="user-img"
+                  />
+                )}
+                {!user.avatar && <div className="user-img"></div>}
+              </>
             )}
             {edit && (
               <label htmlFor="add-avatar" className="avatar-input">

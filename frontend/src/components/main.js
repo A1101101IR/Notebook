@@ -21,14 +21,13 @@ const Main = () => {
    * This function will take input value and create post of it.
    * @param {string} authoId  id of user who the create post
    * @param {string} body     the content of post
-   * @param {arry}   like     a empty array for like
+   * @param {array}  like     a empty array for like
    */
   async function createPost(event) {
     event.preventDefault();
     if (body === null || body === "") {
       console.log(body);
     } else {
-      console.log(body);
       const response = await fetch("/posts/create", {
         method: "POST",
         headers: {

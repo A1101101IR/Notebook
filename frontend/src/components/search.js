@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SearchImg from "../img/search.png";
-import UserMediumByline from "./user/user-m-byline";
+import UserSmByline from "./user/user-sm-byline";
 
 const Search = () => {
   const [search, setSearch] = useState();
@@ -27,7 +27,8 @@ const Search = () => {
     });
     const data = await res.json();
     if (data !== null) {
-      setSearchResult(data);
+      setSearchResult(data.data._id);
+      console.log(data.data._id);
     } else {
       console.log(data);
     }
@@ -46,7 +47,7 @@ const Search = () => {
           />
           <img src={SearchImg} alt="" onClick={() => liveSearch()} />
         </div>
-        {searchResult && <UserMediumByline users={searchResult} />}
+        {searchResult && <UserSmByline id={searchResult} />}
       </div>
     </>
   );
