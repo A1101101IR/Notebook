@@ -1,15 +1,32 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import useFatch from "../customHooks/useFetch";
-const Profile = (data) => {
-  const user = data.data;
+const Profile = () => {
+  /* const userData = data.data; */
+  const [user, setUser] = useState();
+  const { id } = useParams();
   const [edit, setEdit] = useState(false);
   const [sidebar, setSidebar] = useState(false);
   const currentUser = localStorage.getItem("user");
-  const [firstname, setFirstname] = useState(user.firstname);
-  const [lastname, setLastname] = useState(user.lastname);
-  const [biography, setBiography] = useState(user.biography);
-  const { data: posts } = useFatch(`/posts/user/${user._id}`);
-
+  const [firstname, setFirstname] = useState();
+  const [lastname, setLastname] = useState();
+  const [biography, setBiography] = useState();
+  const { data: posts } = useFatch(`/posts/user/${id}`);
+  /* get user info */
+  async function getUser(id) {
+    if (id) {
+      const res = await fetch(`/users/${id}`);
+      const data = await res.json();
+      setUser(data);
+      setFirstname(data.firstname);
+      setLastname(data.lastname);
+      setBiography(data.biography);
+    } else {
+      const res = await fetch(`/users/${currentUser}`);
+      const data = await res.json();
+      setUser(data);
+    }
+  }
   async function follow() {
     const followersId = currentUser;
     const followingId = await user._id;
@@ -25,9 +42,27 @@ const Profile = (data) => {
       redirect: "follow",
     });
     const data = await res.json();
-    setTimeout(() => {
-      following();
-    }, 500);
+    following();
+    getUser(id);
+  }
+
+  async function unfollow() {
+    const followersId = currentUser;
+    const followingId = await user._id;
+    const body = JSON.stringify({
+      followersId,
+    });
+    const res = await fetch(`/follow/${followingId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: body,
+      redirect: "follow",
+    });
+    const data = await res.json();
+    unfollowing();
+    getUser(id);
   }
 
   async function following() {
@@ -48,6 +83,38 @@ const Profile = (data) => {
     const data = await res.json();
   }
 
+  async function unfollowing() {
+    const followersId = currentUser;
+    const followingId = await user._id;
+    const body = JSON.stringify({
+      followersId,
+      followingId,
+    });
+    const res = await fetch(`/following/${followersId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: body,
+      redirect: "follow",
+    });
+    const data = await res.json();
+  }
+
+  function defineBTN(array, currentUser) {
+    /* console.log(array); */
+    for (let i = 0; i < array.length; i++) {
+      console.log(array[i].followersId);
+      if (array[i].followersId === currentUser) {
+        console.log("yes");
+        return true;
+      } else {
+        console.log("no");
+        return false;
+      }
+    }
+  }
+
   /*  */
   async function editUser(event) {
     event.preventDefault();
@@ -65,6 +132,7 @@ const Profile = (data) => {
     const data = await res.json();
     if (res.status === 201) {
       setEdit(false);
+      getUser(id);
     }
   }
 
@@ -87,11 +155,13 @@ const Profile = (data) => {
       window.location.reload();
     }, 500);
   };
+
   useEffect(() => {
-    if (user._id === currentUser) {
+    if (!id) {
       setSidebar(true);
     }
-  });
+    getUser(id);
+  }, []);
   return (
     <>
       {!user && <div className="user-card-preview">error</div>}
@@ -123,7 +193,7 @@ const Profile = (data) => {
               {!edit && (
                 <>
                   <h2 className="user-name">
-                    {user.firstname} {user.lastname}
+                    {user && user.firstname} {user && user.lastname}
                   </h2>
                   <p className="user-card-bio">
                     {user.biography && user.biography.slice(0, 140)}
@@ -181,7 +251,12 @@ const Profile = (data) => {
               )}
               {!sidebar && (
                 <>
-                  <button onClick={() => follow()}>Follow</button>
+                  {defineBTN(user.followers, currentUser) && (
+                    <button onClick={() => unfollow()}>unfollow</button>
+                  )}
+                  {!defineBTN(user.followers, currentUser) && (
+                    <button onClick={() => follow()}>Follow</button>
+                  )}
                   <button onClick={() => following()}>Contact</button>
                 </>
               )}

@@ -4,13 +4,16 @@ import { useParams } from "react-router-dom";
 import useFatch from "../customHooks/useFetch";
 
 const User = () => {
-  const { id } = useParams();
-  const { data: userData, error, isLoading } = useFatch(`/users/${id}`);
+  /* const { id } = useParams();
+  const { data: userData, error, isLoading } = useFatch(`/users/${id}`); */
   return (
     <>
-      {error && <p>{error}</p>}
-      {isLoading && <p>{isLoading}</p>}
-      <aside>{userData && <Profile data={userData} />}</aside>
+      {/* {error && <p>{error}</p>}
+      {isLoading && <p>{isLoading}</p>} */}
+      {/* <aside>{userData && <Profile data={userData} />}</aside> */}
+      <aside>
+        <Profile />
+      </aside>
       <main>
         <Posts />
       </main>

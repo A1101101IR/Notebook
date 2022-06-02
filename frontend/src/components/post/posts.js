@@ -1,4 +1,5 @@
 import Like from "../../img/like.png";
+import DisLike from "../../img/dislike.png";
 import Delete from "../../img/delete.png";
 import { useParams } from "react-router-dom";
 import Bookmark from "../../img/bookmark.png";
@@ -92,10 +93,9 @@ const Posts = forwardRef((props, ref) => {
    * @param {string} currentUser  Current user id,
    * @param {string} likeArr  The post like array, which consists of user IDs.
    */
-  function likeBTN(likeArr, currentUser) {
-    for (let i = 0; i < likeArr.length; i++) {
-      console.log(likeArr[i].like);
-      if (likeArr[i].like === currentUser) {
+  function defineBTN(array, currentUser) {
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].like === currentUser) {
         return true;
       } else {
         return false;
@@ -177,7 +177,13 @@ const Posts = forwardRef((props, ref) => {
                     addLike(post._id, post.likes);
                   }}
                 >
-                  <img src={Like} alt="likeeee" />
+                  {/*  */}
+                  {defineBTN(post.likes, currentUser) && (
+                    <img src={DisLike} alt="dislike button" />
+                  )}
+                  {!defineBTN(post.likes, currentUser) && (
+                    <img src={Like} alt="like button" />
+                  )}
                   {post.likes.length !== 0 && <span>{post.likes.length}</span>}
                 </div>
                 <div className={"comment-box"}>

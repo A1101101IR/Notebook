@@ -167,13 +167,33 @@ app.post("/comment/:id", (req, res) => {
     });
 });
 
-/* follow and onfollow */
+/* follow */
 app.post("/follow/:id", (req, res) => {
   db.collection("users")
     .updateOne(
       { _id: ObjectId(req.params.id) },
       {
         $push: {
+          followers: {
+            followersId: req.body.followersId,
+          },
+        },
+      }
+    )
+    .then((result) => {
+      res.status(201).json({ status: result });
+    })
+    .then((err) => {
+      res.status(500).json(err);
+    });
+});
+/* Unfollow */
+app.delete("/follow/:id", (req, res) => {
+  db.collection("users")
+    .updateOne(
+      { _id: ObjectId(req.params.id) },
+      {
+        $pull: {
           followers: {
             followersId: req.body.followersId,
           },
@@ -196,6 +216,27 @@ app.post("/following/:id", (req, res) => {
       { _id: ObjectId(req.params.id) },
       {
         $push: {
+          following: {
+            followingId: req.body.followingId,
+          },
+        },
+      }
+    )
+    .then((result) => {
+      res.status(201).json({ status: result });
+    })
+    .then((err) => {
+      res.status(500).json(err);
+    });
+});
+/* delete followers after unfollow */
+app.delete("/following/:id", (req, res) => {
+  console.log(req.body);
+  db.collection("users")
+    .updateOne(
+      { _id: ObjectId(req.params.id) },
+      {
+        $pull: {
           following: {
             followingId: req.body.followingId,
           },
