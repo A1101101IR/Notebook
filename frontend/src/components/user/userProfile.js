@@ -13,6 +13,13 @@ const Profile = () => {
   const { data: posts } = useFatch(`/posts/user/${id}`);
   const { data: userPosts } = useFatch(`/posts/user/${currentUser}`);
 
+  /**
+   * This function will getUser info depending on pagr URL
+   * If there is a id, it will fetch info depending on it
+   * Else it will fetch currentUser info.
+   * @param {string} id             User ID depending on pagr URL
+   * @param {string} currentUser    CurrentUser ID from localStorage
+   */
   async function getUser(id) {
     if (id) {
       const res = await fetch(`/users/${id}`);
@@ -28,6 +35,12 @@ const Profile = () => {
     }
   }
 
+  /**
+   * This function will follow other user if currentUser click on follow btn.
+   * If follow operation is succsessfull, it will call following function
+   * @param {string} user._id       User id of the user we will follow
+   * @param {string} currentUser    CurrentUser ID from localStorage
+   */
   async function follow() {
     const followersId = currentUser;
     const followingId = await user._id;
@@ -47,6 +60,12 @@ const Profile = () => {
     getUser(id);
   }
 
+  /**
+   * This function will Unfollow other user if currentUser click on Unfollow btn.
+   * If Unfollow operation is succsessfull, it will call Unfollowing function
+   * @param {string} user._id       User id of the user we will follow
+   * @param {string} currentUser    CurrentUser ID from localStorage
+   */
   async function unfollow() {
     const followersId = currentUser;
     const followingId = await user._id;
@@ -66,6 +85,12 @@ const Profile = () => {
     getUser(id);
   }
 
+  /**
+   * This function will add the user who currentUser will follow to following list.
+   * If follow operation is succsessfull, it will add user_.id to following list
+   * @param {string} user._id       User id of the user we will follow
+   * @param {string} currentUser    CurrentUser ID from localStorage
+   */
   async function following() {
     const followersId = currentUser;
     const followingId = await user._id;
@@ -84,6 +109,11 @@ const Profile = () => {
     const data = await res.json();
   }
 
+  /**
+   * This function remove other user if currentUser click on unfollow btn.
+   * @param {string} user._id       User id of the user we will follow
+   * @param {string} currentUser    CurrentUser ID from localStorage
+   */
   async function unfollowing() {
     const followersId = currentUser;
     const followingId = await user._id;
@@ -102,6 +132,11 @@ const Profile = () => {
     const data = await res.json();
   }
 
+  /**
+   * This function will define follow & unfollow btn.
+   * @param {array} array      array of user who currentUser follow
+   * @param {string} currentUser    CurrentUser ID from localStorage
+   */
   function defineBTN(array, currentUser) {
     for (let i = 0; i < array.length; i++) {
       if (array[i].followersId === currentUser) {
@@ -112,7 +147,9 @@ const Profile = () => {
     }
   }
 
-  /*  */
+  /**
+   * This function will allow user to edit user info as name and bio.
+   */
   async function editUser(event) {
     event.preventDefault();
     const res = await fetch(`/users/${user._id}`, {
@@ -133,9 +170,10 @@ const Profile = () => {
     }
   }
 
-  /* const [editAvatar, setEditAvatar] = useState(false); */
   const [uploading, setUploading] = useState();
-  /* const [avatar, setAvatar] = useState(); */
+  /**
+   * This function will allow user to upload avatar.
+   */
   const addAvatar = async (e) => {
     const file = e.target.files;
     const formdata = new FormData();
@@ -160,7 +198,6 @@ const Profile = () => {
     if (id === currentUser) {
       setSidebar(true);
     }
-
     getUser(id);
   }, []);
   return (

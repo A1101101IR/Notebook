@@ -11,7 +11,7 @@ function App() {
    * Using useEffect as userProvider
    * it will check if there is any user data i localStorege
    * if yes, it will show the content of our app
-   * else our welcome page where user can create account och login
+   * else our welcome page where user can create account or login.
    */
   const [islogged, setIslogged] = useState();
   useEffect(() => {
@@ -20,7 +20,7 @@ function App() {
     } else {
       setIslogged(false);
     }
-  });
+  }, []);
   return (
     <section>
       {islogged ? (

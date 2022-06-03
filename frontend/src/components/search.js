@@ -6,9 +6,8 @@ const Search = () => {
   const [search, setSearch] = useState();
   const [searchValue, setSearchValue] = useState();
   const [searchResult, setSearchResult] = useState();
-
   /**
-   * This function will take input value and find a user
+   * This function will take input value from search input and find a user
    * @param {string} search          the input value
    * @param {string} searchValue     the input value with uppercase character
    * @param {string} searchResult    the search result

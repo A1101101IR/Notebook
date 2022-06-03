@@ -5,7 +5,6 @@ import UserSmByline from "./user-sm-byline";
 const Users = () => {
   const { data: users, error, isLoading } = useFatch("/users");
   const id = useParams();
-  /* you need this one to show userlist when follow func i ready */
   return (
     <>
       <aside>

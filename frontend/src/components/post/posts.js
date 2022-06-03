@@ -1,9 +1,9 @@
 import Like from "../../img/like.png";
-import DisLike from "../../img/dislike.png";
 import Delete from "../../img/delete.png";
-import { Link, useParams } from "react-router-dom";
+import DisLike from "../../img/dislike.png";
 import Bookmark from "../../img/bookmark.png";
 import UserSmByline from "../user/user-sm-byline";
+import { Link, useParams } from "react-router-dom";
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 
 const Posts = forwardRef((props, ref) => {
@@ -37,7 +37,7 @@ const Posts = forwardRef((props, ref) => {
   }
 
   /**
-   * This feature will delete posts depending on the ID it receives.
+   * This function will delete posts depending on the ID it receives.
    * @param {string} id the post ID to be deleted
    */
   async function deletePost(id) {
@@ -52,7 +52,7 @@ const Posts = forwardRef((props, ref) => {
 
   const [comment, setComment] = useState();
   /**
-   * This function will add comment to post depending on the ID it receives.
+   * This function will add comment to each post depending on the ID it receives.
    * @param {string} id         Post ID to the post which comment to be added.
    * @param {string} authorId   Current user id, who create the comment.
    * @param {string} comment    Comments content.
@@ -85,7 +85,6 @@ const Posts = forwardRef((props, ref) => {
     setMyStyle({ display: "block" });
   };
 
-  /* const myArr = [1, 2, 3, 4]; */
   /**
    * This function goes through evert posts like array
    * in order to see if the user has liked it or no.

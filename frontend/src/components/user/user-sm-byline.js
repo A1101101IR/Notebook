@@ -3,6 +3,13 @@ import useFatch from "../customHooks/useFetch";
 const UserSmByline = (id) => {
   const { data: user, error, isLoading } = useFatch(`/users/${id.id}`);
   const currentUser = localStorage.getItem("user");
+
+  /**
+   * This function will follow other user if currentUser click on follow btn.
+   * If follow operation is succsessfull, it will call following function
+   * @param {string} user._id       User id of the user we will follow
+   * @param {string} currentUser    CurrentUser ID from localStorage
+   */
   async function follow() {
     const followersId = currentUser;
     const followingId = await user._id;
@@ -21,6 +28,12 @@ const UserSmByline = (id) => {
     following();
   }
 
+  /**
+   * This function will Unfollow other user if currentUser click on Unfollow btn.
+   * If Unfollow operation is succsessfull, it will call Unfollowing function
+   * @param {string} user._id       User id of the user we will follow
+   * @param {string} currentUser    CurrentUser ID from localStorage
+   */
   async function unfollow() {
     const followersId = currentUser;
     const followingId = await user._id;
@@ -39,6 +52,12 @@ const UserSmByline = (id) => {
     unfollowing();
   }
 
+  /**
+   * This function will add the user who currentUser will follow to following list.
+   * If follow operation is succsessfull, it will add user_.id to following list
+   * @param {string} user._id       User id of the user we will follow
+   * @param {string} currentUser    CurrentUser ID from localStorage
+   */
   async function following() {
     const followersId = currentUser;
     const followingId = await user._id;
@@ -57,6 +76,11 @@ const UserSmByline = (id) => {
     const data = await res.json();
   }
 
+  /**
+   * This function remove other user if currentUser click on unfollow btn.
+   * @param {string} user._id       User id of the user we will follow
+   * @param {string} currentUser    CurrentUser ID from localStorage
+   */
   async function unfollowing() {
     const followersId = currentUser;
     const followingId = await user._id;
@@ -74,6 +98,12 @@ const UserSmByline = (id) => {
     });
     const data = await res.json();
   }
+
+  /**
+   * This function will define follow & unfollow btn.
+   * @param {array} array      array of user who currentUser follow
+   * @param {string} currentUser    CurrentUser ID from localStorage
+   */
   function defineBTN(array, currentUser) {
     for (let i = 0; i < array.length; i++) {
       if (array[i].followersId === currentUser) {
@@ -83,6 +113,7 @@ const UserSmByline = (id) => {
       }
     }
   }
+
   return (
     <>
       {error && <p>{error}</p>}

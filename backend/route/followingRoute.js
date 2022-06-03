@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { db } = require("../models/user");
 const { ObjectId } = require("mongodb");
-/* add followers after follow */
+
 router.post("/following/:id", (req, res) => {
   try {
     db.collection("users").updateOne(

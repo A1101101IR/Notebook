@@ -7,6 +7,11 @@ const Welcome = () => {
   const [lastname, setLastname] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+  /**
+   * Login function
+   * @param {*} event
+   */
   async function login(event) {
     event.preventDefault();
     const response = await fetch("/login", {
@@ -29,12 +34,13 @@ const Welcome = () => {
           window.location.reload(false);
         }, 500);
       } else {
-        setMessage("incorrect password!");
+        setMessage("Incorrect password!");
       }
     } else {
-      setMessage("can't find account!");
+      setMessage("Can't find account!");
     }
   }
+
   const displayLogIn = () => {
     setOutput(false);
     setMessage("Login please!");
@@ -43,6 +49,11 @@ const Welcome = () => {
     setOutput(true);
     setMessage("Create your account!");
   };
+
+  /**
+   * user register function
+   * @param {*} event
+   */
   async function register(event) {
     event.preventDefault();
     const response = await fetch("/register", {
@@ -59,15 +70,12 @@ const Welcome = () => {
       }),
     });
     const data = await response.json();
-    /* if (data.status == "user created") {
-      setMessage(data.status);
-    } */
-    if (data.status === "user exists") {
+    if (data.status === "User exists") {
       setMessage(data.status);
       setTimeout(() => {
         displayLogIn();
       }, 500);
-    } else if (data.status === "user created") {
+    } else if (data.status === "User created") {
       setMessage(data.status);
       setTimeout(() => {
         displayLogIn();
@@ -78,7 +86,7 @@ const Welcome = () => {
   }
 
   return (
-    <div className="welcome">
+    <div className="Welcome">
       {!output && (
         <div className="form-container">
           <div className="login-message">

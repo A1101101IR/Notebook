@@ -9,7 +9,7 @@ import Plus from "../img/plus.png";
 import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const navigate = useNavigate();
+  /* const navigate = useNavigate(); */
   const currentUser = localStorage.getItem("user");
 
   /**
@@ -49,13 +49,11 @@ const Navbar = () => {
               <Link to="/users">
                 <img src={Explore} alt="" />
               </Link>
-
               {/* <span className="logout">
                 <img src={Logout} alt="logout icon" onClick={loggut} />
               </span> */}
             </nav>
           )}
-          {/* <img src={Logout} alt="logout icon" onClick={loggut} /> */}
           {!nav && <img src={Open} alt="logout icon" onClick={toggleNav} />}
           {nav && <img src={Close} alt="logout icon" onClick={toggleNav} />}
         </div>

@@ -10,19 +10,19 @@ const Main = () => {
    * in order to getPosts after user create new post
    */
   const getPostsRef = useRef();
-
   const [body, setBody] = useState(null);
   const authorId = localStorage.getItem("user");
 
-  /* using useFetch custom hook in order to fetching current user data */
+  /* using useFetch custom hook in order to fetch currentuser data */
   const { data: userData, error, isLoading } = useFatch(`/users/${authorId}`);
 
   /**
-   * This function will take input value and create post of it.
-   * @param {string} authoId  id of user who the create post
-   * @param {string} body     the content of post
-   * @param {array}  like     a empty array for like
+   * This event function will take input value and create post of it.
+   * @param {string} authoId  ID of user, who the create post.
+   * @param {string} body     The content of post.
+   * @param {array}  like     A empty array for like.
    */
+
   async function createPost(event) {
     event.preventDefault();
     if (body === null || body === "") {
