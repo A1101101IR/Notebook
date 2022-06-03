@@ -42,7 +42,7 @@ app.use(likeRoute);
 app.use(followRoute);
 app.use(followingRoute);
 
-/* FOR SEARCH FUNCION */
+/* Router for find search object */
 app.post("/search", async (req, res) => {
   console.log(req.query.users);
   try {
@@ -54,7 +54,8 @@ app.post("/search", async (req, res) => {
     res.json({ status: "cannot find" });
   }
 });
-/* FOR USER REGISTER */
+
+/* Router for register new user */
 app.post("/register", async (req, res) => {
   try {
     const userInDatabase = await User.findOne({
@@ -78,7 +79,8 @@ app.post("/register", async (req, res) => {
     res.json({ status: "error", error: err });
   }
 });
-/* FOR USER LOG IN */
+
+/* Router for log in */
 app.post("/login", async (req, res) => {
   console.log(req.body);
   const user = await User.findOne({
@@ -98,7 +100,8 @@ app.post("/login", async (req, res) => {
     res.json({ status: "cannot find" });
   }
 });
-/* FOR COMMENTS */
+
+/* Router for add comment to post */
 app.post("/comment/:id", (req, res) => {
   db.collection("posts")
     .updateOne(

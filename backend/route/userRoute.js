@@ -5,7 +5,7 @@ const { db } = require("../models/user");
 const { ObjectId } = require("mongodb");
 const upload = require("../models/upload");
 
-/* get all users */
+/* Router for a list of all users */
 router.get("/users", (req, res) => {
   User.find()
     .then((result) => {
@@ -16,7 +16,7 @@ router.get("/users", (req, res) => {
     });
 });
 
-/* get singel user by id */
+/* Router for getting one single user */
 router.get("/users/:id", (req, res) => {
   db.collection("users")
     .findOne({ _id: ObjectId(req.params.id) })
@@ -28,7 +28,7 @@ router.get("/users/:id", (req, res) => {
     });
 });
 
-/* add avatar */
+/* Router for add avatar to user */
 router.post("/users/:id", upload.single("file"), (req, res) => {
   console.log(req.file.path);
   db.collection("users")
@@ -48,7 +48,7 @@ router.post("/users/:id", upload.single("file"), (req, res) => {
     });
 });
 
-/* uppdate user info */
+/* Router for updateing user info */
 router.patch("/users/:id", (req, res) => {
   console.log(req.body);
   db.collection("users")

@@ -3,7 +3,7 @@ const router = express.Router();
 const { db } = require("../models/user");
 const { ObjectId } = require("mongodb");
 
-/* follow */
+/* Router for add followrs id to followers list */
 router.post("/follow/:id", (req, res) => {
   try {
     db.collection("users").updateOne(
@@ -21,7 +21,7 @@ router.post("/follow/:id", (req, res) => {
     console.log(err);
   }
 });
-
+/* Router for delete followrs id from followers list */
 /* Unfollow */
 router.delete("/follow/:id", (req, res) => {
   try {

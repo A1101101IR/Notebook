@@ -4,7 +4,7 @@ const Post = require("../models/post");
 const { db } = require("../models/user");
 const { ObjectId } = require("mongodb");
 
-/* add like to post */
+/* Router for add like to like list */
 router.post("/like/:id", (req, res) => {
   db.collection("posts")
     .updateOne(
@@ -25,7 +25,7 @@ router.post("/like/:id", (req, res) => {
     });
 });
 
-/* delete like from post */
+/* Router for delete lie from like list */
 router.delete("/like/:id", (req, res) => {
   db.collection("posts")
     .updateOne(

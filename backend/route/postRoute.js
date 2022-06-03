@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../models/post");
 
-/* get all posts */
+/* Router for getting all posts */
 router.get("/posts", (req, res) => {
   Post.find()
     .then((result) => {
@@ -13,7 +13,7 @@ router.get("/posts", (req, res) => {
     });
 });
 
-/* create new post */
+/* Router creating new post */
 router.post("/posts/create", (req, res) => {
   const post = new Post(req.body);
   post
@@ -26,7 +26,7 @@ router.post("/posts/create", (req, res) => {
     });
 });
 
-/* get single post by id */
+/* Router for getting one single post */
 router.get("/posts/:id", (req, res) => {
   db.collection("posts")
     .findOne({ _id: ObjectId(req.params.id) })
@@ -38,7 +38,7 @@ router.get("/posts/:id", (req, res) => {
     });
 });
 
-/* get single post by id and delete */
+/* Router for delete one single post */
 router.delete("/posts/:id", (req, res) => {
   const id = req.params.id;
   Post.findByIdAndDelete(id)
@@ -50,6 +50,7 @@ router.delete("/posts/:id", (req, res) => {
     });
 });
 
+/* Router for getting one single user posts */
 router.get("/posts/user/:id", (req, res) => {
   Post.find({ authorId: req.params.id })
     .then((result) => {
