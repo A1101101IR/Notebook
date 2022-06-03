@@ -107,9 +107,7 @@ const UserSmByline = (id) => {
   function defineBTN(array, currentUser) {
     for (let i = 0; i < array.length; i++) {
       if (array[i].followersId === currentUser) {
-        return true;
-      } else {
-        return false;
+        return "yes";
       }
     }
   }

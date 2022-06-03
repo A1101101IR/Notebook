@@ -93,12 +93,10 @@ const Posts = forwardRef((props, ref) => {
    * @param {string} currentUser  Current user id,
    * @param {string} likeArr  The post like array, which consists of user IDs.
    */
-  function defineBTN(array, currentUser) {
+  function defineLikeBTN(array, currentUser) {
     for (let i = 0; i < array.length; i++) {
       if (array[i].like === currentUser) {
-        return true;
-      } else {
-        return false;
+        return "yes";
       }
     }
   }
@@ -180,10 +178,10 @@ const Posts = forwardRef((props, ref) => {
                     addLike(post._id, post.likes);
                   }}
                 >
-                  {defineBTN(post.likes, currentUser) && (
+                  {defineLikeBTN(post.likes, currentUser) == "yes" && (
                     <img src={DisLike} alt="dislike button" />
                   )}
-                  {!defineBTN(post.likes, currentUser) && (
+                  {defineLikeBTN(post.likes, currentUser) !== "yes" && (
                     <img src={Like} alt="like button" />
                   )}
                   {post.likes.length !== 0 && <span>{post.likes.length}</span>}
