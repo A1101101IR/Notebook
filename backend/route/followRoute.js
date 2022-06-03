@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { db } = require("../models/user");
 const { ObjectId } = require("mongodb");
+
 /* follow */
 router.post("/follow/:id", (req, res) => {
   try {
@@ -20,6 +21,7 @@ router.post("/follow/:id", (req, res) => {
     console.log(err);
   }
 });
+
 /* Unfollow */
 router.delete("/follow/:id", (req, res) => {
   try {
@@ -38,4 +40,5 @@ router.delete("/follow/:id", (req, res) => {
     console.log(err);
   }
 });
+
 module.exports = router;

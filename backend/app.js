@@ -25,19 +25,15 @@ app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 app.use(express.urlencoded({ extended: true }));
 
-/* tell me if any req is made */
-/* app.use((req, res, next) => {
-  console.log("new req made");
-  console.log("host: ", req.hostname);
-  console.log("path:", req.path);
-  console.log("method", req.method);
-  next();
-}); */
-
+/* ROUTE TO ALLA POST REQ */
 const postRoute = require("./route/postRoute");
+/* ROUTE TO ALLA USER REQ */
 const userRoute = require("./route/userRoute");
+/* ROUTE TO ALLA LIKE REQ */
 const likeRoute = require("./route/likeRoute");
+/* ROUTE TO ALLA FOLLOW REQ */
 const followRoute = require("./route/followRoute");
+/* ROUTE TO ALLA FOLLOWING REQ */
 const followingRoute = require("./route/followingRoute");
 
 app.use(postRoute);
@@ -46,7 +42,7 @@ app.use(likeRoute);
 app.use(followRoute);
 app.use(followingRoute);
 
-/* SEARCH FUNC */
+/* FOR SEARCH FUNCION */
 app.post("/search", async (req, res) => {
   console.log(req.query.users);
   try {
@@ -57,47 +53,8 @@ app.post("/search", async (req, res) => {
   } catch (err) {
     res.json({ status: "cannot find" });
   }
-  /* try {
-    data = await databaseURL
-      .db("fullstack01")
-      .collection("users")
-      .aggregate([
-        {
-          $search: {
-            index: "default",
-            compound: {
-              must: [
-                {
-                  text: {
-                    query: req.body.query,
-                    path: "firstname",
-                    fuzzy: {
-                      maxEdits: 1,
-                    },
-                  },
-                },
-              ],
-            },
-          },
-        },
-        {
-          $project: {
-            _id: 1,
-            firstname: 1,
-          },
-        },
-        {
-          $limit: 10,
-        },
-      ])
-      .toArray();
-    return res.send("data");
-  } catch (err) {
-    res.send(err);
-  }
-  console.log("hello"); */
 });
-/* user register */
+/* FOR USER REGISTER */
 app.post("/register", async (req, res) => {
   try {
     const userInDatabase = await User.findOne({
@@ -121,7 +78,7 @@ app.post("/register", async (req, res) => {
     res.json({ status: "error", error: err });
   }
 });
-/* user login api */
+/* FOR USER LOG IN */
 app.post("/login", async (req, res) => {
   console.log(req.body);
   const user = await User.findOne({
@@ -141,7 +98,7 @@ app.post("/login", async (req, res) => {
     res.json({ status: "cannot find" });
   }
 });
-/* add comment to post */
+/* FOR COMMENTS */
 app.post("/comment/:id", (req, res) => {
   db.collection("posts")
     .updateOne(

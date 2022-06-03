@@ -4,8 +4,8 @@ const User = require("../models/user");
 const { db } = require("../models/user");
 const { ObjectId } = require("mongodb");
 const upload = require("../models/upload");
-/* get all users */
 
+/* get all users */
 router.get("/users", (req, res) => {
   User.find()
     .then((result) => {

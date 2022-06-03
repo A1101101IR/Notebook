@@ -20,7 +20,7 @@ router.post("/following/:id", (req, res) => {
     console.log(err);
   }
 });
-/* delete followers after unfollow */
+
 router.delete("/following/:id", (req, res) => {
   try {
     db.collection("users").updateOne(
@@ -38,4 +38,5 @@ router.delete("/following/:id", (req, res) => {
     console.log(err);
   }
 });
+
 module.exports = router;
